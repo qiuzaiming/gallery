@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
 
         //activity listens to different fragments in the foreground
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            TODO()
         }
     }
 }
