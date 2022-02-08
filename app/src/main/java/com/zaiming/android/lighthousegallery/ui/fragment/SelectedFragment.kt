@@ -8,26 +8,31 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.lighthousegallery.databinding.FragmentSelectedBinding
+import com.zaiming.android.lighthousegallery.extensions.customViewModel
 import com.zaiming.android.lighthousegallery.viewmodel.SelectedViewModel
 
+/**
+ * @author zaiming
+ */
 class SelectedFragment : Fragment() {
 
     private var _binding: FragmentSelectedBinding? = null
     private val binding get() = _binding!!
+    private val selectViewModel by customViewModel {
+        SelectedViewModel()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(SelectedViewModel::class.java)
 
         _binding = FragmentSelectedBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textSelected
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        selectViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

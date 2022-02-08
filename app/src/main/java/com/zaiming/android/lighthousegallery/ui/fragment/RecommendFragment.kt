@@ -8,26 +8,31 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.lighthousegallery.databinding.FragmentRecommendsBinding
+import com.zaiming.android.lighthousegallery.extensions.customViewModel
 import com.zaiming.android.lighthousegallery.viewmodel.RecommendViewModel
 
+/**
+ * @author zaiming
+ */
 class RecommendFragment : Fragment() {
 
     private var _binding: FragmentRecommendsBinding? = null
     private val binding get() = _binding!!
+    private val recommendViewModel by customViewModel {
+        RecommendViewModel()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(RecommendViewModel::class.java)
 
         _binding = FragmentRecommendsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textRecommend
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        recommendViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
