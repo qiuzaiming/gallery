@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.lighthousegallery.databinding.FragmentAlbumsBinding
 import com.zaiming.android.lighthousegallery.extensions.customViewModel
 import com.zaiming.android.lighthousegallery.viewmodel.AlbumsViewModel
+import timber.log.Timber
 
 class AlbumsFragment : Fragment() {
 
@@ -33,6 +34,11 @@ class AlbumsFragment : Fragment() {
             textView.text = it
         }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Timber.e("AlbumsFragment instance id is ${Integer.toHexString(this.hashCode())}")
     }
 
     override fun onDestroyView() {

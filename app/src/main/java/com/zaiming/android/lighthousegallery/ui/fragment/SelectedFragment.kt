@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.lighthousegallery.databinding.FragmentSelectedBinding
 import com.zaiming.android.lighthousegallery.extensions.customViewModel
 import com.zaiming.android.lighthousegallery.viewmodel.SelectedViewModel
+import timber.log.Timber
 
 /**
  * @author zaiming
@@ -36,6 +37,11 @@ class SelectedFragment : Fragment() {
             textView.text = it
         }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Timber.e("SelectedFragment instance id is ${Integer.toHexString(this.hashCode())}")
     }
 
     override fun onDestroyView() {
