@@ -3,16 +3,16 @@ package com.zaiming.android.lighthousegallery.ui
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.zaiming.android.lighthousegallery.R
 import com.zaiming.android.lighthousegallery.databinding.ActivityMainBinding
+import com.zaiming.android.lighthousegallery.ui.fragment.AlbumsFragment
+import com.zaiming.android.lighthousegallery.ui.fragment.PhotosFragment
+import com.zaiming.android.lighthousegallery.ui.fragment.RecommendFragment
+import com.zaiming.android.lighthousegallery.ui.fragment.SelectedFragment
 
 /**
  * @author zaiming
@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
             return@registerForActivityResult
         }
     }
-    private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,31 +34,68 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initView()
         requestPermissionLauncher.launch(needRequestMultiplePermission)
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        navController = navHostFragment.navController
-        initBottomNavigationView(navController)
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_photos, R.id.navigation_albums, R.id.navigation_selected, R.id.navigation_recommends)
-        )
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    private fun initBottomNavigationView(navController: NavController) {
-        binding.navView.apply {
-            // labelVisibilityMode = LABEL_VISIBILITY_LABELED
-            setupWithNavController(navController)
-        }
+    private fun initView() {
+        binding.apply {
+            viewpagerHostFragmentActivityMain.apply {
+                adapter = object : FragmentStateAdapter(this@MainActivity) {
+                    override fun getItemCount(): Int {
+                        return NAVIGATIONTABCOUNT
+                    }
 
-        //activity listens to different fragments in the foreground
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                    override fun createFragment(position: Int): Fragment {
+                        return when(position) {
+                            0 -> PhotosFragment()
+                            1 -> AlbumsFragment()
+                            2 -> SelectedFragment()
+                            else -> RecommendFragment()
+                        }
+                    }
+                }
+
+                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        binding.navView.menu.getItem(position).isChecked = true
+                    }
+                })
+
+                //forbid left and right scroll
+                isUserInputEnabled = false
+                offscreenPageLimit = 2
+            }
+
+            navView.apply {
+
+                //display full BottomNavigationView
+                labelVisibilityMode = LABEL_VISIBILITY_LABELED
+
+                setOnItemSelectedListener {
+
+                    fun performClickNavigationItem(index: Int) {
+                        if (binding.viewpagerHostFragmentActivityMain.currentItem != index) {
+                            if (!binding.viewpagerHostFragmentActivityMain.isFakeDragging) {
+                                binding.viewpagerHostFragmentActivityMain.setCurrentItem(index, true)
+                            }
+                        }
+                    }
+
+                    when(it.itemId) {
+                        R.id.navigation_photos -> performClickNavigationItem(0)
+                        R.id.navigation_albums -> performClickNavigationItem(1)
+                        R.id.navigation_selected -> performClickNavigationItem(2)
+                        R.id.navigation_recommends -> performClickNavigationItem(3)
+                    }
+                    true
+                }
+            }
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration)
+    companion object {
+        private const val NAVIGATIONTABCOUNT = 4
     }
 }
