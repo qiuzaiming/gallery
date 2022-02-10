@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'androidx.navigation.safeargs'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -53,4 +53,7 @@ dependencies {
 
     //timber
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
 }

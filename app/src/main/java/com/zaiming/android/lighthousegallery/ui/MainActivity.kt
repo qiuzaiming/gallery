@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
         if (it.values.any { value -> value == false }) {
             finish()
+            return@registerForActivityResult
         }
     }
 
@@ -34,11 +35,6 @@ class MainActivity : AppCompatActivity() {
         requestPermissionLauncher.launch(needRequestMultiplePermission)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_photos, R.id.navigation_albums, R.id.navigation_selected, R.id.navigation_recommends)
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
         initBottomNavigationView(navController)
 
     }

@@ -6,6 +6,7 @@ buildscript {
         kotlin_version = '1.6.10'
         timberVersion = '5.0.1'
         materialVersion = '1.5.0'
+        glideVersion = '4.12.0'
     }
 
     dependencies {
