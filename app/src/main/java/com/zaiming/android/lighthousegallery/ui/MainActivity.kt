@@ -13,10 +13,12 @@ import com.zaiming.android.lighthousegallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.PhotosFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.RecommendFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.SelectedFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author zaiming
  */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
