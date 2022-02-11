@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LightHouseGallery</string>
+    <string name="app_name">LHGallery</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_photos">Photos</string>
     <string name="title_albums">Albums</string>
