@@ -1,5 +1,8 @@
 package com.zaiming.android.lighthousegallery.viewmodel
 
+import android.content.Context
+import android.database.Cursor
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.zaiming.android.lighthousegallery.bean.Asset
 import com.zaiming.android.lighthousegallery.bean.AssetLibrary
@@ -18,10 +21,6 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
 
     private val mediaStoreGroup = MutableStateFlow<List<Asset>>(emptyList())
 
-    fun emitMediaStoreGroup(mediaStoreData: List<Asset>) {
-        mediaStoreGroup.value = mediaStoreData
-    }
-
     fun asMediaStoreFlow() = mediaStoreGroup.map {
         it.sortedByDescending { createItem ->
             createItem.dateTimeModified
@@ -30,6 +29,17 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         }.map { processData ->
             AssetLibrary(processData.key, processData.value)
         }
+    }
+
+    suspend fun fetchMediaStoreInViewModel(
+        columns: Array<String> = emptyArray(),
+        contentUri: Uri,
+        selection: String? = null,
+        selectionArguments: Array<String>? = null,
+        sortBy: String? = null,
+        mapTo: (Asset, Cursor) -> Asset = { a, _ -> a }
+    ) {
+        mediaStoreGroup.value = photosRepository.fetchMediaStoreInRepository(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
     }
 
 }

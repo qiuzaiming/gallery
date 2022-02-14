@@ -46,20 +46,20 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = PhotosAdapter(requireContext(), null)
+        val photosAdapter = PhotosAdapter(requireContext(), null)
         val gridLayoutManager = GridLayoutManager(requireContext(), 4).apply {
-            spanSizeLookup = SectionedSpanSizeLookup(adapter, this)
+            spanSizeLookup = SectionedSpanSizeLookup(photosAdapter, this)
         }
-        binding.rvPhotos.layoutManager = gridLayoutManager
-        binding.rvPhotos.adapter = adapter
+        binding.rvPhotos.apply {
+            layoutManager = gridLayoutManager
+            adapter = photosAdapter
+        }
 
         lifecycleScope.launch {
-            val fetchMediaContents = MediaStoreCollection.fetchMediaContents(context = GalleryApplication.instance, contentUri = imageContentUri())
-            photosViewModel.emitMediaStoreGroup(fetchMediaContents)
+          photosViewModel.fetchMediaStoreInViewModel(contentUri = imageContentUri())
 
             photosViewModel.asMediaStoreFlow().collect {
-                Timber.e("this data is $it")
-                adapter.setData(it)
+                photosAdapter.setData(it)
             }
         }
     }
