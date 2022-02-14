@@ -1,19 +1,21 @@
 package com.zaiming.android.lighthousegallery.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.zaiming.android.lighthousegallery.R
 import com.zaiming.android.lighthousegallery.databinding.ActivityMainBinding
+import com.zaiming.android.lighthousegallery.extensions.imageContentUri
 import com.zaiming.android.lighthousegallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.PhotosFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.RecommendFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.SelectedFragment
+import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -23,11 +25,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val photosViewModel by lazy {
+        ViewModelProvider(this)[PhotosViewModel::class.java]
+    }
     private val needRequestMultiplePermission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
         if (it.values.any { value -> value == false }) {
             finish()
             return@registerForActivityResult
+        } else {
+            // agree all permission
+            photosViewModel.fetchMediaStoreInViewModel(contentUri = imageContentUri())
         }
     }
 

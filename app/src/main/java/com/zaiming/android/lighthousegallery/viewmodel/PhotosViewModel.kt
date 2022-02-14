@@ -37,7 +37,7 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         }
     }
 
-    suspend fun fetchMediaStoreInViewModel(
+     fun fetchMediaStoreInViewModel(
         columns: Array<String> = emptyArray(),
         contentUri: Uri,
         selection: String? = null,
@@ -45,8 +45,10 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         sortBy: String? = null,
         mapTo: (Asset, Cursor) -> Asset = { a, _ -> a }
     ) {
-        mediaStoreGroup.value = photosRepository.fetchMediaStoreInRepository(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
-    }
+        viewModelScope.launch {
+            mediaStoreGroup.value = photosRepository.fetchMediaStoreInRepository(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
+        }
+     }
 
     private fun listenerMediaStoreObserverInViewModel() {
         viewModelScope.launch {

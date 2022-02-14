@@ -8,17 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.zaiming.android.lighthousegallery.GalleryApplication
 import com.zaiming.android.lighthousegallery.adapter.PhotosAdapter
 import com.zaiming.android.lighthousegallery.adapter.SectionedSpanSizeLookup
 import com.zaiming.android.lighthousegallery.databinding.FragmentPhotosBinding
-import com.zaiming.android.lighthousegallery.extensions.imageContentUri
-import com.zaiming.android.lighthousegallery.mediastore.MediaStoreCollection
 import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 /**
  * @author zaiming
@@ -56,8 +52,6 @@ class PhotosFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-          photosViewModel.fetchMediaStoreInViewModel(contentUri = imageContentUri())
-
             photosViewModel.asMediaStoreFlow().collect {
                 photosAdapter.setData(it)
             }
