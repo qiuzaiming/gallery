@@ -4,9 +4,16 @@ import android.database.Cursor
 import android.net.Uri
 import com.zaiming.android.lighthousegallery.bean.Asset
 import com.zaiming.android.lighthousegallery.mediastore.MediaStoreCollection
+import com.zaiming.android.lighthousegallery.mediastore.MediaStoreObserver
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class PhotosRepository @Inject constructor(private val mediaStoreCollection: MediaStoreCollection) {
+@Singleton
+class PhotosRepository @Inject constructor(private val mediaStoreCollection: MediaStoreCollection, private val mediaStoreObserver: MediaStoreObserver) {
+
+    val observerMediaStoreObserverInRepository by lazy {
+        mediaStoreObserver.listenerMediaStoreChange()
+    }
 
     suspend fun fetchMediaStoreInRepository(
         columns: Array<String> = emptyArray(),
