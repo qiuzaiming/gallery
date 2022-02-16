@@ -42,7 +42,7 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val photosAdapter = PhotosAdapter(requireContext(), null)
+        val photosAdapter = PhotosAdapter(requireContext())
         val gridLayoutManager = GridLayoutManager(requireContext(), 4).apply {
             spanSizeLookup = SectionedSpanSizeLookup(photosAdapter, this)
         }
@@ -53,7 +53,7 @@ class PhotosFragment : Fragment() {
 
         lifecycleScope.launch {
             photosViewModel.asMediaStoreFlow().collect {
-                photosAdapter.setData(it)
+                photosAdapter.setAssetLibrary(it)
             }
         }
     }

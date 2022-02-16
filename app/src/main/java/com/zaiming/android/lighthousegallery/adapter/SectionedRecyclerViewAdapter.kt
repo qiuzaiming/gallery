@@ -6,6 +6,9 @@ import com.zaiming.android.lighthousegallery.adapter.SectionedRecyclerViewAdapte
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.zaiming.android.lighthousegallery.adapter.SectionedRecyclerViewAdapter.SectionDataObserver
 
+/**
+ * source code from https://github.com/luizgrp/SectionedRecyclerViewAdapter
+ */
 abstract class SectionedRecyclerViewAdapter<H : RecyclerView.ViewHolder, VH : RecyclerView.ViewHolder, F : RecyclerView.ViewHolder> :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var sectionForPosition: IntArray? = null
@@ -81,13 +84,13 @@ abstract class SectionedRecyclerViewAdapter<H : RecyclerView.ViewHolder, VH : Re
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val viewHolder = when {
             isSectionHeaderViewType(viewType) -> {
-                onCreateSectionHeaderViewHolder(parent, viewType) as RecyclerView.ViewHolder
+                onCreateSectionHeaderViewHolder(parent, viewType)
             }
             isSectionFooterViewType(viewType) -> {
                 onCreateSectionFooterViewHolder(parent, viewType) as RecyclerView.ViewHolder
             }
             else -> {
-                onCreateItemViewHolder(parent, viewType) as RecyclerView.ViewHolder
+                onCreateItemViewHolder(parent, viewType)
             }
         }
         return viewHolder
@@ -113,26 +116,28 @@ abstract class SectionedRecyclerViewAdapter<H : RecyclerView.ViewHolder, VH : Re
         if (sectionForPosition == null) {
             setupIndices()
         }
-        val section = sectionForPosition!![position]
-        val index = positionWithinSection!![position]
-        return if (isSectionHeaderPosition(position)) {
-            getSectionHeaderViewType(section)
-        } else if (isSectionFooterPosition(position)) {
-            getSectionFooterViewType(section)
-        } else {
-            getSectionItemViewType(section, index)
+        return when {
+            isSectionHeaderPosition(position) -> {
+                getSectionHeaderViewType()
+            }
+            isSectionFooterPosition(position) -> {
+                getSectionFooterViewType()
+            }
+            else -> {
+                getSectionItemViewType()
+            }
         }
     }
 
-    protected fun getSectionHeaderViewType(section: Int): Int {
+    private fun getSectionHeaderViewType(): Int {
         return TYPE_SECTION_HEADER
     }
 
-    protected fun getSectionFooterViewType(section: Int): Int {
+    private fun getSectionFooterViewType(): Int {
         return TYPE_SECTION_FOOTER
     }
 
-    protected fun getSectionItemViewType(section: Int, position: Int): Int {
+    private fun getSectionItemViewType(): Int {
         return TYPE_ITEM
     }
 
