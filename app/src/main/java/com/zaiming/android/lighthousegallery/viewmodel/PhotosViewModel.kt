@@ -4,6 +4,7 @@ import android.database.Cursor
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zaiming.android.lighthousegallery.adapter.SectionsAdapter
 import com.zaiming.android.lighthousegallery.bean.Asset
 import com.zaiming.android.lighthousegallery.bean.AssetLibrary
 import com.zaiming.android.lighthousegallery.extensions.dateFormat
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -25,7 +27,7 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         listenerMediaStoreObserverInViewModel()
     }
 
-    private var mediaStoreGroup = MutableStateFlow<List<Asset>>(emptyList())
+    private var mediaStoreGroup = MutableStateFlow<MutableList<Asset>>(mutableListOf())
 
     fun asMediaStoreFlow() = mediaStoreGroup.map {
         it.sortedByDescending { createItem ->
@@ -33,7 +35,7 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         }.groupBy { item ->
             item.dateTimeModified.dateFormat()
         }.map { processData ->
-            AssetLibrary(processData.key, processData.value)
+           SectionsAdapter.Section(processData.key, processData.value, Any())
         }
     }
 
@@ -58,6 +60,8 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
                     //search mediaStore external.db to judge image/view exist?
                     val changeUriAsset = photosRepository.fetchMediaStoreInRepository(contentUri = it)
 
+                    //todo has bug
+                    mediaStoreGroup.value.add(changeUriAsset.first())
                 }
             }
         }

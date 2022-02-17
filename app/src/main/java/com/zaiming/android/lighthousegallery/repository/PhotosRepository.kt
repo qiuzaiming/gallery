@@ -22,7 +22,7 @@ class PhotosRepository @Inject constructor(private val mediaStoreCollection: Med
         selectionArguments: Array<String>? = null,
         sortBy: String? = null,
         mapTo: (Asset, Cursor) -> Asset = { a, _ -> a }
-    ): List<Asset> {
+    ): MutableList<Asset> {
         return mediaStoreCollection.fetchMediaContents(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
     }
 

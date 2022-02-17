@@ -2,17 +2,19 @@ package com.zaiming.android.lighthousegallery.adapter.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
-import android.text.TextUtils
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.zaiming.android.lighthousegallery.R
 
 /**
  * @author zaiming
  */
-class CountHeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var tvTitleText: TextView = itemView.findViewById(R.id.header_title)
+class CountHeaderViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context).inflate(R.layout.view_count_header, parent, false)
+) {
+    private val tvTitleText: TextView = itemView.findViewById(R.id.header_title)
 
-    fun setTitle(text: String?) {
+    fun bindTo(text: String?) {
         if (text?.isNotBlank() == true) {
             tvTitleText.text = text
         }

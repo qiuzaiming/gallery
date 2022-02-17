@@ -3,9 +3,7 @@ package com.zaiming.android.lighthousegallery.adapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 
-/**
- * RecyclerView分组的GridLayoutManager.SpanSizeLookup
- */
+@Deprecated(message = "use SectionsDiffAdapter to replace SectionedRecyclerViewAdapter")
 open class SectionedSpanSizeLookup(
     private var adapter: SectionedRecyclerViewAdapter<*, *, *>,
     private var layoutManager: GridLayoutManager

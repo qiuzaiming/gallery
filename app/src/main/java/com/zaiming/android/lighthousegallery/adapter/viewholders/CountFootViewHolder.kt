@@ -1,9 +1,9 @@
 package com.zaiming.android.lighthousegallery.adapter.viewholders
 
-import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 /**
  * @author zaiming
  */
-class CountFootViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+class CountFootViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent)

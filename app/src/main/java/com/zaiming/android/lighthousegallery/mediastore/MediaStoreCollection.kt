@@ -24,7 +24,7 @@ class MediaStoreCollection @Inject constructor(@ApplicationContext val context: 
         selectionArguments: Array<String>? = null,
         sortBy: String? = null,
         crossinline mapTo: (Asset, Cursor) -> Asset = { a, _ -> a }
-    ): List<Asset> {
+    ): MutableList<Asset> {
         val projection = arrayOf(
             MediaStore.MediaColumns._ID,
             MediaStore.MediaColumns.DATE_ADDED,
@@ -89,7 +89,7 @@ class MediaStoreCollection @Inject constructor(@ApplicationContext val context: 
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            return emptyList()
+            return mutableListOf()
         }
     }
 }

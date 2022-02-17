@@ -42,9 +42,14 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val photosAdapter = PhotosAdapter(requireContext())
+        val photosAdapter = PhotosAdapter()
         val gridLayoutManager = GridLayoutManager(requireContext(), 4).apply {
-            spanSizeLookup = SectionedSpanSizeLookup(photosAdapter, this)
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (photosAdapter.isHeaderForPosition(position)) 4 else 1
+                }
+
+            }
         }
         binding.rvPhotos.apply {
             layoutManager = gridLayoutManager
@@ -53,7 +58,7 @@ class PhotosFragment : Fragment() {
 
         lifecycleScope.launch {
             photosViewModel.asMediaStoreFlow().collect {
-                photosAdapter.setAssetLibrary(it)
+                photosAdapter.setSections(it)
             }
         }
     }

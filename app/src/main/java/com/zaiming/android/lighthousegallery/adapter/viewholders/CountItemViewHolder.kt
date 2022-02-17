@@ -1,6 +1,7 @@
 package com.zaiming.android.lighthousegallery.adapter.viewholders
 
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.zaiming.android.lighthousegallery.bean.Asset
@@ -10,7 +11,9 @@ import com.zaiming.android.lighthousegallery.R
 /**
  * @author zaiming
  */
-class CountItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class CountItemViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context).inflate(R.layout.item_global_grid, parent, false)
+) {
     var ivPic: ImageView = itemView.findViewById(R.id.iv_pic)
 
     fun render(asset: Asset) {

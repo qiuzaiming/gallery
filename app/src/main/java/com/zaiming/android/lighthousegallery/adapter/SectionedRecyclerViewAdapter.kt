@@ -9,6 +9,7 @@ import com.zaiming.android.lighthousegallery.adapter.SectionedRecyclerViewAdapte
 /**
  * source code from https://github.com/luizgrp/SectionedRecyclerViewAdapter
  */
+@Deprecated(message = "use SectionsDiffAdapter to replace SectionedRecyclerViewAdapter")
 abstract class SectionedRecyclerViewAdapter<H : RecyclerView.ViewHolder, VH : RecyclerView.ViewHolder, F : RecyclerView.ViewHolder> :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var sectionForPosition: IntArray? = null
