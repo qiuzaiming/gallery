@@ -30,15 +30,6 @@ abstract class SectionsDiffAdapter<
         }
     }
 
-    fun setSectionsInMainThread(newSections : List<Section<SH, I, SF>>) {
-        val diffSectionResult = diffSections(newSections)
-        refreshIndices(diffSectionResult.totalCount, diffSectionResult.sectionForPosition,
-            diffSectionResult.positionForPosition, diffSectionResult.isHeaderForPosition,
-            diffSectionResult.isFooterForPosition)
-        currentSections = newSections
-        diffSectionResult.diffResult.dispatchUpdatesTo(this@SectionsDiffAdapter)
-    }
-
     fun getSelectedItems() : List<I> {
         val sections = currentSections
         val selectedItems = LinkedList<I>()
