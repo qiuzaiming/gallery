@@ -1,8 +1,10 @@
 package com.zaiming.android.lighthousegallery.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -45,8 +47,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        settingWindowInset()
         initView()
         requestPermissionLauncher.launch(needRequestMultiplePermission)
+    }
+
+    private fun settingWindowInset() {
+        window.statusBarColor = Color.TRANSPARENT
+        ViewCompat.getWindowInsetsController(binding.clRoot)?.apply {
+            // change statusBar text to black color.
+            isAppearanceLightStatusBars = true
+        }
     }
 
     private fun initView() {
