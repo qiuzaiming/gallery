@@ -1,30 +1,15 @@
 package com.zaiming.android.lighthousegallery.utils.windowInsets
 
+import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.*
 
-class InitialPadding(
-    val left: Int,
-    val top: Int,
-    val right: Int,
-    val bottom: Int
-)
+fun View.recordInitialPaddingForView() = Rect(paddingLeft, paddingTop, paddingRight, paddingBottom)
 
-class InitialMargin(
-    val left: Int,
-    val top: Int,
-    val right: Int,
-    val bottom: Int
-)
-
-fun recordInitialPaddingForView(view: View) = InitialPadding(
-    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom
-)
-
-fun recordInitialMarginForView(view: View) = InitialMargin(
-    view.marginLeft, view.marginTop, view.marginRight, view.marginBottom
-)
+fun View.recordInitialMarginForView() =
+    (layoutParams as? ViewGroup.MarginLayoutParams)?.let { Rect(marginLeft, marginTop, marginRight, marginBottom) }
+        ?: Rect(0, 0, 0, 0)
 
 /**
  * It is best to always call this method when setting OnApplyWindowInsetsListener,
@@ -48,11 +33,11 @@ fun View.requestApplyInsetsWhenAttached() {
     }
 }
 
-fun View.doOnApplyWindowInsets(block: (WindowInsetsCompat, InitialPadding, InitialMargin) -> Unit) {
-    val initialPadding = recordInitialPaddingForView(this)
-    val initialMargin = recordInitialMarginForView(this)
-    ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
-        block(insets, initialPadding, initialMargin)
+fun View.doOnApplyWindowInsets(block: (View, WindowInsetsCompat, Rect, Rect) -> Unit) {
+    val initialPadding = recordInitialPaddingForView()
+    val initialMargin = recordInitialMarginForView()
+    ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+        block(v, insets, initialPadding, initialMargin)
         insets
     }
     requestApplyInsetsWhenAttached()
@@ -60,16 +45,56 @@ fun View.doOnApplyWindowInsets(block: (WindowInsetsCompat, InitialPadding, Initi
 
 fun View.applyBottomWindowInsetsForScrollingView(scrollingView: ViewGroup) {
     scrollingView.clipToPadding = false
-    val scrollingViewInitialPadding = recordInitialPaddingForView(scrollingView)
-    this.doOnApplyWindowInsets { insets, _, _ ->
+    val scrollingViewInitialPadding = recordInitialPaddingForView()
+    this.doOnApplyWindowInsets { _, insets, _, _ ->
         scrollingView.updatePadding(bottom = scrollingViewInitialPadding.bottom + insets.systemWindowInsetBottom)
     }
 }
 
 fun View.applyTopWindowInsetsForScrollingView(scrollingView: ViewGroup) {
     scrollingView.clipToPadding = false
-    val scrollingViewInitialPadding = recordInitialPaddingForView(scrollingView)
-    this.doOnApplyWindowInsets { insets, _, _ ->
+    val scrollingViewInitialPadding = recordInitialPaddingForView()
+    this.doOnApplyWindowInsets { _, insets, _, _ ->
         scrollingView.updatePadding(top = scrollingViewInitialPadding.top + insets.systemWindowInsetTop)
     }
 }
+
+fun View.applyHorizontalInsetPadding() =
+    doOnApplyWindowInsets { view, insets, padding, _ ->
+        view.updatePaddingRelative(
+            top = padding.top + insets.systemWindowInsetTop,
+            bottom = padding.bottom + insets.systemWindowInsetBottom
+        )
+    }
+
+fun View.applyTopInsetPadding() =
+    doOnApplyWindowInsets { view, insets, padding, _ ->
+        view.updatePaddingRelative(
+            top = padding.top + insets.systemWindowInsetTop
+        )
+    }
+
+fun View.applyBottomInsetPadding() =
+    doOnApplyWindowInsets { view, insets, padding, _ ->
+        view.updatePaddingRelative(
+            bottom = padding.bottom + insets.systemWindowInsetBottom
+        )
+    }
+
+fun View.applyTopInsetMargin() =
+    doOnApplyWindowInsets { view, insets, _, margin ->
+        (view.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+            updateMarginsRelative(
+                top = margin.top + insets.systemWindowInsetTop
+            )
+        }
+    }
+
+fun View.applyBottomInsetMargin() =
+    doOnApplyWindowInsets { view, insets, _, margin ->
+        (view.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+            updateMarginsRelative(
+                bottom = margin.bottom + insets.systemWindowInsetBottom
+            )
+        }
+    }

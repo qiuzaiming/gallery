@@ -30,7 +30,7 @@ class EdgeInsetDelegate(private val activity: Activity) {
 
         var eveGivenInsetsToDecorView = false
         //This prevents a translucent white bottom bar from appearing on the MIUI system
-        activity.window.decorView.doOnApplyWindowInsets { windowInsets, _, _ ->
+        activity.window.decorView.doOnApplyWindowInsets { _, windowInsets, _, _ ->
             val navigationBarsInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
 
             val isGestureNavigation = isGestureNavigation(navigationBarsInsets)

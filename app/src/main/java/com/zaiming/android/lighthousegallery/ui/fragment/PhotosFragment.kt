@@ -69,8 +69,8 @@ class PhotosFragment : Fragment() {
     }
 
     private fun settingWindowInsetsParams() {
-        binding.clPhotos.doOnApplyWindowInsets { windowInsetsCompat, _, _ ->
-            with(binding.rvPhotos) {
+        binding.rvPhotos.doOnApplyWindowInsets { view, windowInsetsCompat, _, _ ->
+            with(view) {
                 setPaddingRelative(
                     paddingStart,
                     paddingTop + windowInsetsCompat.systemWindowInsetTop,
