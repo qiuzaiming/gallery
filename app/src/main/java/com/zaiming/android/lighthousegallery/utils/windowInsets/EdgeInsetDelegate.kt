@@ -16,7 +16,7 @@ class EdgeInsetDelegate(private val activity: Activity) {
     }
 
     /**
-     * 0x21
+     * dark: 0x21
      * light: 0x11
      */
     private fun isDarkModeActive(currentActivity: Activity): Boolean {

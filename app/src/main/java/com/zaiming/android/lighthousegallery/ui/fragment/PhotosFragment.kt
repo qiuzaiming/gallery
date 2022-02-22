@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zaiming.android.lighthousegallery.adapter.PhotosAdapter
-import com.zaiming.android.lighthousegallery.adapter.SectionedSpanSizeLookup
 import com.zaiming.android.lighthousegallery.databinding.FragmentPhotosBinding
+import com.zaiming.android.lighthousegallery.utils.windowInsets.doOnApplyWindowInsets
 import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -35,7 +35,7 @@ class PhotosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPhotosBinding.inflate(inflater, container, false)
-
+        settingWindowInsetsParams()
         return binding.root
     }
 
@@ -66,5 +66,18 @@ class PhotosFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun settingWindowInsetsParams() {
+        binding.clPhotos.doOnApplyWindowInsets { windowInsetsCompat, _, _ ->
+            with(binding.rvPhotos) {
+                setPaddingRelative(
+                    paddingStart,
+                    paddingTop + windowInsetsCompat.systemWindowInsetTop,
+                    paddingEnd + windowInsetsCompat.systemWindowInsetRight,
+                    paddingBottom + windowInsetsCompat.systemWindowInsetBottom
+                )
+            }
+        }
     }
 }

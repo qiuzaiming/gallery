@@ -17,6 +17,7 @@ import com.zaiming.android.lighthousegallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.PhotosFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.RecommendFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.SelectedFragment
+import com.zaiming.android.lighthousegallery.utils.windowInsets.EdgeInsetDelegate
 import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             // change statusBar text to black color.
             isAppearanceLightStatusBars = true
         }
+        EdgeInsetDelegate(this).start()
     }
 
     private fun initView() {
