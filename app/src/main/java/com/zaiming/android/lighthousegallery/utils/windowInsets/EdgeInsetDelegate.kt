@@ -31,7 +31,7 @@ class EdgeInsetDelegate(private val activity: Activity) {
         activity.window.navigationBarColor = if (isDarkModeActive(activity)) {
             activity.getColor(R.color.black_with_opacity_90)
         } else {
-            activity.getColor(R.color.blue_color)
+            activity.getColor(R.color.white_with_opacity_90)
         }
 
         var eveGivenInsetsToDecorView = false
