@@ -8,6 +8,7 @@ buildscript {
         materialVersion = '1.5.0'
         glideVersion = '4.12.0'
         hiltVersion = '2.28-alpha'
+        appcenterVersion = '4.3.1'
     }
 
     dependencies {
