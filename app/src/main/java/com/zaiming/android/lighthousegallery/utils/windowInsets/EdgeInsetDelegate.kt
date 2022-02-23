@@ -28,6 +28,12 @@ class EdgeInsetDelegate(private val activity: Activity) {
         // because in default, decorView can deal with status, navigation bar and ime -> set padding
         WindowCompat.setDecorFitsSystemWindows(activity.window, false)
 
+        activity.window.navigationBarColor = if (isDarkModeActive(activity)) {
+            activity.getColor(R.color.black_with_opacity_90)
+        } else {
+            activity.getColor(R.color.blue_color)
+        }
+
         var eveGivenInsetsToDecorView = false
         //This prevents a translucent white bottom bar from appearing on the MIUI system
         activity.window.decorView.doOnApplyWindowInsets { _, windowInsets, _, _ ->
@@ -37,7 +43,12 @@ class EdgeInsetDelegate(private val activity: Activity) {
 
             if (!isGestureNavigation) {
                 //Let decorView draw the translucent navigationBarColor
-                ViewCompat.onApplyWindowInsets(activity.window.decorView, windowInsets)
+                // setting ViewCompat.onApplyWindowInsets(activity.window.decorView, windowInsets) means that windowInsets give decorView to handle
+                // so decorView decors statusBar and navigationBar colors -> you set statusBar color or navigationBar color take effect
+                // by the way, you do not set  ViewCompat.onApplyWindowInsets(activity.window.decorView, windowInsets) and setting navigationBar or statusBar -> not effect
+
+                // Be consistent with whether isGestureNavigation
+                // ViewCompat.onApplyWindowInsets(activity.window.decorView, windowInsets)
                 eveGivenInsetsToDecorView = true
             } else if (isGestureNavigation && eveGivenInsetsToDecorView) {
                 //Let DecorView remove navigationBarBackground once it has been draw
@@ -54,12 +65,6 @@ class EdgeInsetDelegate(private val activity: Activity) {
                 // navigationBarColor will not be used, which means that the navigation bar
                 // will be completely transparent
             }
-        }
-
-        activity.window.navigationBarColor = if (isDarkModeActive(activity)) {
-            activity.getColor(R.color.black_with_opacity_90)
-        } else {
-            activity.getColor(R.color.white_with_opacity_90)
         }
     }
 
