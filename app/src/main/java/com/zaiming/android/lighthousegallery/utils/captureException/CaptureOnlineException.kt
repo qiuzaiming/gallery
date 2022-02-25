@@ -8,12 +8,14 @@ import com.microsoft.appcenter.crashes.Crashes
 import com.microsoft.appcenter.crashes.CrashesListener
 import com.microsoft.appcenter.crashes.ingestion.models.ErrorAttachmentLog
 import com.microsoft.appcenter.crashes.model.ErrorReport
-import java.lang.Exception
+
 
 /**
  * @author zaiming
  */
 object CaptureOnlineException {
+
+    private val logBuilder = StringBuilder()
 
     fun init(application: Application) {
         with(application) {
@@ -31,6 +33,7 @@ object CaptureOnlineException {
 
             override fun getErrorAttachments(report: ErrorReport?): MutableIterable<ErrorAttachmentLog> {
 
+                //read the specific file upload to server
                 return mutableListOf()
             }
 
@@ -42,4 +45,15 @@ object CaptureOnlineException {
 
         })
     }
+
+    fun log(message: String?) {
+        if (message != null) {
+            logBuilder.appendLine(message)
+        }
+    }
+
+    fun flushLog() {
+
+    }
+
 }
