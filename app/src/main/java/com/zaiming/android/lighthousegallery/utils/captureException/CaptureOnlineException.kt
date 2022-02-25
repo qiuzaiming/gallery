@@ -8,6 +8,10 @@ import com.microsoft.appcenter.crashes.Crashes
 import com.microsoft.appcenter.crashes.CrashesListener
 import com.microsoft.appcenter.crashes.ingestion.models.ErrorAttachmentLog
 import com.microsoft.appcenter.crashes.model.ErrorReport
+import com.zaiming.android.lighthousegallery.BuildConfig
+import timber.log.Timber
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 /**
@@ -18,6 +22,11 @@ object CaptureOnlineException {
     private val logBuilder = StringBuilder()
 
     fun init(application: Application) {
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+
         with(application) {
             AppCenter.start(
                 this,
@@ -33,8 +42,26 @@ object CaptureOnlineException {
 
             override fun getErrorAttachments(report: ErrorReport?): MutableIterable<ErrorAttachmentLog> {
 
-                //read the specific file upload to server
-                return mutableListOf()
+                report ?: return mutableListOf()
+
+                runCatching {
+                    val readLogCommand = arrayListOf("logcat", "-d")
+                    val clearLogCommand = arrayListOf("logcat", "-c")
+
+                    //capture log
+                    val process = Runtime.getRuntime().exec(readLogCommand.toTypedArray())
+                    val bufferReader = BufferedReader(InputStreamReader(process.inputStream))
+                    var temporaryContent: String? = null
+                    while (bufferReader.readLine().also { temporaryContent = it } != null) {
+                        //clear log
+                        Runtime.getRuntime().exec(clearLogCommand.toTypedArray())
+                        logBuilder.appendLine(temporaryContent)
+                    }
+                }
+
+                val logText = if (logBuilder.isNotBlank()) ErrorAttachmentLog.attachmentWithText(logBuilder.toString(), "log.txt") else return mutableListOf()
+
+                return mutableListOf(logText)
             }
 
             override fun onBeforeSending(report: ErrorReport?) = Unit
@@ -44,16 +71,6 @@ object CaptureOnlineException {
             override fun onSendingSucceeded(report: ErrorReport?) = Unit
 
         })
-    }
-
-    fun log(message: String?) {
-        if (message != null) {
-            logBuilder.appendLine(message)
-        }
-    }
-
-    fun flushLog() {
-
     }
 
 }

@@ -2,9 +2,7 @@ package com.zaiming.android.lighthousegallery
 
 import android.app.Application
 import com.zaiming.android.lighthousegallery.utils.captureException.CaptureOnlineException
-import com.zaiming.android.lighthousegallery.utils.captureException.CrashReportTree
 import dagger.hilt.android.HiltAndroidApp
-import timber.log.Timber
 
 
 /**
@@ -21,15 +19,7 @@ class GalleryApplication : Application() {
         super.onCreate()
         instance = this
 
-        initTimber()
-
         initCaptureOnlineException()
-    }
-
-    private fun initTimber() {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(CrashReportTree())
-        }
     }
 
     private fun initCaptureOnlineException() {
