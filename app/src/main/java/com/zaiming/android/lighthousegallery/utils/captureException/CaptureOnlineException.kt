@@ -2,14 +2,12 @@ package com.zaiming.android.lighthousegallery.utils.captureException
 
 import android.app.Application
 import android.content.pm.PackageManager
-import android.util.Log
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
 import com.microsoft.appcenter.crashes.Crashes
 import com.microsoft.appcenter.crashes.CrashesListener
 import com.microsoft.appcenter.crashes.ingestion.models.ErrorAttachmentLog
 import com.microsoft.appcenter.crashes.model.ErrorReport
-import timber.log.Timber
 import java.lang.Exception
 
 /**
@@ -33,13 +31,7 @@ object CaptureOnlineException {
 
             override fun getErrorAttachments(report: ErrorReport?): MutableIterable<ErrorAttachmentLog> {
 
-                report ?: return mutableListOf()
-
-                val logcat = LogcatDumper.dump().joinToString(separator = "\n")
-                return mutableListOf(
-                    ErrorAttachmentLog.attachmentWithText(logcat, "log.txt")
-                )
-
+                return mutableListOf()
             }
 
             override fun onBeforeSending(report: ErrorReport?) = Unit
