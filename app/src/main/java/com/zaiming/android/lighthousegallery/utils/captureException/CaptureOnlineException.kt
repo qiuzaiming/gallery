@@ -35,6 +35,7 @@ object CaptureOnlineException {
             )
         }
 
+        //seems it not work normally
         Crashes.setListener(object : CrashesListener {
             override fun shouldProcess(report: ErrorReport?): Boolean = true
 
