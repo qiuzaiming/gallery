@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zaiming.android.lighthousegallery.adapter.PhotosAdapter
+import com.zaiming.android.lighthousegallery.animator.SpringAddItemAnimator
 import com.zaiming.android.lighthousegallery.databinding.FragmentPhotosBinding
 import com.zaiming.android.lighthousegallery.utils.windowInsets.doOnApplyWindowInsets
 import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
@@ -52,6 +53,7 @@ class PhotosFragment : Fragment() {
             }
         }
         binding.rvPhotos.apply {
+            itemAnimator = SpringAddItemAnimator()
             layoutManager = gridLayoutManager
             adapter = photosAdapter
         }
