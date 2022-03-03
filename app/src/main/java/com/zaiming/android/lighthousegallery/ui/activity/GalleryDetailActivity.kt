@@ -2,21 +2,15 @@ package com.zaiming.android.lighthousegallery.ui.activity
 
 import android.app.Activity
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.ViewCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnPreDraw
 import com.bumptech.glide.Glide
-import com.zaiming.android.lighthousegallery.R
 import com.zaiming.android.lighthousegallery.databinding.ActivityGalleryDetailBinding
 import com.zaiming.android.lighthousegallery.extensions.applyImmersionWithWindowInsets
 import com.zaiming.android.lighthousegallery.extensions.applyMaterialTransform
-import com.zaiming.android.lighthousegallery.utils.windowInsets.EdgeInsetDelegate
 
 /**
  * @author zaiming
@@ -53,15 +47,6 @@ class GalleryDetailActivity : AppCompatActivity() {
         Glide.with(this)
             .load(galleryDetailUri)
             .into(binding.ivDetail)
-    }
-
-    private fun settingWindowInset() {
-        window.statusBarColor = Color.TRANSPARENT
-        ViewCompat.getWindowInsetsController(binding.root)?.apply {
-            // change statusBar text to black color.
-            isAppearanceLightStatusBars = true
-        }
-        EdgeInsetDelegate(this).start()
     }
 
     companion object {

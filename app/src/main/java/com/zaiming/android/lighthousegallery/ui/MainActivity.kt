@@ -1,10 +1,8 @@
 package com.zaiming.android.lighthousegallery.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -19,7 +17,6 @@ import com.zaiming.android.lighthousegallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.PhotosFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.RecommendFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.SelectedFragment
-import com.zaiming.android.lighthousegallery.utils.windowInsets.EdgeInsetDelegate
 import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,15 +51,6 @@ class MainActivity : AppCompatActivity() {
         applyImmersionWithWindowInsets()
         initView()
         requestPermissionLauncher.launch(needRequestMultiplePermission)
-    }
-
-    private fun settingWindowInset() {
-        window.statusBarColor = Color.TRANSPARENT
-        ViewCompat.getWindowInsetsController(binding.clRoot)?.apply {
-            // change statusBar text to black color.
-            isAppearanceLightStatusBars = true
-        }
-        EdgeInsetDelegate(this).start()
     }
 
     private fun initView() {
