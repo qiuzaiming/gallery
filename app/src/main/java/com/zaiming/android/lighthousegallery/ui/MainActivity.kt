@@ -12,6 +12,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.zaiming.android.lighthousegallery.R
 import com.zaiming.android.lighthousegallery.databinding.ActivityMainBinding
+import com.zaiming.android.lighthousegallery.extensions.applyExitMaterialTransform
+import com.zaiming.android.lighthousegallery.extensions.applyImmersionWithWindowInsets
 import com.zaiming.android.lighthousegallery.extensions.imageContentUri
 import com.zaiming.android.lighthousegallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.PhotosFragment
@@ -43,12 +45,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyExitMaterialTransform()
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        settingWindowInset()
+        applyImmersionWithWindowInsets()
         initView()
         requestPermissionLauncher.launch(needRequestMultiplePermission)
     }

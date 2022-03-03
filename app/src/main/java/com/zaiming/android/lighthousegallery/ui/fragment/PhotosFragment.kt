@@ -43,7 +43,7 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val photosAdapter = PhotosAdapter()
+        val photosAdapter = PhotosAdapter(requireActivity())
         val gridLayoutManager = GridLayoutManager(requireContext(), 4).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {

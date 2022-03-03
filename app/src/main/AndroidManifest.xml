@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.activity.GalleryDetailActivity"
+            android:exported="false" />
+
         <meta-data android:name="secret_appcenter" android:value="51e2b874-6add-4f72-ad1f-69af59cf88c2" />
     </application>
 

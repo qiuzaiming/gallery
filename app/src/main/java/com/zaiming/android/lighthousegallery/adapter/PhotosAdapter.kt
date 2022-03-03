@@ -1,15 +1,17 @@
 package com.zaiming.android.lighthousegallery.adapter
 
+import android.app.Activity
 import android.view.ViewGroup
 import com.zaiming.android.lighthousegallery.adapter.viewholders.CountFootViewHolder
 import com.zaiming.android.lighthousegallery.adapter.viewholders.CountHeaderViewHolder
 import com.zaiming.android.lighthousegallery.adapter.viewholders.CountItemViewHolder
 import com.zaiming.android.lighthousegallery.bean.Asset
+import com.zaiming.android.lighthousegallery.ui.activity.GalleryDetailActivity
 
 /**
  * @author zaiming
  */
-class PhotosAdapter: SectionsDiffAdapter<String, Asset, Any,
+class PhotosAdapter(private val activity: Activity): SectionsDiffAdapter<String, Asset, Any,
         Long,
         CountHeaderViewHolder, CountItemViewHolder, CountFootViewHolder>() {
 
@@ -43,6 +45,11 @@ class PhotosAdapter: SectionsDiffAdapter<String, Asset, Any,
         val selectable = isSelectableStatus()
         val selected = isSelected(getPositionOf(section, index))
         viewHolder.render(assets)
+        val transientName = "${assets.uri}${assets.fullPath}"
+        viewHolder.ivPic.setOnClickListener {
+            it.transitionName = transientName
+            GalleryDetailActivity.startActivity(activity, it, transientName, assets.uri.toString())
+        }
     }
 
     override fun isSectionHeaderTheSame(header1: String, header2: String): Boolean {
