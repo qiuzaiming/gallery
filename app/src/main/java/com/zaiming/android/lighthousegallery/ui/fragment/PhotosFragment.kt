@@ -30,6 +30,10 @@ class PhotosFragment : Fragment() {
         ViewModelProvider(requireActivity())[PhotosViewModel::class.java]
     }
 
+    private  val photosAdapter by lazy {
+        PhotosAdapter(requireActivity())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +47,6 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val photosAdapter = PhotosAdapter(requireActivity())
         val gridLayoutManager = GridLayoutManager(requireContext(), 4).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {

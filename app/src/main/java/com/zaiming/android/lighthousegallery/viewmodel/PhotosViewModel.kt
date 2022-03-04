@@ -5,8 +5,8 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zaiming.android.lighthousegallery.adapter.SectionsAdapter
+import com.zaiming.android.lighthousegallery.bean.AlbumAsset
 import com.zaiming.android.lighthousegallery.bean.Asset
-import com.zaiming.android.lighthousegallery.bean.AssetLibrary
 import com.zaiming.android.lighthousegallery.extensions.dateFormat
 import com.zaiming.android.lighthousegallery.repository.PhotosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,6 +36,16 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
             item.dateTimeModified.dateFormat()
         }.map { processData ->
            SectionsAdapter.Section(processData.key, processData.value, Any())
+        }
+    }
+
+    fun asAlbumMediaStoreFlow() = mediaStoreGroup.map {
+        it.sortedByDescending { createItem ->
+            createItem.dateTimeModified
+        }.groupBy { item ->
+            item.relativePath ?: ""
+        }.map { processData ->
+            AlbumAsset(processData.key, processData.value.size, processData.value.firstOrNull()?.uri?.toString() ?: "")
         }
     }
 
