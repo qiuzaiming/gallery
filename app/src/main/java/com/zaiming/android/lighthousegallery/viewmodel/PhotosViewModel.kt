@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -70,8 +69,22 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
                     //search mediaStore external.db to judge image/view exist?
                     val changeUriAsset = photosRepository.fetchMediaStoreInRepository(contentUri = it)
 
-                    //todo has bug
-                    mediaStoreGroup.value.add(changeUriAsset.first())
+                    if (changeUriAsset.isEmpty()) {
+                        //delete action
+                        mediaStoreGroup.value.find { changeAsset ->
+                            changeAsset.uri == it
+                        }?.let { deleteAssetItem ->
+                            mediaStoreGroup.value.remove(deleteAssetItem)
+                        }
+                    }
+
+                    //add action
+                    changeUriAsset.firstNotNullOf { newAsset ->
+                        if (!mediaStoreGroup.value.contains(newAsset)) {
+                            mediaStoreGroup.value.add(newAsset)
+                        }
+                    }
+
                 }
             }
         }
