@@ -69,6 +69,4 @@ dependencies {
     implementation "com.microsoft.appcenter:appcenter-analytics:$rootProject.appcenterVersion"
     implementation "com.microsoft.appcenter:appcenter-crashes:$rootProject.appcenterVersion"
 
-    //SplashScreen
-    implementation "androidx.core:core-splashscreen:$rootProject.splashScreenVersion"
 }
