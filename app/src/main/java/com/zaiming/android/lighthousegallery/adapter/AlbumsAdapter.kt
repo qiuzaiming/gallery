@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zaiming.android.lighthousegallery.R
 import com.zaiming.android.lighthousegallery.bean.AlbumAsset
-import timber.log.Timber
 
 /**
  * @author zaiming
@@ -34,7 +33,6 @@ class AlbumsAdapter(private val items: MutableList<AlbumAsset>): RecyclerView.Ad
         private val albumCount: AppCompatTextView = itemView.findViewById(R.id.tv_album_count)
 
         fun bindTo(albumAsset: AlbumAsset) {
-            Timber.i("bind to execute: ${albumAsset.cover}")
             Glide.with(albumCover.context).load(albumAsset.cover).into(albumCover)
             albumName.text = albumAsset.albumName
             albumCount.text = albumAsset.count.toString()

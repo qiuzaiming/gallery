@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zaiming.android.lighthousegallery.adapter.AlbumsAdapter
@@ -24,9 +24,7 @@ class AlbumsFragment : Fragment() {
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
 
-    private val albumsViewModel by lazy {
-        ViewModelProvider(requireActivity())[PhotosViewModel::class.java]
-    }
+    private val albumsViewModel: PhotosViewModel by activityViewModels()
 
     private var albumAssetGroup: MutableList<AlbumAsset> = ArrayList()
     private val albumAdapter by lazy {
