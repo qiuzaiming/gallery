@@ -1,4 +1,4 @@
-package com.zaiming.android.lighthousegallery.ui.view
+package com.zaiming.android.lighthousegallery.ui.viewgroup
 
 import android.content.Context
 import android.util.AttributeSet
