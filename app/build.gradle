@@ -69,4 +69,6 @@ dependencies {
     implementation "com.microsoft.appcenter:appcenter-analytics:$rootProject.appcenterVersion"
     implementation "com.microsoft.appcenter:appcenter-crashes:$rootProject.appcenterVersion"
 
+    //lottie
+    implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
 }

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.zaiming.android.lighthousegallery.R
 import com.zaiming.android.lighthousegallery.adapter.PhotosAdapter
 import com.zaiming.android.lighthousegallery.animator.SpringAddItemAnimator
 import com.zaiming.android.lighthousegallery.databinding.FragmentPhotosBinding
@@ -39,7 +40,13 @@ class PhotosFragment : Fragment() {
     ): View {
         _binding = FragmentPhotosBinding.inflate(inflater, container, false)
         settingWindowInsetsParams()
+        setAnimator()
         return binding.root
+    }
+
+    private fun setAnimator() {
+        binding.vfPhotos.setInAnimation(requireContext(), R.anim.anim_fade_in)
+        binding.vfPhotos.setOutAnimation(requireContext(), R.anim.anim_fade_out)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +69,7 @@ class PhotosFragment : Fragment() {
         lifecycleScope.launch {
             photosViewModel.asMediaStoreFlow().collect {
                 photosAdapter.setSections(it)
+                binding.vfPhotos.displayedChild = 1
             }
         }
     }
