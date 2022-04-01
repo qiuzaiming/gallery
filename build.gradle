@@ -2,6 +2,7 @@
 buildscript {
     ext {
         kotlin_version = '1.6.10'
+        ktlintVersion = '10.2.1'
         activityKtxVersion = '1.4.0'
         fragmentKtxVersion = '1.4.1'
         liveDataKtxVersion = '2.4.1'
@@ -25,7 +26,7 @@ plugins {
     id 'com.android.application' version '7.1.0' apply false
     id 'com.android.library' version '7.1.0' apply false
     id 'org.jetbrains.kotlin.android' version "$kotlin_version" apply false
-    id 'org.jlleitschuh.gradle.ktlint' version "10.0.0"
+    id 'org.jlleitschuh.gradle.ktlint' version "$ktlintVersion"
 }
 
 task clean(type: Delete) {
