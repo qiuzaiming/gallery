@@ -3,7 +3,6 @@ package com.zaiming.android.lighthousegallery.utils
 import com.zaiming.android.lighthousegallery.utils.debug.Debugs
 import timber.log.Timber
 
-
 object ArrayUtils {
 
     fun <E> getItem(list: List<E>?, i: Int): E? {
@@ -15,7 +14,6 @@ object ArrayUtils {
         }
     }
 
-
     fun size(collection: Collection<*>?): Int {
         if (collection == null) {
             printCollectionErrorLog()
@@ -23,14 +21,12 @@ object ArrayUtils {
         return collection?.size ?: 0
     }
 
-
     fun size(map: Map<*, *>?): Int {
         if (map == null) {
             printCollectionErrorLog()
         }
         return map?.size ?: 0
     }
-
 
     fun isEmpty(collection: Collection<*>?): Boolean {
         return collection == null || collection.isEmpty()

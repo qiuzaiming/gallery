@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun createFragment(position: Int): Fragment {
-                        return when(position) {
+                        return when (position) {
                             0 -> PhotosFragment()
                             1 -> AlbumsFragment()
                             2 -> SelectedFragment()
@@ -78,14 +78,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-                //forbid left and right scroll
+                // forbid left and right scroll
                 isUserInputEnabled = false
                 offscreenPageLimit = 2
             }
 
             navView.apply {
 
-                //display full BottomNavigationView
+                // display full BottomNavigationView
                 labelVisibilityMode = LABEL_VISIBILITY_LABELED
 
                 setOnItemSelectedListener {
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
 
-                    when(it.itemId) {
+                    when (it.itemId) {
                         R.id.navigation_photos -> performClickNavigationItem(0)
                         R.id.navigation_albums -> performClickNavigationItem(1)
                         R.id.navigation_selected -> performClickNavigationItem(2)

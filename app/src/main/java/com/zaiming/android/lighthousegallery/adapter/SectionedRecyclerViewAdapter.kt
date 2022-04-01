@@ -1,8 +1,7 @@
 package com.zaiming.android.lighthousegallery.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-import com.zaiming.android.lighthousegallery.adapter.SectionedRecyclerViewAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.zaiming.android.lighthousegallery.adapter.SectionedRecyclerViewAdapter.SectionDataObserver
 

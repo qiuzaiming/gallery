@@ -54,7 +54,6 @@ class AlbumsFragment : Fragment() {
                 albumAdapter.notifyDataSetChanged()
             }
         }
-
     }
 
     override fun onDestroyView() {

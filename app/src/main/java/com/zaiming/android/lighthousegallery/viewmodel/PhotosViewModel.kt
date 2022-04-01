@@ -34,7 +34,7 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         }.groupBy { item ->
             item.dateTimeModified.dateFormat()
         }.map { processData ->
-           SectionsAdapter.Section(processData.key, processData.value, Any())
+            SectionsAdapter.Section(processData.key, processData.value, Any())
         }
     }
 
@@ -48,7 +48,7 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         }
     }
 
-     fun fetchMediaStoreInViewModel(
+    fun fetchMediaStoreInViewModel(
         columns: Array<String> = emptyArray(),
         contentUri: Uri,
         selection: String? = null,
@@ -59,18 +59,18 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
         viewModelScope.launch {
             mediaStoreGroup.value = photosRepository.fetchMediaStoreInRepository(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
         }
-     }
+    }
 
     private fun listenerMediaStoreObserverInViewModel() {
         viewModelScope.launch {
             photosRepository.observerMediaStoreObserverInRepository.collect { changeUri ->
                 changeUri?.let {
 
-                    //search mediaStore external.db to judge image/view exist?
+                    // search mediaStore external.db to judge image/view exist?
                     val changeUriAsset = photosRepository.fetchMediaStoreInRepository(contentUri = it)
 
                     if (changeUriAsset.isEmpty()) {
-                        //delete action
+                        // delete action
                         mediaStoreGroup.value.find { changeAsset ->
                             changeAsset.uri == it
                         }?.let { deleteAssetItem ->
@@ -78,17 +78,14 @@ class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRe
                         }
                     }
 
-                    //add action
+                    // add action
                     changeUriAsset.firstNotNullOf { newAsset ->
                         if (!mediaStoreGroup.value.contains(newAsset)) {
                             mediaStoreGroup.value.add(newAsset)
                         }
                     }
-
                 }
             }
         }
     }
-
 }
-

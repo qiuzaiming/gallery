@@ -11,14 +11,14 @@ import com.zaiming.android.lighthousegallery.R
 /**
  * image switcher
  */
-class CustomImageSwitchView(context: Context, attributeSet: AttributeSet? = null): ImageSwitcher(context, attributeSet), ViewSwitcher.ViewFactory {
+class CustomImageSwitchView(context: Context, attributeSet: AttributeSet? = null) : ImageSwitcher(context, attributeSet), ViewSwitcher.ViewFactory {
 
     init {
         setFactory(this)
         setInAnimation(context, R.anim.anim_switch_in)
         setOutAnimation(context, R.anim.anim_switch_out)
     }
-    
+
     override fun makeView(): View {
         return AppCompatImageView(context).apply {
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)

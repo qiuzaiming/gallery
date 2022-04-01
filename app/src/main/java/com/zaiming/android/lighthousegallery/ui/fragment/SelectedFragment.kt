@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.zaiming.android.lighthousegallery.databinding.FragmentSelectedBinding
 import com.zaiming.android.lighthousegallery.extensions.customViewModel
 import com.zaiming.android.lighthousegallery.viewmodel.SelectedViewModel

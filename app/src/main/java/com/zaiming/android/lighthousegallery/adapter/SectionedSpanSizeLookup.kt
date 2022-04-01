@@ -10,10 +10,10 @@ open class SectionedSpanSizeLookup(
 ) : SpanSizeLookup() {
     override fun getSpanSize(position: Int): Int {
         return if (adapter.isSectionHeaderPosition(position)) {
-            //是分组头部，该position占用当前行分配的全部空间
+            // 是分组头部，该position占用当前行分配的全部空间
             layoutManager.spanCount
         } else {
-            //是分组item，该position占用当前行分配的1个空间
+            // 是分组item，该position占用当前行分配的1个空间
             1
         }
     }

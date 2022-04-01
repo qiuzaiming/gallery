@@ -13,7 +13,6 @@ import timber.log.Timber
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-
 /**
  * @author zaiming
  */
@@ -35,7 +34,7 @@ object CaptureOnlineException {
             )
         }
 
-        //seems it not work normally
+        // seems it not work normally
         Crashes.setListener(object : CrashesListener {
             override fun shouldProcess(report: ErrorReport?): Boolean = true
 
@@ -49,12 +48,12 @@ object CaptureOnlineException {
                     val readLogCommand = arrayListOf("logcat", "-d")
                     val clearLogCommand = arrayListOf("logcat", "-c")
 
-                    //capture log
+                    // capture log
                     val process = Runtime.getRuntime().exec(readLogCommand.toTypedArray())
                     val bufferReader = BufferedReader(InputStreamReader(process.inputStream))
                     var temporaryContent: String? = null
                     while (bufferReader.readLine().also { temporaryContent = it } != null) {
-                        //clear log
+                        // clear log
                         Runtime.getRuntime().exec(clearLogCommand.toTypedArray())
                         logBuilder.appendLine(temporaryContent)
                     }
@@ -70,8 +69,6 @@ object CaptureOnlineException {
             override fun onSendingFailed(report: ErrorReport?, e: Exception?) = Unit
 
             override fun onSendingSucceeded(report: ErrorReport?) = Unit
-
         })
     }
-
 }

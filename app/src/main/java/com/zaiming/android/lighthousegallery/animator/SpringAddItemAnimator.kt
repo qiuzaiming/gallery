@@ -49,7 +49,8 @@ class SpringAddItemAnimator : DefaultItemAnimator() {
                     damping = SpringForce.DAMPING_RATIO_NO_BOUNCY
                 )
 
-                listenForAllSpringsEnd( { cancelled ->
+                listenForAllSpringsEnd(
+                    { cancelled ->
                         if (!cancelled) {
                             dispatchAddFinished(holder)
                             dispatchFinishedWhenDone()
@@ -101,9 +102,7 @@ class SpringAddItemAnimator : DefaultItemAnimator() {
         view.alpha = 1f
         view.translationY = 0f
     }
-
 }
-
 
 /**
  * An extension function which creates/retrieves a [SpringAnimation] and stores it in the [View]s

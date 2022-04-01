@@ -8,9 +8,7 @@ import android.os.HandlerThread
 import com.zaiming.android.lighthousegallery.extensions.imageContentUri
 import com.zaiming.android.lighthousegallery.extensions.videoContentUri
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -33,14 +31,12 @@ class MediaStoreObserver @Inject constructor(@ApplicationContext private val con
         return innerObserver.mediaStoreOnChangeUri
     }
 
-
     companion object {
         private const val mediaStoreHandlerThreadName = "GalleryMediaStoreObserver"
     }
-
 }
 
-private class InnerObserver(handler: Handler): ContentObserver(handler) {
+private class InnerObserver(handler: Handler) : ContentObserver(handler) {
 
     private var innerMediaStoreOnChangeUri = MutableStateFlow<Uri?>(null)
     val mediaStoreOnChangeUri
@@ -50,5 +46,4 @@ private class InnerObserver(handler: Handler): ContentObserver(handler) {
         super.onChange(selfChange, uri)
         innerMediaStoreOnChangeUri.value = uri
     }
-
 }

@@ -25,5 +25,4 @@ class PhotosRepository @Inject constructor(private val mediaStoreCollection: Med
     ): MutableList<Asset> {
         return mediaStoreCollection.fetchMediaContents(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
     }
-
 }

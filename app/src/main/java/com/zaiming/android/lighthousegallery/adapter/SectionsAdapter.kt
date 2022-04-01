@@ -5,12 +5,12 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.stream.IntStream.range
 
 abstract class SectionsAdapter<
-        ID, // section item 的 id 类型
-        VH : RecyclerView.ViewHolder, // section header 的 ViewHolder
-        VI : RecyclerView.ViewHolder, // section item 的 ViewHolder
-        VF : RecyclerView.ViewHolder  // section footer 的 ViewHolder
-        >
-    : BaseAdapter<ID>() {
+    ID, // section item 的 id 类型
+    VH : RecyclerView.ViewHolder, // section header 的 ViewHolder
+    VI : RecyclerView.ViewHolder, // section item 的 ViewHolder
+    VF : RecyclerView.ViewHolder // section footer 的 ViewHolder
+    > :
+    BaseAdapter<ID>() {
 
     companion object {
         protected const val TYPE_SECTION_HEADER = 101
@@ -23,14 +23,13 @@ abstract class SectionsAdapter<
     protected var isHeaderForPosition = BooleanArray(0)
     protected var isFooterForPosition = BooleanArray(0)
 
-
     private var count = 0
 
-    protected abstract fun onCreateSectionHeaderViewHolder(parent: ViewGroup) : VH
+    protected abstract fun onCreateSectionHeaderViewHolder(parent: ViewGroup): VH
 
-    protected abstract fun onCreateSectionFooterViewHolder(parent: ViewGroup) : VF
+    protected abstract fun onCreateSectionFooterViewHolder(parent: ViewGroup): VF
 
-    protected abstract fun onCreateSectionItemViewHolder(parent: ViewGroup) : VI
+    protected abstract fun onCreateSectionItemViewHolder(parent: ViewGroup): VI
 
     protected abstract fun onBindSectionHeaderViewHolder(viewHolder: VH, section: Int)
 
@@ -38,16 +37,16 @@ abstract class SectionsAdapter<
 
     protected abstract fun onBindSectionItemViewHolder(viewHolder: VI, section: Int, index: Int, payloads: MutableList<Any>)
 
-    protected abstract fun getSectionCount() : Int
+    protected abstract fun getSectionCount(): Int
 
     /**
      * 指定 section 中项目的个数，不包括 header 和 footer
      */
-    protected abstract fun getSectionItemCount(section: Int) : Int
+    protected abstract fun getSectionItemCount(section: Int): Int
 
     override fun getItemCount(): Int = count
 
-    fun computeIndices(sectionCount: Int, itemCount: (Int)-> Int) : Array<Any> {
+    fun computeIndices(sectionCount: Int, itemCount: (Int) -> Int): Array<Any> {
 
         val totalCount = calculateTotalCount(sectionCount, itemCount)
         val sectionForPosition = IntArray(totalCount)
@@ -57,20 +56,29 @@ abstract class SectionsAdapter<
 
         var index = 0
         for (section in range(0, sectionCount)) {
-            assignPositionForSections(sectionForPosition, positionForPosition, isHeaderForPosition, isFooterForPosition,
-                index, true, false, section, -1)
+            assignPositionForSections(
+                sectionForPosition, positionForPosition, isHeaderForPosition, isFooterForPosition,
+                index, true, false, section, -1
+            )
             index++
             for (position in range(0, itemCount(section))) {
-                assignPositionForSections(sectionForPosition, positionForPosition, isHeaderForPosition, isFooterForPosition,
-                    index, false, false, section, position)
+                assignPositionForSections(
+                    sectionForPosition, positionForPosition, isHeaderForPosition, isFooterForPosition,
+                    index, false, false, section, position
+                )
                 index++
             }
         }
         return arrayOf(sectionForPosition, positionForPosition, isHeaderForPosition, isFooterForPosition)
     }
 
-    fun refreshIndices(totalCount: Int, sectionForPosition: IntArray, positionForPosition: IntArray,
-                       isHeaderForPosition: BooleanArray, isFooterForPosition: BooleanArray,) {
+    fun refreshIndices(
+        totalCount: Int,
+        sectionForPosition: IntArray,
+        positionForPosition: IntArray,
+        isHeaderForPosition: BooleanArray,
+        isFooterForPosition: BooleanArray,
+    ) {
         count = totalCount
         this.sectionForPosition = sectionForPosition
         this.positionForPosition = positionForPosition
@@ -78,17 +86,24 @@ abstract class SectionsAdapter<
         this.isFooterForPosition = isFooterForPosition
     }
 
-    fun getIndexOfPosition(position: Int) : Int {
+    fun getIndexOfPosition(position: Int): Int {
 
         return positionForPosition.getOrElse(position) {
             -1
         }
     }
 
-    private fun assignPositionForSections(sectionForPosition: IntArray, positionForPosition: IntArray,
-                                          isHeaderForPosition: BooleanArray, isFooterForPosition: BooleanArray,
-                                          index : Int, isHeader : Boolean, isFooter : Boolean,
-                                          section: Int, position: Int) {
+    private fun assignPositionForSections(
+        sectionForPosition: IntArray,
+        positionForPosition: IntArray,
+        isHeaderForPosition: BooleanArray,
+        isFooterForPosition: BooleanArray,
+        index: Int,
+        isHeader: Boolean,
+        isFooter: Boolean,
+        section: Int,
+        position: Int
+    ) {
 
         sectionForPosition[index] = section
         positionForPosition[index] = position
@@ -96,14 +111,13 @@ abstract class SectionsAdapter<
         isFooterForPosition[index] = isFooter
     }
 
-    fun isHeaderForPosition(position: Int) : Boolean {
+    fun isHeaderForPosition(position: Int): Boolean {
         return isHeaderForPosition.getOrElse(position) {
             false
         }
     }
 
-
-    fun getTotalItemCount() : Int {
+    fun getTotalItemCount(): Int {
 
         var totalCount = 0
         for (section in 0 until getSectionCount()) {
@@ -112,8 +126,7 @@ abstract class SectionsAdapter<
         return totalCount
     }
 
-
-    fun getPositionOf(section: Int, position: Int) : Int {
+    fun getPositionOf(section: Int, position: Int): Int {
 
         var index = 0
         for (sectionIndex in 0 until section) {
@@ -123,7 +136,7 @@ abstract class SectionsAdapter<
         return index2Position(index + position + 1)
     }
 
-    protected fun calculateTotalCount() : Int {
+    protected fun calculateTotalCount(): Int {
         return calculateTotalCount(getSectionCount()) {
             getSectionItemCount(it)
         }
@@ -139,7 +152,7 @@ abstract class SectionsAdapter<
         return totalCount
     }
 
-    fun getItemIndexOf(section: Int, position: Int) : Int {
+    fun getItemIndexOf(section: Int, position: Int): Int {
         var index = 0
         for (i in 0 until section) {
             index += getSectionItemCount(i)
@@ -171,7 +184,6 @@ abstract class SectionsAdapter<
         }
     }
 
-
     override fun onBindGalleryViewHolder(
         viewHolder: RecyclerView.ViewHolder,
         position: Int,
@@ -195,36 +207,33 @@ abstract class SectionsAdapter<
         }
     }
 
-
-    private fun isSectionItemType(type: Int) : Boolean {
+    private fun isSectionItemType(type: Int): Boolean {
         return type == TYPE_SECTION_ITEM
     }
 
-    private fun isSectionHeaderType(type: Int) : Boolean {
+    private fun isSectionHeaderType(type: Int): Boolean {
         return type == TYPE_SECTION_HEADER
     }
 
-    private fun isSectionFooterType(type: Int) : Boolean {
+    private fun isSectionFooterType(type: Int): Boolean {
         return type == TYPE_SECTION_FOOTER
     }
 
-    private fun isSectionHeaderPosition(position: Int) : Boolean {
+    private fun isSectionHeaderPosition(position: Int): Boolean {
         return isHeaderForPosition.size > position && isHeaderForPosition.getOrElse(position) {
             false
         }
     }
 
-    private fun isSectionFooterPosition(position: Int) : Boolean {
+    private fun isSectionFooterPosition(position: Int): Boolean {
         return isFooterForPosition.size > position && isFooterForPosition.getOrElse(position) {
             false
         }
     }
 
-
     data class Section<H, T, F>(
-        val header : H,
-        val data : List<T>,
-        val footer : F
+        val header: H,
+        val data: List<T>,
+        val footer: F
     )
-
 }

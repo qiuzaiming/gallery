@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 // 可多选的类型对应的 id 类型，比如数据库中的自增 id
-abstract class BaseAdapter<ID>: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class BaseAdapter<ID> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         protected const val VIEW_TYPE = 1
@@ -13,32 +13,32 @@ abstract class BaseAdapter<ID>: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     /**
      * 是否为可选状态
      */
-    private var selectable : Boolean = false
+    private var selectable: Boolean = false
 
     /**
      * 已经选择的列表的 id
      */
-    var selectedItemIds : MutableSet<ID> = HashSet()
+    var selectedItemIds: MutableSet<ID> = HashSet()
 
     /**
      * 如果有多个 item 类型，可以继承这个方法
      */
-    protected open fun getGalleryItemViewType(position : Int) : Int {
+    protected open fun getGalleryItemViewType(position: Int): Int {
         return VIEW_TYPE
     }
 
     // 透传
-    protected abstract fun onCreateGalleryViewHolder(parent: ViewGroup, type: Int) : RecyclerView.ViewHolder
+    protected abstract fun onCreateGalleryViewHolder(parent: ViewGroup, type: Int): RecyclerView.ViewHolder
 
-    //透传
-    protected abstract fun onBindGalleryViewHolder(viewHolder: RecyclerView.ViewHolder, position : Int, payloads: MutableList<Any>)
+    // 透传
+    protected abstract fun onBindGalleryViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>)
 
     // 支持多选
     open fun isSelectableStatus() = selectable
 
     open fun isSelected(position: Int) = selectedItemIds.contains(generateId(position))
 
-    protected fun isSelected(id : ID) = selectedItemIds.contains(id)
+    protected fun isSelected(id: ID) = selectedItemIds.contains(id)
 
     /**
      * 设置进入或者退出多选状态
@@ -118,17 +118,15 @@ abstract class BaseAdapter<ID>: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         notifySelectItemsChanged()
     }
 
-
-    fun getSelectedItemCount() : Int {
+    fun getSelectedItemCount(): Int {
         return selectedItemIds.size
     }
 
-    protected abstract fun generateId(position: Int) : ID?
+    protected abstract fun generateId(position: Int): ID?
 
     override fun getItemViewType(position: Int): Int {
         return getGalleryItemViewType(position)
     }
-
 
     private fun notifySelectItemsChanged() {
         notifyItemRangeChanged(firstIndexOfPosition(), lastIndexOfPosition(), SelectPayload())
@@ -138,19 +136,19 @@ abstract class BaseAdapter<ID>: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         notifyItemChanged(position, SelectPayload())
     }
 
-    protected fun index2Position(index: Int) : Int {
+    protected fun index2Position(index: Int): Int {
         return index
     }
 
-    protected fun position2Index(position: Int) : Int {
+    protected fun position2Index(position: Int): Int {
         return position
     }
 
-    private fun firstIndexOfPosition() : Int {
+    private fun firstIndexOfPosition(): Int {
         return index2Position(0)
     }
 
-    private fun lastIndexOfPosition() : Int {
+    private fun lastIndexOfPosition(): Int {
         return itemCount
     }
 
@@ -166,7 +164,7 @@ abstract class BaseAdapter<ID>: RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         onBindGalleryViewHolder(holder, position, payloads)
     }
 
-    protected fun isIndexPosition(position : Int) : Boolean {
+    protected fun isIndexPosition(position: Int): Boolean {
         return position < itemCount
     }
 

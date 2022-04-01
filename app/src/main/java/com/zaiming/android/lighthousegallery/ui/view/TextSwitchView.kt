@@ -14,7 +14,7 @@ import com.zaiming.android.lighthousegallery.R
 /**
  * text switcher
  */
-class TextSwitchView(context: Context, attributeSet: AttributeSet? = null): TextSwitcher(context, attributeSet), ViewSwitcher.ViewFactory {
+class TextSwitchView(context: Context, attributeSet: AttributeSet? = null) : TextSwitcher(context, attributeSet), ViewSwitcher.ViewFactory {
 
     init {
         setFactory(this)

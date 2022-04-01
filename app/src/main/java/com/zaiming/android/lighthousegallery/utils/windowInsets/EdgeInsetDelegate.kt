@@ -35,14 +35,14 @@ class EdgeInsetDelegate(private val activity: Activity) {
         }
 
         var eveGivenInsetsToDecorView = false
-        //This prevents a translucent white bottom bar from appearing on the MIUI system
+        // This prevents a translucent white bottom bar from appearing on the MIUI system
         activity.window.decorView.doOnApplyWindowInsets { _, windowInsets, _, _ ->
             val navigationBarsInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
 
             val isGestureNavigation = isGestureNavigation(navigationBarsInsets)
 
             if (!isGestureNavigation) {
-                //Let decorView draw the translucent navigationBarColor
+                // Let decorView draw the translucent navigationBarColor
                 // setting ViewCompat.onApplyWindowInsets(activity.window.decorView, windowInsets) means that windowInsets give decorView to handle
                 // so decorView decors statusBar and navigationBar colors -> you set statusBar color or navigationBar color take effect
                 // by the way, you do not set  ViewCompat.onApplyWindowInsets(activity.window.decorView, windowInsets) and setting navigationBar or statusBar -> not effect
@@ -51,7 +51,7 @@ class EdgeInsetDelegate(private val activity: Activity) {
                 // ViewCompat.onApplyWindowInsets(activity.window.decorView, windowInsets)
                 eveGivenInsetsToDecorView = true
             } else if (isGestureNavigation && eveGivenInsetsToDecorView) {
-                //Let DecorView remove navigationBarBackground once it has been draw
+                // Let DecorView remove navigationBarBackground once it has been draw
                 ViewCompat.onApplyWindowInsets(
                     activity.window.decorView,
                     WindowInsetsCompat.Builder()
@@ -67,5 +67,4 @@ class EdgeInsetDelegate(private val activity: Activity) {
             }
         }
     }
-
 }

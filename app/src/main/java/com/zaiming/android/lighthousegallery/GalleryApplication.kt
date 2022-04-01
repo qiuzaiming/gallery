@@ -6,7 +6,6 @@ import com.zaiming.android.lighthousegallery.app.Global
 import com.zaiming.android.lighthousegallery.utils.captureException.CaptureOnlineException
 import dagger.hilt.android.HiltAndroidApp
 
-
 /**
  * @author zaiming
  */
@@ -32,5 +31,4 @@ class GalleryApplication : Application() {
         super.attachBaseContext(base)
         Global.start()
     }
-
 }

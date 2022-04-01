@@ -3,7 +3,8 @@ package com.zaiming.android.lighthousegallery.extensions
 import com.zaiming.android.lighthousegallery.GalleryApplication
 import com.zaiming.android.lighthousegallery.R
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 /**
  * time change to standard form

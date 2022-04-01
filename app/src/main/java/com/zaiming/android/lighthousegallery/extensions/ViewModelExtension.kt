@@ -7,23 +7,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-
-class ParamViewModelFactory<VM: ViewModel>(
+class ParamViewModelFactory<VM : ViewModel>(
     private val factory: () -> VM
-): ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T = factory() as T
 }
 
 /**
  * create activity viewmodel instance with params
  */
-inline fun <reified VM: ViewModel> AppCompatActivity.customViewModel(
+inline fun <reified VM : ViewModel> AppCompatActivity.customViewModel(
     noinline factory: () -> VM
 ): Lazy<VM> = viewModels { ParamViewModelFactory(factory) }
 
 /**
  * create fragment viewmodel instance with params
  */
-inline fun <reified VM: ViewModel> Fragment.customViewModel(
+inline fun <reified VM : ViewModel> Fragment.customViewModel(
     noinline factory: () -> VM
 ): Lazy<VM> = viewModels { ParamViewModelFactory(factory) }

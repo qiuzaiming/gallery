@@ -45,7 +45,7 @@ object Global {
         }
 
         if (Looper.myLooper() == Looper.getMainLooper()) {
-           setupIdleHandler(Looper.myQueue())
+            setupIdleHandler(Looper.myQueue())
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 setupIdleHandler(Looper.getMainLooper().queue)

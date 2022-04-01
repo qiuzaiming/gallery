@@ -7,7 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import androidx.core.view.*
+import androidx.core.view.forEach
+import androidx.core.view.isGone
+import androidx.core.view.marginBottom
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 
 const val matchParent = MATCH_PARENT
 const val wrapContent = WRAP_CONTENT
@@ -16,13 +21,15 @@ const val wrapContent = WRAP_CONTENT
  * from drakeet
  */
 abstract class CustomBaseLayout @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, deStyleAttr: Int = 0
-): ViewGroup(context, attrs, deStyleAttr) {
+    context: Context,
+    attrs: AttributeSet? = null,
+    deStyleAttr: Int = 0
+) : ViewGroup(context, attrs, deStyleAttr) {
 
     protected val Int.dp: Int
-                get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), resources.displayMetrics).toInt()
+        get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), resources.displayMetrics).toInt()
 
-    class LayoutParams(width: Int, height: Int): MarginLayoutParams(width, height)
+    class LayoutParams(width: Int, height: Int) : MarginLayoutParams(width, height)
 
     override fun generateDefaultLayoutParams(): LayoutParams {
         return LayoutParams(matchParent, wrapContent)
@@ -37,7 +44,6 @@ abstract class CustomBaseLayout @JvmOverloads constructor(
      * 提示用于需要重写onMeasure方法进行测量子View
      */
     protected abstract fun onMeasureChildren(widthMeasureSpec: Int, heightMeasureSpec: Int)
-
 
     /**
      * 多个View进行测量
@@ -60,7 +66,8 @@ abstract class CustomBaseLayout @JvmOverloads constructor(
      * @param fromBottom: from bottom to top
      */
     protected fun View.layout(
-        x: Int, y: Int,
+        x: Int,
+        y: Int,
         fromEnd: Boolean = false,
         fromBottom: Boolean = false
     ) {
@@ -86,14 +93,14 @@ abstract class CustomBaseLayout @JvmOverloads constructor(
     protected val View.measureWidthWithMargin get() = (measuredWidth + marginStart + marginEnd)
     protected val View.measureHeightWithMargin get() = (measuredHeight + marginTop + marginBottom)
 
-    protected fun View.defaultWidthMeasureSpec(parentView: ViewGroup): Int = when(layoutParams.width) {
+    protected fun View.defaultWidthMeasureSpec(parentView: ViewGroup): Int = when (layoutParams.width) {
         matchParent -> (parentView.measuredWidth - paddingStart - paddingEnd).toExactlyMeasureSpec()
         wrapContent -> Int.MAX_VALUE.toAtMostMeasureSpec()
         0 -> throw IllegalAccessException("Need special treatment for $this")
         else -> layoutParams.width.toExactlyMeasureSpec()
     }
 
-    protected fun View.defaultHeightMeasureSpec(parentView: ViewGroup): Int = when(layoutParams.height) {
+    protected fun View.defaultHeightMeasureSpec(parentView: ViewGroup): Int = when (layoutParams.height) {
         matchParent -> (parentView.measuredHeight - paddingTop - paddingBottom).toExactlyMeasureSpec()
         wrapContent -> Int.MAX_VALUE.toAtMostMeasureSpec()
         0 -> throw IllegalAccessException("Need special treatment for $this")

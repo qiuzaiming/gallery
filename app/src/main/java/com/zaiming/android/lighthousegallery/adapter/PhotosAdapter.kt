@@ -11,9 +11,9 @@ import com.zaiming.android.lighthousegallery.ui.activity.GalleryDetailActivity
 /**
  * @author zaiming
  */
-class PhotosAdapter(private val activity: Activity): SectionsDiffAdapter<String, Asset, Any,
-        Long,
-        CountHeaderViewHolder, CountItemViewHolder, CountFootViewHolder>() {
+class PhotosAdapter(private val activity: Activity) : SectionsDiffAdapter<String, Asset, Any,
+    Long,
+    CountHeaderViewHolder, CountItemViewHolder, CountFootViewHolder>() {
 
     override fun onCreateSectionHeaderViewHolder(parent: ViewGroup): CountHeaderViewHolder {
         return CountHeaderViewHolder(parent)
@@ -77,5 +77,4 @@ class PhotosAdapter(private val activity: Activity): SectionsDiffAdapter<String,
     }
 
     override fun generateId(item: Asset): Long = item.id
-
 }

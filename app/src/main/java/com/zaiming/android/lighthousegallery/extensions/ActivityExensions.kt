@@ -10,7 +10,6 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.zaiming.android.lighthousegallery.utils.windowInsets.EdgeInsetDelegate
 
-
 internal fun getContentTransform(): MaterialContainerTransform {
     return MaterialContainerTransform().apply {
         addTarget(android.R.id.content)

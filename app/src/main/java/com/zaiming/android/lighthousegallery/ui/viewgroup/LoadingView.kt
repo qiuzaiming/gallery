@@ -13,7 +13,7 @@ import com.zaiming.android.lighthousegallery.ui.base.CustomBaseLayout
 /**
  * Loading ViewGroup
  */
-class LoadingView(context: Context, attributeSet: AttributeSet): CustomBaseLayout(context, attributeSet) {
+class LoadingView(context: Context, attributeSet: AttributeSet) : CustomBaseLayout(context, attributeSet) {
 
     private val loadingImageView = AppCompatImageView(context).apply {
         layoutParams = LayoutParams(160.dp, 160.dp)

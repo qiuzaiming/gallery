@@ -13,7 +13,7 @@ import com.zaiming.android.lighthousegallery.bean.AlbumAsset
 /**
  * @author zaiming
  */
-class AlbumsAdapter(private val items: MutableList<AlbumAsset>): RecyclerView.Adapter<AlbumsAdapter.ViewHolder>() {
+class AlbumsAdapter(private val items: MutableList<AlbumAsset>) : RecyclerView.Adapter<AlbumsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_album, parent, false))
@@ -27,7 +27,7 @@ class AlbumsAdapter(private val items: MutableList<AlbumAsset>): RecyclerView.Ad
 
     override fun getItemId(position: Int): Long = items[position].hashCode().toLong()
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val albumCover: AppCompatImageView = itemView.findViewById(R.id.album_cover)
         private val albumName: AppCompatTextView = itemView.findViewById(R.id.tv_album_name)
         private val albumCount: AppCompatTextView = itemView.findViewById(R.id.tv_album_count)

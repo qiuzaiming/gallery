@@ -29,7 +29,7 @@ class PhotosFragment : Fragment() {
 
     private val photosViewModel: PhotosViewModel by activityViewModels()
 
-    private  val photosAdapter by lazy {
+    private val photosAdapter by lazy {
         PhotosAdapter(requireActivity())
     }
 
@@ -57,7 +57,6 @@ class PhotosFragment : Fragment() {
                 override fun getSpanSize(position: Int): Int {
                     return if (photosAdapter.isHeaderForPosition(position)) 4 else 1
                 }
-
             }
         }
         binding.rvPhotos.apply {

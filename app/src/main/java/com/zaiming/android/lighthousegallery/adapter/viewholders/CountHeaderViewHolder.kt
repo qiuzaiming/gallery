@@ -1,9 +1,9 @@
 package com.zaiming.android.lighthousegallery.adapter.viewholders
 
-import androidx.recyclerview.widget.RecyclerView
-import android.widget.TextView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.zaiming.android.lighthousegallery.R
 
 /**
