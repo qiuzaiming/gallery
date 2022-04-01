@@ -9,6 +9,7 @@
     <ImageView
         android:id="@+id/iv_detail"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/content_description_gallery_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -11,6 +11,7 @@
         android:gravity="start|center_vertical"
         android:minHeight="26dp"
         android:paddingStart="20dp"
+        android:paddingEnd="0dp"
         android:maxLines="1"
         android:textColor="#FF44546D"
         android:textSize="14sp" />

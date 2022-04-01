@@ -9,6 +9,7 @@
         android:layout_width="108dp"
         android:layout_height="108dp"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/content_description_gallery_group_picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
