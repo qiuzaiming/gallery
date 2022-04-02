@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.marginTop
 import com.zaiming.android.lighthousegallery.R
+import com.zaiming.android.lighthousegallery.extensions.toTheme
 import com.zaiming.android.lighthousegallery.ui.base.CustomBaseLayout
 
 /**
@@ -21,7 +22,7 @@ class LoadingView(context: Context, attributeSet: AttributeSet) : CustomBaseLayo
         addView(this)
     }
 
-    private val loadingTextView = AppCompatTextView(context).apply {
+    private val loadingTextView = AppCompatTextView(context.toTheme(R.style.Theme_Style_Loading_TextView), null, android.R.attr.textViewStyle).apply {
         layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT).apply {
             topMargin = 10.dp
         }
