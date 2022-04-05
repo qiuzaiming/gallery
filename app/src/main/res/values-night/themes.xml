@@ -12,5 +12,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">#000000</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/lxgwwenkai_regular</item>
     </style>
 </resources>
