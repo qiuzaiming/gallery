@@ -53,22 +53,25 @@ dependencies {
     implementation "androidx.activity:activity-ktx:$rootProject.activityKtxVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentKtxVersion"
 
-    //timber
+    // timber
     implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
-    //glide
+    // glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
 
-    //hilt
+    // hilt
     implementation "com.google.dagger:hilt-android:2.31-alpha"
     kapt "com.google.dagger:hilt-android-compiler:2.31-alpha"
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
 
-    //AppCenter
+    // AppCenter
     implementation "com.microsoft.appcenter:appcenter-analytics:$rootProject.appcenterVersion"
     implementation "com.microsoft.appcenter:appcenter-crashes:$rootProject.appcenterVersion"
 
-    //lottie
+    // lottie
     implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
+
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycleVersion"
 }
