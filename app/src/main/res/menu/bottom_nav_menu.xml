@@ -17,9 +17,9 @@
         android:title="@string/title_selected"/>
 
     <item
-        android:id="@+id/navigation_recommends"
+        android:id="@+id/navigation_settings"
         android:icon="@drawable/main_ic_me"
-        android:title="@string/title_recommends" />
+        android:title="@string/title_settings" />
 
 
 </menu>

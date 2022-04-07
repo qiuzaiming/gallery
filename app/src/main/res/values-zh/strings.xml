@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">LHGallery</string>
+    <string name="title_photos">照片</string>
+    <string name="title_albums">相册</string>
+    <string name="title_selected">未定</string>
+    <string name="title_settings">设置</string>
+    <string name="date_format_by_day">yyyy-MM-dd</string>
+    <string name="text_loading">加载中…</string>
+    <string name="settings_title_common">通用</string>
+    <string name="settings_title_common_show_pictures">展示图片</string>
+    <string name="settings_summary_show_pictures">展示图片资源</string>
+    <string name="settings_title_common_show_videos">展示视频</string>
+    <string name="settings_summary_show_videos">展示视频资源</string>
+
+    <!-- contentDescription-->
+    <string name="content_description_gallery_detail">图片详情</string>
+    <string name="content_description_gallery_group_picture">相册详情</string>
+</resources>

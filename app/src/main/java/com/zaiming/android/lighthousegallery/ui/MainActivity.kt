@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                         R.id.navigation_photos -> performClickNavigationItem(0)
                         R.id.navigation_albums -> performClickNavigationItem(1)
                         R.id.navigation_selected -> performClickNavigationItem(2)
-                        R.id.navigation_recommends -> performClickNavigationItem(3)
+                        R.id.navigation_settings -> performClickNavigationItem(3)
                     }
                     true
                 }
