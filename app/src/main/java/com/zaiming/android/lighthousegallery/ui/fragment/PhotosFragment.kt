@@ -13,7 +13,7 @@ import com.zaiming.android.lighthousegallery.animator.SpringAddItemAnimator
 import com.zaiming.android.lighthousegallery.databinding.FragmentPhotosBinding
 import com.zaiming.android.lighthousegallery.extensions.repeatOnLifecycleOnStart
 import com.zaiming.android.lighthousegallery.utils.windowInsets.doOnApplyWindowInsets
-import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
+import com.zaiming.android.lighthousegallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -26,7 +26,7 @@ class PhotosFragment : Fragment() {
     private var _binding: FragmentPhotosBinding? = null
     private val binding get() = _binding!!
 
-    private val photosViewModel: PhotosViewModel by activityViewModels()
+    private val galleryViewModel: GalleryViewModel by activityViewModels()
 
     private val photosAdapter by lazy {
         PhotosAdapter(requireActivity())
@@ -65,7 +65,7 @@ class PhotosFragment : Fragment() {
         }
 
         repeatOnLifecycleOnStart {
-            photosViewModel.asMediaStoreFlow().collect {
+            galleryViewModel.asMediaStoreFlow().collect {
                 photosAdapter.setSections(it)
                 binding.vfPhotos.displayedChild = 1
             }

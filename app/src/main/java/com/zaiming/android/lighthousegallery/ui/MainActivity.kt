@@ -15,9 +15,9 @@ import com.zaiming.android.lighthousegallery.extensions.applyImmersionWithWindow
 import com.zaiming.android.lighthousegallery.extensions.imageContentUri
 import com.zaiming.android.lighthousegallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.PhotosFragment
-import com.zaiming.android.lighthousegallery.ui.fragment.RecommendFragment
 import com.zaiming.android.lighthousegallery.ui.fragment.SelectedFragment
-import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
+import com.zaiming.android.lighthousegallery.ui.fragment.SettingsFragment
+import com.zaiming.android.lighthousegallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val photosViewModel by lazy {
-        ViewModelProvider(this)[PhotosViewModel::class.java]
+        ViewModelProvider(this)[GalleryViewModel::class.java]
     }
     private val needRequestMultiplePermission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                             0 -> PhotosFragment()
                             1 -> AlbumsFragment()
                             2 -> SelectedFragment()
-                            else -> RecommendFragment()
+                            else -> SettingsFragment()
                         }
                     }
                 }

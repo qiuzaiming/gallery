@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="commonSettings"
+        app:title="@string/settings_title_common">
+
+        <SwitchPreferenceCompat
+            app:key="showPicturesFiles"
+            app:title="@string/settings_title_common_show_pictures"
+            android:summary="@string/settings_summary_show_pictures"
+            android:icon="@drawable/settings_icon_pictures"
+            android:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            app:key="showVideoFiles"
+            app:title="@string/settings_title_common_show_videos"
+            android:summary="@string/settings_summary_show_videos"
+            android:icon="@drawable/settings_icon_videos"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

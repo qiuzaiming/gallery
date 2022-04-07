@@ -12,7 +12,7 @@ import com.zaiming.android.lighthousegallery.bean.AlbumAsset
 import com.zaiming.android.lighthousegallery.databinding.FragmentAlbumsBinding
 import com.zaiming.android.lighthousegallery.extensions.repeatOnLifecycleOnStart
 import com.zaiming.android.lighthousegallery.utils.windowInsets.doOnApplyWindowInsets
-import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
+import com.zaiming.android.lighthousegallery.viewmodel.GalleryViewModel
 import kotlinx.coroutines.flow.collect
 
 /**
@@ -23,7 +23,7 @@ class AlbumsFragment : Fragment() {
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
 
-    private val albumsViewModel: PhotosViewModel by activityViewModels()
+    private val albumsViewModel: GalleryViewModel by activityViewModels()
 
     private var albumAssetGroup: MutableList<AlbumAsset> = ArrayList()
     private val albumAdapter by lazy {

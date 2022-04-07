@@ -7,10 +7,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
 inline fun LifecycleOwner.repeatOnLifecycleOnStart(crossinline block: suspend CoroutineScope.() -> Unit) {
     lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED ) {
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
             block()
         }
     }

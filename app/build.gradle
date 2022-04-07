@@ -74,4 +74,7 @@ dependencies {
 
     // lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycleVersion"
+
+    // preference
+    implementation "androidx.preference:preference:$rootProject.preferenceVersion"
 }

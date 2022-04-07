@@ -20,7 +20,7 @@ import javax.inject.Inject
  * @author zaiming
  */
 @HiltViewModel
-class PhotosViewModel @Inject constructor(private val photosRepository: PhotosRepository) : ViewModel() {
+class GalleryViewModel @Inject constructor(private val photosRepository: PhotosRepository) : ViewModel() {
 
     init {
         listenerMediaStoreObserverInViewModel()
