@@ -6,17 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zaiming.android.lighthousegallery.R
 import com.zaiming.android.lighthousegallery.adapter.PhotosAdapter
 import com.zaiming.android.lighthousegallery.animator.SpringAddItemAnimator
 import com.zaiming.android.lighthousegallery.databinding.FragmentPhotosBinding
+import com.zaiming.android.lighthousegallery.extensions.repeatOnLifecycleOnStart
 import com.zaiming.android.lighthousegallery.utils.windowInsets.doOnApplyWindowInsets
 import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 /**
  * @author zaiming
@@ -65,7 +64,7 @@ class PhotosFragment : Fragment() {
             adapter = photosAdapter
         }
 
-        lifecycleScope.launch {
+        repeatOnLifecycleOnStart {
             photosViewModel.asMediaStoreFlow().collect {
                 photosAdapter.setSections(it)
                 binding.vfPhotos.displayedChild = 1

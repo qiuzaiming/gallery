@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zaiming.android.lighthousegallery.adapter.AlbumsAdapter
 import com.zaiming.android.lighthousegallery.bean.AlbumAsset
 import com.zaiming.android.lighthousegallery.databinding.FragmentAlbumsBinding
+import com.zaiming.android.lighthousegallery.extensions.repeatOnLifecycleOnStart
 import com.zaiming.android.lighthousegallery.utils.windowInsets.doOnApplyWindowInsets
 import com.zaiming.android.lighthousegallery.viewmodel.PhotosViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 /**
  * @author zaiming
@@ -47,7 +46,7 @@ class AlbumsFragment : Fragment() {
 
         initRecyclerViewWindowInsets()
 
-        lifecycleScope.launch {
+        repeatOnLifecycleOnStart {
             albumsViewModel.asAlbumMediaStoreFlow().collect {
                 albumAssetGroup.clear()
                 albumAssetGroup.addAll(it.toMutableList())
