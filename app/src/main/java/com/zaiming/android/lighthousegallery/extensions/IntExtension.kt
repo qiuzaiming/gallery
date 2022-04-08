@@ -10,3 +10,7 @@ val Int.dp: Int
 context(Context)
 val Int.px: Int
     get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, this.toFloat(), resources.displayMetrics).toInt()
+
+context(Context)
+val Int.sp: Int
+    get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, this.toFloat(), resources.displayMetrics).toInt()
