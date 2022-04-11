@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     fun performClickNavigationItem(index: Int) {
                         if (binding.viewpagerHostFragmentActivityMain.currentItem != index) {
                             if (!binding.viewpagerHostFragmentActivityMain.isFakeDragging) {
-                                binding.viewpagerHostFragmentActivityMain.setCurrentItem(index, true)
+                                binding.viewpagerHostFragmentActivityMain.setCurrentItem(index, false)
                             }
                         }
                     }

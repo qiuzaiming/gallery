@@ -6,7 +6,9 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import com.zaiming.android.gallery.bean.Asset
+import com.zaiming.android.gallery.extensions.imageContentUri
 import com.zaiming.android.gallery.extensions.requireApiQ
+import com.zaiming.android.gallery.extensions.videoContentUri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -73,7 +75,7 @@ class MediaStoreCollection @Inject constructor(@ApplicationContext val context: 
 
                         val asset = Asset(
                             id = id,
-                            uri = ContentUris.withAppendedId(contentUri, id),
+                            uri = contentUriDependOnStandard(contentUri, id),
                             dateTimeAdded = dateAdded,
                             dateTimeModified = dateModified,
                             displayName = displayName,
@@ -90,6 +92,14 @@ class MediaStoreCollection @Inject constructor(@ApplicationContext val context: 
         } catch (e: Exception) {
             e.printStackTrace()
             return mutableListOf()
+        }
+    }
+
+    fun contentUriDependOnStandard(uri: Uri, id: Long): Uri {
+        return if (uri == imageContentUri() || uri == videoContentUri()) {
+            ContentUris.withAppendedId(uri, id)
+        } else {
+            uri
         }
     }
 }

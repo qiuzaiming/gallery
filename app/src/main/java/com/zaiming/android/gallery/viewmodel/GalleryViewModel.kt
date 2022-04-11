@@ -81,7 +81,7 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
                     // add action
                     changeUriAsset.firstNotNullOf { newAsset ->
                         if (!mediaStoreGroup.value.contains(newAsset)) {
-                            mediaStoreGroup.value.add(newAsset)
+                            mediaStoreGroup.value = (mediaStoreGroup.value + newAsset) as MutableList<Asset>
                         }
                     }
                 }
