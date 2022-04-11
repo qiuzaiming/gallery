@@ -41,7 +41,7 @@ class MediaStoreCollection @Inject constructor(@ApplicationContext val context: 
         try {
             return withContext(Dispatchers.IO) {
                 val assets = ArrayList<Asset>()
-                val isIndividual = contentUri == imageContentUri() || contentUri == videoContentUri()
+                val isCollection = contentUri == imageContentUri() || contentUri == videoContentUri()
                 context.contentResolver.query(
                     contentUri,
                     projection,
@@ -76,7 +76,7 @@ class MediaStoreCollection @Inject constructor(@ApplicationContext val context: 
 
                         val asset = Asset(
                             id = id,
-                            uri = if (isIndividual) contentUri else ContentUris.withAppendedId(contentUri, id),
+                            uri = if (isCollection) ContentUris.withAppendedId(contentUri, id) else contentUri,
                             dateTimeAdded = dateAdded,
                             dateTimeModified = dateModified,
                             displayName = displayName,
