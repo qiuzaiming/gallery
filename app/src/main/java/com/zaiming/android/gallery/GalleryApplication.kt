@@ -14,6 +14,7 @@ class GalleryApplication : Application() {
 
     companion object {
         lateinit var instance: Application
+            private set
     }
 
     override fun onCreate() {
