@@ -1,6 +1,7 @@
 package com.zaiming.android.gallery.ui.base
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -117,5 +118,13 @@ abstract class CustomBaseLayout @JvmOverloads constructor(
         params.height = height
         apply(params)
         super.addView(child, params)
+    }
+
+    protected fun View.overScrollNever() {
+        this.overScrollMode = OVER_SCROLL_NEVER
+    }
+
+    protected fun View.transparentBackground() {
+        this.setBackgroundColor(Color.TRANSPARENT)
     }
 }
