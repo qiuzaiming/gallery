@@ -11,7 +11,7 @@ import com.zaiming.android.gallery.adapter.AlbumsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
 import com.zaiming.android.gallery.extensions.repeatOnLifecycleOnStart
-import com.zaiming.android.gallery.utils.windowInsets.doOnApplyWindowInsets
+import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import kotlinx.coroutines.flow.collect
 
@@ -36,6 +36,7 @@ class AlbumsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
+        binding.recyclerviewAlbum.applySystemBarImmersionMode()
         return binding.root
     }
 
@@ -43,8 +44,6 @@ class AlbumsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-
-        initRecyclerViewWindowInsets()
 
         repeatOnLifecycleOnStart {
             albumsViewModel.asAlbumMediaStoreFlow().collect {
@@ -67,19 +66,6 @@ class AlbumsFragment : Fragment() {
         with(binding.recyclerviewAlbum) {
             layoutManager = GridLayoutManager(requireContext(), spanCount)
             adapter = albumAdapter
-        }
-    }
-
-    private fun initRecyclerViewWindowInsets() {
-        binding.recyclerviewAlbum.doOnApplyWindowInsets { view, windowInsetsCompat, _, _ ->
-            with(view) {
-                setPaddingRelative(
-                    paddingStart,
-                    paddingTop + windowInsetsCompat.systemWindowInsetTop,
-                    paddingEnd + windowInsetsCompat.systemWindowInsetRight,
-                    paddingBottom + windowInsetsCompat.systemWindowInsetBottom
-                )
-            }
         }
     }
 

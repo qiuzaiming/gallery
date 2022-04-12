@@ -8,7 +8,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.utils.Constants
-import com.zaiming.android.gallery.utils.windowInsets.doOnApplyWindowInsets
+import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 
 /**
@@ -26,23 +26,10 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        settingWindowInsetsParamsOnRecyclerView()
+        listView.applySystemBarImmersionMode()
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
         return false
-    }
-
-    private fun settingWindowInsetsParamsOnRecyclerView() {
-        listView.doOnApplyWindowInsets { view, windowInsetsCompat, _, _ ->
-            with(view) {
-                setPaddingRelative(
-                    paddingStart,
-                    paddingTop + windowInsetsCompat.systemWindowInsetTop,
-                    paddingEnd + windowInsetsCompat.systemWindowInsetRight,
-                    paddingBottom + windowInsetsCompat.systemWindowInsetBottom
-                )
-            }
-        }
     }
 }

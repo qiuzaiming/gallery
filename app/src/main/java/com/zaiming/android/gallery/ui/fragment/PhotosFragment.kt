@@ -12,7 +12,7 @@ import com.zaiming.android.gallery.adapter.PhotosAdapter
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
 import com.zaiming.android.gallery.databinding.FragmentPhotosBinding
 import com.zaiming.android.gallery.extensions.repeatOnLifecycleOnStart
-import com.zaiming.android.gallery.utils.windowInsets.doOnApplyWindowInsets
+import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -38,7 +38,7 @@ class PhotosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPhotosBinding.inflate(inflater, container, false)
-        settingWindowInsetsParams()
+        binding.rvPhotos.applySystemBarImmersionMode()
         setAnimator()
         return binding.root
     }
@@ -75,18 +75,5 @@ class PhotosFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun settingWindowInsetsParams() {
-        binding.rvPhotos.doOnApplyWindowInsets { view, windowInsetsCompat, _, _ ->
-            with(view) {
-                setPaddingRelative(
-                    paddingStart,
-                    paddingTop + windowInsetsCompat.systemWindowInsetTop,
-                    paddingEnd + windowInsetsCompat.systemWindowInsetRight,
-                    paddingBottom + windowInsetsCompat.systemWindowInsetBottom
-                )
-            }
-        }
     }
 }

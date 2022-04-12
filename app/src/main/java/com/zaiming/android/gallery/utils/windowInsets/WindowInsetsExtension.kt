@@ -105,3 +105,16 @@ fun View.applyBottomInsetMargin() =
             )
         }
     }
+
+fun View.applySystemBarImmersionMode() {
+    this.doOnApplyWindowInsets { view, windowInsetsCompat, _, _ ->
+        with(view) {
+            setPaddingRelative(
+                paddingStart,
+                windowInsetsCompat.systemWindowInsetTop,
+                paddingEnd + windowInsetsCompat.systemWindowInsetRight,
+                windowInsetsCompat.systemWindowInsetBottom
+            )
+        }
+    }
+}
