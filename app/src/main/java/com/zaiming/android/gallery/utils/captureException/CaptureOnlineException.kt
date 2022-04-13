@@ -27,11 +27,16 @@ object CaptureOnlineException {
         }
 
         with(application) {
-            AppCenter.start(
-                this,
-                packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.getString("secret_appcenter"),
-                Analytics::class.java, Crashes::class.java
-            )
+            if (BuildConfig.DEBUG) {
+
+            } else {
+                AppCenter.start(
+                    this,
+                    packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.getString("secret_appcenter"),
+                    Analytics::class.java, Crashes::class.java
+                )
+            }
+
         }
 
         // seems it not work normally
