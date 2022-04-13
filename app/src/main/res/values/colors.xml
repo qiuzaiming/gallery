@@ -10,4 +10,6 @@
     <color name="black_with_opacity_90">#E6000000</color>
     <color name="white_with_opacity_90">#E6FFFFFF</color>
     <color name="loading_icon_background">#10000000</color>
+    <color name="follow_system_color">#FFFFFFFF</color>
+    <color name="inverse_follow_system_color">#FF000000</color>
 </resources>

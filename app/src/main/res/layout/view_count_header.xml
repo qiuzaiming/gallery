@@ -13,6 +13,6 @@
         android:paddingStart="20dp"
         android:paddingEnd="0dp"
         android:maxLines="1"
-        android:textColor="#FF44546D"
+        android:textColor="@color/inverse_follow_system_color"
         android:textSize="14sp" />
 </LinearLayout>
