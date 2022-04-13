@@ -74,14 +74,14 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
                         mediaStoreGroup.value.find { changeAsset ->
                             changeAsset.uri == it
                         }?.let { deleteAssetItem ->
-                            mediaStoreGroup.value.remove(deleteAssetItem)
+                            mediaStoreGroup.value = (mediaStoreGroup.value - deleteAssetItem).toMutableList()
                         }
                     }
 
                     // add action
                     changeUriAsset.firstNotNullOf { newAsset ->
                         if (!mediaStoreGroup.value.contains(newAsset)) {
-                            mediaStoreGroup.value = (mediaStoreGroup.value + newAsset) as MutableList<Asset>
+                            mediaStoreGroup.value = (mediaStoreGroup.value + newAsset).toMutableList()
                         }
                     }
                 }
