@@ -36,18 +36,13 @@ class GalleryDetailActivity : AppCompatActivity() {
 
         applyImmersionWithWindowInsets()
 
+        Glide.with(this).load(galleryDetailUri).into(binding.ivDetail)
+
         binding.ivDetail.doOnPreDraw {
             startPostponedEnterTransition()
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        Glide.with(this)
-            .load(galleryDetailUri)
-            .into(binding.ivDetail)
-    }
 
     companion object {
         private const val EXTRA_URL = "EXTRA_URL"

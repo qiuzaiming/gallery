@@ -19,8 +19,8 @@ internal fun getContentTransform(): MaterialContainerTransform {
         startElevation = 9f
         endElevation = 9f
         interpolator = AccelerateDecelerateInterpolator()
-        startContainerColor = Color.WHITE
-        endContainerColor = Color.WHITE
+        startContainerColor = Color.TRANSPARENT
+        endContainerColor = Color.TRANSPARENT
     }
 }
 
