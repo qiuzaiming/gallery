@@ -15,4 +15,5 @@
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">Gallery Picture Detail</string>
     <string name="content_description_gallery_group_picture">Gallery Group Picture</string>
+    <string name="content_description_gallery_add_album">Add Album</string>
 </resources>

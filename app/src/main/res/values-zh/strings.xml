@@ -15,4 +15,5 @@
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">图片详情</string>
     <string name="content_description_gallery_group_picture">相册详情</string>
+    <string name="content_description_gallery_add_album">新建相册</string>
 </resources>

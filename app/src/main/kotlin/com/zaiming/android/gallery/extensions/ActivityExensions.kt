@@ -1,6 +1,9 @@
 package com.zaiming.android.gallery.extensions
 
 import android.graphics.Color
+import android.transition.TransitionManager
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
@@ -46,4 +49,18 @@ fun AppCompatActivity.applyImmersionWithWindowInsets() {
         isAppearanceLightStatusBars = true
     }
     EdgeInsetDelegate(this).start()
+}
+
+/**
+ * two view apply motion animator
+ */
+fun applyMaterialContainerTransitionBetweenTwoViews(rootView: ViewGroup, mStartView: View, mEndView: View) {
+    TransitionManager.beginDelayedTransition(rootView, MaterialContainerTransform().apply {
+        startView = mStartView
+        endView = mEndView
+        addTarget(mEndView)
+        duration = 550L
+        pathMotion = MaterialArcMotion()
+        scrimColor = Color.TRANSPARENT
+    })
 }
