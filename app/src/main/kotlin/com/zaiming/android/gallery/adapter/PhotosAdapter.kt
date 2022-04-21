@@ -2,6 +2,7 @@ package com.zaiming.android.gallery.adapter
 
 import android.app.Activity
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import com.zaiming.android.gallery.adapter.viewholders.CountFootViewHolder
 import com.zaiming.android.gallery.adapter.viewholders.CountHeaderViewHolder
 import com.zaiming.android.gallery.adapter.viewholders.CountItemViewHolder
@@ -46,8 +47,8 @@ class PhotosAdapter(private val activity: Activity) : SectionsDiffAdapter<String
         val selected = isSelected(getPositionOf(section, index))
         viewHolder.render(assets)
         val transientName = "${assets.uri}${assets.fullPath}"
+        ViewCompat.setTransitionName(viewHolder.ivPic, transientName)
         viewHolder.ivPic.setOnClickListener {
-            it.transitionName = transientName
             GalleryDetailActivity.startActivity(activity, it, transientName, assets.uri.toString())
         }
     }
