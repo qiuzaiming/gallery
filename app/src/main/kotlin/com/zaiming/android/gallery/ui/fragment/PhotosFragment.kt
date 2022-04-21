@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.PhotosAdapter
+import com.zaiming.android.gallery.adapter.itemdecoration.PhotosItemDecoration
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
 import com.zaiming.android.gallery.databinding.FragmentPhotosBinding
 import com.zaiming.android.gallery.extensions.repeatOnLifecycleOnStart
@@ -62,6 +63,7 @@ class PhotosFragment : Fragment() {
         binding.rvPhotos.apply {
             itemAnimator = SpringAddItemAnimator()
             layoutManager = gridLayoutManager
+            addItemDecoration(PhotosItemDecoration(photosAdapter))
             adapter = photosAdapter
         }
 
