@@ -23,8 +23,7 @@ import kotlinx.coroutines.flow.collect
 @AndroidEntryPoint
 class PhotosFragment : Fragment() {
 
-    private var _binding: FragmentPhotosBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentPhotosBinding
 
     private val galleryViewModel: GalleryViewModel by activityViewModels()
 
@@ -37,15 +36,17 @@ class PhotosFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPhotosBinding.inflate(inflater, container, false)
+        binding = FragmentPhotosBinding.inflate(inflater, container, false)
         binding.rvPhotos.applySystemBarImmersionMode()
         setAnimator()
         return binding.root
     }
 
     private fun setAnimator() {
-        binding.vfPhotos.setInAnimation(requireContext(), R.anim.anim_fade_in)
-        binding.vfPhotos.setOutAnimation(requireContext(), R.anim.anim_fade_out)
+        binding.vfPhotos.apply {
+            setInAnimation(requireContext(), R.anim.anim_fade_in)
+            setOutAnimation(requireContext(), R.anim.anim_fade_out)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,8 +73,4 @@ class PhotosFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

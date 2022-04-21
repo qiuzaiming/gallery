@@ -1,18 +1,12 @@
 package com.zaiming.android.gallery.ui.fragment
 
-import android.graphics.Color
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.transition.platform.MaterialArcMotion
-import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.zaiming.android.gallery.adapter.AlbumsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
