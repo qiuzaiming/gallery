@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import com.zaiming.android.gallery.BuildConfig
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.utils.Constants
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
@@ -22,6 +23,9 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
         setPreferencesFromResource(R.xml.settings, rootKey)
         findPreference<SwitchPreferenceCompat>(Constants.showPicturesFiles)?.onPreferenceChangeListener = this
         findPreference<SwitchPreferenceCompat>(Constants.showVideoFiles)?.onPreferenceChangeListener = this
+        findPreference<Preference>(Constants.settingAppVersion)?.apply {
+            summary = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

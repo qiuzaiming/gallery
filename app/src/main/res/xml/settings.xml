@@ -22,4 +22,15 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="commonAbout"
+        app:title="@string/settings_about">
+
+        <Preference
+            app:key="appVersion"
+            app:iconSpaceReserved="false"
+            app:title="@string/settings_about_app_version" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

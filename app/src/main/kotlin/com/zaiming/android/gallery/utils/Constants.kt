@@ -8,4 +8,6 @@ object Constants {
     const val showPicturesFiles = "showPicturesFiles"
 
     const val showVideoFiles = "showVideoFiles"
+
+    const val settingAppVersion = "appVersion"
 }

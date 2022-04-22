@@ -11,6 +11,8 @@
     <string name="settings_summary_show_pictures">展示图片资源</string>
     <string name="settings_title_common_show_videos">展示视频</string>
     <string name="settings_summary_show_videos">展示视频资源</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_about_app_version">App 版本</string>
 
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">图片详情</string>
