@@ -1,6 +1,7 @@
 package com.zaiming.android.gallery.utils.windowInsets
 
 import android.app.Activity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -29,9 +30,9 @@ class EdgeInsetDelegate(private val activity: Activity) {
         WindowCompat.setDecorFitsSystemWindows(activity.window, false)
 
         activity.window.navigationBarColor = if (isDarkModeActive(activity)) {
-            activity.getColor(R.color.black_with_opacity_90)
+            ContextCompat.getColor(activity, R.color.black_with_opacity_90)
         } else {
-            activity.getColor(R.color.white_with_opacity_90)
+            ContextCompat.getColor(activity, R.color.white_with_opacity_90)
         }
 
         var eveGivenInsetsToDecorView = false
