@@ -23,6 +23,18 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        app:key="privacy"
+        app:title="@string/setting_privacy">
+
+        <Preference
+            app:key="privacy_description"
+            app:iconSpaceReserved="false"
+            app:title="@string/setting_privacy_description" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:key="commonAbout"
         app:title="@string/settings_about">
 

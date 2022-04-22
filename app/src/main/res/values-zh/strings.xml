@@ -13,6 +13,8 @@
     <string name="settings_summary_show_videos">展示视频资源</string>
     <string name="settings_about">关于</string>
     <string name="settings_about_app_version">App 版本</string>
+    <string name="setting_privacy">隐私</string>
+    <string name="setting_privacy_description">相册不会收集任何用户信息\n网络权限仅用于应用崩溃统计</string>
 
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">图片详情</string>
