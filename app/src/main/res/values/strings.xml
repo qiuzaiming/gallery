@@ -15,6 +15,8 @@
     <string name="settings_about_app_version">App Version</string>
     <string name="setting_privacy">Privacy</string>
     <string name="setting_privacy_description">Gallery does not upload privacy data</string>
+    <string name="settings_title_privacy_provide_crash_information">Analysis Statistics</string>
+    <string name="settings_summary_privacy_provide_crash_information">Automatically send crash and error messages to developers</string>
 
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">Gallery Picture Detail</string>

@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.SwitchPreference
 import com.zaiming.android.gallery.BuildConfig
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.utils.Constants
@@ -21,16 +21,20 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)
-        findPreference<SwitchPreferenceCompat>(Constants.showPicturesFiles)?.onPreferenceChangeListener = this
-        findPreference<SwitchPreferenceCompat>(Constants.showVideoFiles)?.onPreferenceChangeListener = this
+        findPreference<SwitchPreference>(Constants.showPicturesFiles)?.onPreferenceChangeListener = this
+        findPreference<SwitchPreference>(Constants.showVideoFiles)?.onPreferenceChangeListener = this
         findPreference<Preference>(Constants.settingAppVersion)?.apply {
             summary = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
         }
+        findPreference<SwitchPreference>(Constants.sendErrorMessage)?.onPreferenceChangeListener = this
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listView.applySystemBarImmersionMode()
+        listView.apply {
+            setDivider(null)
+            applySystemBarImmersionMode()
+        }
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {

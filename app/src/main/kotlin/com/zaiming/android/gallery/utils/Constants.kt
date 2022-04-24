@@ -10,4 +10,6 @@ object Constants {
     const val showVideoFiles = "showVideoFiles"
 
     const val settingAppVersion = "appVersion"
+
+    const val sendErrorMessage = "sendErrorMessage"
 }

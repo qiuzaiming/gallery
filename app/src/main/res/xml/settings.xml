@@ -3,44 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        app:key="commonSettings"
-        app:title="@string/settings_title_common">
+        android:layout="@layout/settings_layout_category_common"
+        app:key="commonSettings">
 
-        <SwitchPreferenceCompat
-            app:key="showPicturesFiles"
-            app:title="@string/settings_title_common_show_pictures"
+        <SwitchPreference
+            android:defaultValue="true"
             android:summary="@string/settings_summary_show_pictures"
-            android:icon="@drawable/settings_icon_pictures"
-            android:defaultValue="true" />
+            app:icon="@drawable/settings_icon_pictures"
+            app:key="showPicturesFiles"
+            app:title="@string/settings_title_common_show_pictures" />
 
-        <SwitchPreferenceCompat
-            app:key="showVideoFiles"
-            app:title="@string/settings_title_common_show_videos"
+        <SwitchPreference
+            android:defaultValue="false"
             android:summary="@string/settings_summary_show_videos"
-            android:icon="@drawable/settings_icon_videos"
-            android:defaultValue="false" />
+            app:icon="@drawable/settings_icon_videos"
+            app:key="showVideoFiles"
+            app:title="@string/settings_title_common_show_videos" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="privacy"
-        app:title="@string/setting_privacy">
+        android:layout="@layout/settings_layout_category_privacy"
+        app:key="privacy">
 
         <Preference
-            app:key="privacy_description"
             app:iconSpaceReserved="false"
+            app:key="privacy_description"
             app:title="@string/setting_privacy_description" />
 
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:summary="@string/settings_summary_privacy_provide_crash_information"
+            app:iconSpaceReserved="false"
+            app:key="sendErrorMessage"
+            app:title="@string/settings_title_privacy_provide_crash_information" />
+
+
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="commonAbout"
-        app:title="@string/settings_about">
+        android:layout="@layout/settings_layout_category_about"
+        app:key="commonAbout">
 
         <Preference
-            app:key="appVersion"
             app:iconSpaceReserved="false"
+            app:key="appVersion"
             app:title="@string/settings_about_app_version" />
 
     </PreferenceCategory>

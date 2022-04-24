@@ -15,6 +15,8 @@
     <string name="settings_about_app_version">App 版本</string>
     <string name="setting_privacy">隐私</string>
     <string name="setting_privacy_description">相册不会收集任何用户信息\n网络权限仅用于应用崩溃统计</string>
+    <string name="settings_title_privacy_provide_crash_information">分析统计</string>
+    <string name="settings_summary_privacy_provide_crash_information">自动将崩溃和错误信息发送给开发者</string>
 
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">图片详情</string>
