@@ -11,6 +11,7 @@ import com.zaiming.android.gallery.adapter.AlbumsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
 import com.zaiming.android.gallery.extensions.*
+import com.zaiming.android.gallery.galleryinterface.ItemClickListener
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import kotlinx.coroutines.flow.collect
@@ -61,7 +62,14 @@ class AlbumsFragment : Fragment() {
 
     private fun initView() {
 
-        albumAdapter.setHasStableIds(true)
+        albumAdapter.apply {
+            setHasStableIds(true)
+            setOnClickListener(object : ItemClickListener {
+                override fun onItemClick(view: View, position: Int) {
+
+                }
+            })
+        }
 
         with(binding.recyclerviewAlbum) {
             layoutManager = GridLayoutManager(requireContext(), spanCount)
