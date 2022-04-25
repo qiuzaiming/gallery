@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.zaiming.android.gallery.adapter.AlbumsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
-import com.zaiming.android.gallery.extensions.applyMaterialContainerTransitionBetweenTwoViews
-import com.zaiming.android.gallery.extensions.beGone
-import com.zaiming.android.gallery.extensions.beVisible
-import com.zaiming.android.gallery.extensions.repeatOnLifecycleOnStart
+import com.zaiming.android.gallery.extensions.*
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import kotlinx.coroutines.flow.collect
@@ -72,13 +69,13 @@ class AlbumsFragment : Fragment() {
         }
 
         binding.apply {
-            fabAddAlbum.setOnClickListener {
+            fabAddAlbum.setOnSingleClick {
                 applyMaterialContainerTransitionBetweenTwoViews(binding.root, it, cardviewAlbumDetail)
                 cardviewAlbumDetail.beVisible()
                 fabAddAlbum.beGone()
             }
 
-            cardviewAlbumDetail.setOnClickListener {
+            cardviewAlbumDetail.setOnSingleClick {
                 applyMaterialContainerTransitionBetweenTwoViews(binding.root, it, fabAddAlbum)
                 cardviewAlbumDetail.beGone()
                 fabAddAlbum.beVisible()

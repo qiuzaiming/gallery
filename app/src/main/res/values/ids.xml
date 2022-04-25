@@ -15,4 +15,6 @@
         <item name="scroll_x" type="id"/>
         <item name="scroll_y" type="id"/>
         <item name="tag_pending_end_listener" type="id"/>
+
+        <item name="target_view_last_click_time" type="id" />
 </resources>

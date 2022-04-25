@@ -7,6 +7,7 @@ import com.zaiming.android.gallery.adapter.viewholders.CountFootViewHolder
 import com.zaiming.android.gallery.adapter.viewholders.CountHeaderViewHolder
 import com.zaiming.android.gallery.adapter.viewholders.CountItemViewHolder
 import com.zaiming.android.gallery.bean.Asset
+import com.zaiming.android.gallery.extensions.setOnSingleClick
 import com.zaiming.android.gallery.ui.activity.GalleryDetailActivity
 
 /**
@@ -48,7 +49,7 @@ class PhotosAdapter(private val activity: Activity) : SectionsDiffAdapter<String
         viewHolder.render(assets)
         val transientName = "${assets.uri}${assets.fullPath}"
         ViewCompat.setTransitionName(viewHolder.ivPic, transientName)
-        viewHolder.ivPic.setOnClickListener {
+        viewHolder.ivPic.setOnSingleClick {
             GalleryDetailActivity.startActivity(activity, it, transientName, assets.uri.toString())
         }
     }
