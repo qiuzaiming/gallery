@@ -8,7 +8,9 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.zaiming.android.gallery.BuildConfig
 import com.zaiming.android.gallery.R
+import com.zaiming.android.gallery.app.GlobalValue
 import com.zaiming.android.gallery.utils.Constants
+import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 
@@ -38,6 +40,12 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+        when (preference.key) {
+            SpKeys.isCollectCrashInformation -> {
+                GlobalValue.analyticsCollectInformationFromAppCenter.value = newValue as Boolean
+                return true
+            }
+        }
         return false
     }
 }

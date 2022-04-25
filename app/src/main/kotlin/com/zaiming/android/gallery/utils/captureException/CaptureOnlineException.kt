@@ -9,6 +9,7 @@ import com.microsoft.appcenter.crashes.CrashesListener
 import com.microsoft.appcenter.crashes.ingestion.models.ErrorAttachmentLog
 import com.microsoft.appcenter.crashes.model.ErrorReport
 import com.zaiming.android.gallery.BuildConfig
+import com.zaiming.android.gallery.app.GlobalValue
 import timber.log.Timber
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -30,11 +31,13 @@ object CaptureOnlineException {
             if (BuildConfig.DEBUG) {
 
             } else {
-                AppCenter.start(
-                    this,
-                    packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.getString("secret_appcenter"),
-                    Analytics::class.java, Crashes::class.java
-                )
+                if (GlobalValue.analyticsCollectInformationFromAppCenter.value == true) {
+                    AppCenter.start(
+                        this,
+                        packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA).metaData.getString("secret_appcenter"),
+                        Analytics::class.java, Crashes::class.java
+                    )
+                }
             }
 
         }
