@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
@@ -19,6 +20,8 @@ import com.zaiming.android.gallery.ui.fragment.SelectedFragment
 import com.zaiming.android.gallery.ui.fragment.SettingsFragment
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * @author zaiming
@@ -88,14 +91,6 @@ class MainActivity : AppCompatActivity() {
 
                 setOnItemSelectedListener {
 
-                    fun performClickNavigationItem(index: Int) {
-                        if (binding.viewpagerHostFragmentActivityMain.currentItem != index) {
-                            if (!binding.viewpagerHostFragmentActivityMain.isFakeDragging) {
-                                binding.viewpagerHostFragmentActivityMain.setCurrentItem(index, false)
-                            }
-                        }
-                    }
-
                     when (it.itemId) {
                         R.id.navigation_photos -> performClickNavigationItem(0)
                         R.id.navigation_albums -> performClickNavigationItem(1)
@@ -104,6 +99,25 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
+            }
+        }
+    }
+
+    private fun performClickNavigationItem(index: Int) {
+        if (binding.viewpagerHostFragmentActivityMain.currentItem != index) {
+            if (!binding.viewpagerHostFragmentActivityMain.isFakeDragging) {
+                binding.viewpagerHostFragmentActivityMain.setCurrentItem(index, false)
+            }
+        } else {
+            val isScrollAble = binding.viewpagerHostFragmentActivityMain.getTag(R.id.viewpager_click_event) as? Boolean ?: false
+            if (!isScrollAble) {
+                binding.viewpagerHostFragmentActivityMain.setTag(R.id.viewpager_click_event, true)
+                lifecycleScope.launch {
+                    delay(200)
+                    binding.viewpagerHostFragmentActivityMain.setTag(R.id.viewpager_click_event, false)
+                }
+            } else {
+                photosViewModel.controller?.scrollToTop()
             }
         }
     }

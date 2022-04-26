@@ -17,4 +17,5 @@
         <item name="tag_pending_end_listener" type="id"/>
 
         <item name="target_view_last_click_time" type="id" />
+        <item name="viewpager_click_event" type="id" />
 </resources>

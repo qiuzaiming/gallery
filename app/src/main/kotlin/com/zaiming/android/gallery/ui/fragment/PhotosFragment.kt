@@ -13,6 +13,8 @@ import com.zaiming.android.gallery.adapter.itemdecoration.PhotosItemDecoration
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
 import com.zaiming.android.gallery.databinding.FragmentPhotosBinding
 import com.zaiming.android.gallery.extensions.repeatOnLifecycleOnStart
+import com.zaiming.android.gallery.extensions.scrollToTopIfNeed
+import com.zaiming.android.gallery.galleryinterface.IController
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +24,7 @@ import kotlinx.coroutines.flow.collect
  * @author zaiming
  */
 @AndroidEntryPoint
-class PhotosFragment : Fragment() {
+class PhotosFragment : Fragment(), IController {
 
     private lateinit var binding: FragmentPhotosBinding
 
@@ -73,6 +75,25 @@ class PhotosFragment : Fragment() {
                 binding.vfPhotos.displayedChild = 1
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (galleryViewModel.controller != this) {
+            galleryViewModel.controller = this
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        if (galleryViewModel.controller == this) {
+            galleryViewModel.controller = null
+        }
+    }
+
+
+    override fun scrollToTop() {
+        binding.rvPhotos.scrollToTopIfNeed()
     }
 
 }

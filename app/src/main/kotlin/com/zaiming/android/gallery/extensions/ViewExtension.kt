@@ -2,6 +2,7 @@ package com.zaiming.android.gallery.extensions
 
 import android.view.View
 import androidx.annotation.IntRange
+import androidx.recyclerview.widget.RecyclerView
 import com.zaiming.android.gallery.utils.AntiShakeUtils
 import com.zaiming.android.gallery.utils.AntiShakeUtils.MAX_INTERVAL_TIME
 
@@ -22,5 +23,11 @@ inline fun View.setOnSingleClick(
             return@setOnClickListener
         }
         block(this)
+    }
+}
+
+fun RecyclerView.scrollToTopIfNeed() {
+    if (canScrollVertically(-1)) {
+        smoothScrollToPosition(0)
     }
 }

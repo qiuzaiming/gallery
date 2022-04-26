@@ -8,6 +8,7 @@ import com.zaiming.android.gallery.adapter.SectionsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.bean.Asset
 import com.zaiming.android.gallery.extensions.dateFormat
+import com.zaiming.android.gallery.galleryinterface.IController
 import com.zaiming.android.gallery.repository.PhotosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,6 +22,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class GalleryViewModel @Inject constructor(private val photosRepository: PhotosRepository) : ViewModel() {
+
+    var controller: IController? = null
 
     init {
         listenerMediaStoreObserverInViewModel()
