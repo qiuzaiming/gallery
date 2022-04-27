@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.AlbumsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
@@ -66,22 +68,36 @@ class AlbumsFragment : Fragment() {
             setHasStableIds(true)
             setOnClickListener(object : ItemClickListener {
                 override fun onItemClick(view: View, position: Int) {
-
                 }
             })
         }
 
-        with(binding.recyclerviewAlbum) {
-            layoutManager = GridLayoutManager(requireContext(), spanCount)
-            adapter = albumAdapter
-        }
-
         binding.apply {
-            fabAddAlbum.setOnSingleClick {
-                applyMaterialContainerTransitionBetweenTwoViews(binding.root, it, cardviewAlbumDetail)
-                cardviewAlbumDetail.beVisible()
-                fabAddAlbum.beGone()
+
+            recyclerviewAlbum.apply {
+                layoutManager = GridLayoutManager(requireContext(), spanCount)
+                adapter = albumAdapter
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        when(newState) {
+                            RecyclerView.SCROLL_STATE_DRAGGING -> fabAddAlbum.hide()
+                            RecyclerView.SCROLL_STATE_IDLE -> fabAddAlbum.show()
+                        }
+                    }
+                })
             }
+
+            fabAddAlbum.apply {
+                setShowMotionSpecResource(R.animator.fab_show)
+                setHideMotionSpecResource(R.animator.fab_hide)
+
+                setOnSingleClick {
+                    applyMaterialContainerTransitionBetweenTwoViews(binding.root, it, cardviewAlbumDetail)
+                    cardviewAlbumDetail.beVisible()
+                    fabAddAlbum.beGone()
+                }
+            }
+
 
             cardviewAlbumDetail.setOnSingleClick {
                 applyMaterialContainerTransitionBetweenTwoViews(binding.root, it, fabAddAlbum)
