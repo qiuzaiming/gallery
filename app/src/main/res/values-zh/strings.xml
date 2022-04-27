@@ -18,6 +18,10 @@
     <string name="settings_title_privacy_provide_crash_information">分析统计</string>
     <string name="settings_summary_privacy_provide_crash_information">自动将崩溃和错误信息发送给开发者</string>
 
+    <!--shortcut-->
+    <string name="shortcut_title_photos">照片</string>
+    <string name="shortcut_title_albums">相册</string>
+
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">图片详情</string>
     <string name="content_description_gallery_group_picture">相册详情</string>

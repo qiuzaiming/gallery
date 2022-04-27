@@ -91,6 +91,9 @@ class PhotosFragment : Fragment(), IController {
         }
     }
 
+    override fun isAllowScrollToTop(): Boolean {
+        return true
+    }
 
     override fun scrollToTop() {
         binding.rvPhotos.scrollToTopIfNeed()

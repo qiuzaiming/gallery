@@ -18,6 +18,10 @@
     <string name="settings_title_privacy_provide_crash_information">Analysis Statistics</string>
     <string name="settings_summary_privacy_provide_crash_information">Automatically send crash and error messages to developers</string>
 
+    <!--shortcut-->
+    <string name="shortcut_title_photos">Photos</string>
+    <string name="shortcut_title_albums">Album</string>
+
     <!-- contentDescription-->
     <string name="content_description_gallery_detail">Gallery Picture Detail</string>
     <string name="content_description_gallery_group_picture">Gallery Group Picture</string>

@@ -5,5 +5,6 @@ package com.zaiming.android.gallery.galleryinterface
  */
 interface IController {
 
+    fun isAllowScrollToTop(): Boolean = false
     fun scrollToTop()
 }

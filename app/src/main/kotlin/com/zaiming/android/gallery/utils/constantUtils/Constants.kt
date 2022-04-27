@@ -1,4 +1,4 @@
-package com.zaiming.android.gallery.utils
+package com.zaiming.android.gallery.utils.constantUtils
 
 /**
  * @author zaiming

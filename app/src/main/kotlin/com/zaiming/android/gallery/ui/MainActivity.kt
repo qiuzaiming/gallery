@@ -1,5 +1,6 @@
 package com.zaiming.android.gallery.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.zaiming.android.gallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.gallery.ui.fragment.PhotosFragment
 import com.zaiming.android.gallery.ui.fragment.SelectedFragment
 import com.zaiming.android.gallery.ui.fragment.SettingsFragment
+import com.zaiming.android.gallery.utils.constantUtils.ShortCutConstants
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -52,6 +54,12 @@ class MainActivity : AppCompatActivity() {
         applyImmersionWithWindowInsets()
         initView()
         requestPermissionLauncher.launch(needRequestMultiplePermission)
+        startActionFromShortCutAction(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        startActionFromShortCutAction(intent)
     }
 
     private fun initView() {
@@ -116,9 +124,16 @@ class MainActivity : AppCompatActivity() {
                     delay(200)
                     binding.viewpagerHostFragmentActivityMain.setTag(R.id.viewpager_click_event, false)
                 }
-            } else {
+            } else if (photosViewModel.controller?.isAllowScrollToTop() == true) {
                 photosViewModel.controller?.scrollToTop()
             }
+        }
+    }
+
+    private fun startActionFromShortCutAction(intent: Intent) {
+        when(intent.action) {
+            ShortCutConstants.ACTION_START_PHOTOS -> binding.viewpagerHostFragmentActivityMain.setCurrentItem(0, false)
+            ShortCutConstants.ACTION_START_ALBUM ->  binding.viewpagerHostFragmentActivityMain.setCurrentItem(1, false)
         }
     }
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="n_mr1">
+
+    <shortcut
+        android:icon="@drawable/main_ic_photos"
+        android:shortcutId="start_shortcut_photos"
+        android:shortcutShortLabel="@string/shortcut_title_photos">
+
+        <intent
+            android:action="com.zaiming.android.gallery.intent.start.photos"
+            android:targetClass="com.zaiming.android.gallery.ui.MainActivity"
+            android:targetPackage="com.zaiming.android.gallery" />
+    </shortcut>
+
+    <shortcut
+        android:icon="@drawable/main_ic_albums"
+        android:shortcutId="start_shortcut_album"
+        android:shortcutShortLabel="@string/shortcut_title_albums">
+
+        <intent
+            android:action="com.zaiming.android.gallery.intent.start.album"
+            android:targetClass="com.zaiming.android.gallery.ui.MainActivity"
+            android:targetPackage="com.zaiming.android.gallery" />
+    </shortcut>
+
+</shortcuts>

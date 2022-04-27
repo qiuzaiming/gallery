@@ -9,7 +9,7 @@ import androidx.preference.SwitchPreference
 import com.zaiming.android.gallery.BuildConfig
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.app.GlobalValue
-import com.zaiming.android.gallery.utils.Constants
+import com.zaiming.android.gallery.utils.constantUtils.Constants
 import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
