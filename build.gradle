@@ -12,7 +12,7 @@ buildscript {
         glideVersion = '4.13.0'
         hiltVersion = '2.28-alpha'
         appcenterVersion = '4.4.3'
-        lottieVersion = '5.0.3'
+        lottieVersion = '5.1.1'
         lifecycleVersion = '2.4.1'
         preferenceVersion = '1.2.0'
     }
