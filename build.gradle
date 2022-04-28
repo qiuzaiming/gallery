@@ -1,5 +1,10 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+
+    def baseVersionName = "1.0.1"
+    def gitCommitId = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+    def gitCommitCount = Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
+
     ext {
         kotlin_version = '1.6.21'
         ktlintVersion = '10.2.1'
@@ -15,6 +20,11 @@ buildscript {
         lottieVersion = '5.1.1'
         lifecycleVersion = '2.4.1'
         preferenceVersion = '1.2.0'
+
+        minSdkVersion = 24
+        targetSdkVersion = 31
+        vc = gitCommitCount
+        vn = "${baseVersionName}.${gitCommitId}"
     }
 
     dependencies {
