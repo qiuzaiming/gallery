@@ -15,7 +15,7 @@
         android:theme="@style/Theme.LightHouseGallery">
         <activity
             android:name=".ui.MainActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,7 @@
 
         <activity
             android:name=".ui.activity.GalleryDetailActivity"
+            android:launchMode="singleTop"
             android:exported="false" />
 
         <meta-data android:name="secret_appcenter" android:value="51e2b874-6add-4f72-ad1f-69af59cf88c2" />

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.AlbumsAdapter
+import com.zaiming.android.gallery.animator.SpringAddItemAnimator
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
 import com.zaiming.android.gallery.extensions.*
@@ -76,6 +77,7 @@ class AlbumsFragment : Fragment() {
 
             recyclerviewAlbum.apply {
                 layoutManager = GridLayoutManager(requireContext(), spanCount)
+                itemAnimator = SpringAddItemAnimator()
                 adapter = albumAdapter
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {
                     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
