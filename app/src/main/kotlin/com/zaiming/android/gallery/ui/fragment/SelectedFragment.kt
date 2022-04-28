@@ -19,7 +19,6 @@ class SelectedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentSelectedBinding.inflate(inflater, container, false)
         return binding.root
     }

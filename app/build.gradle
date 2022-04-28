@@ -83,4 +83,7 @@ dependencies {
 
     // preference
     implementation "androidx.preference:preference:$rootProject.preferenceVersion"
+
+    // speed dial
+    implementation "com.leinardi.android:speed-dial:$rootProject.fabSpeedDialVersion"
 }

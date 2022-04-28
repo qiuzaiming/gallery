@@ -17,6 +17,8 @@
     <string name="setting_privacy_description">Gallery does not upload privacy data</string>
     <string name="settings_title_privacy_provide_crash_information">Analysis Statistics</string>
     <string name="settings_summary_privacy_provide_crash_information">Automatically send crash and error messages to developers</string>
+    <string name="photos_fab_sort_date_added">sort by add time</string>
+    <string name="photos_fab_sort_date_modify">sort by modify time</string>
 
     <!--shortcut-->
     <string name="shortcut_title_photos">Photos</string>

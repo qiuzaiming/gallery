@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.leinardi.android.speeddial.SpeedDialActionItem
+import com.zaiming.android.gallery.GalleryApplication
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.PhotosAdapter
 import com.zaiming.android.gallery.adapter.itemdecoration.PhotosItemDecoration
@@ -62,11 +65,29 @@ class PhotosFragment : Fragment(), IController {
                 }
             }
         }
-        binding.rvPhotos.apply {
-            itemAnimator = SpringAddItemAnimator()
-            layoutManager = gridLayoutManager
-            addItemDecoration(PhotosItemDecoration(photosAdapter))
-            adapter = photosAdapter
+        binding.apply {
+            rvPhotos.apply {
+                itemAnimator = SpringAddItemAnimator()
+                layoutManager = gridLayoutManager
+                addItemDecoration(PhotosItemDecoration(photosAdapter))
+                adapter = photosAdapter
+            }
+
+            speedDial.apply {
+                addActionItem(SpeedDialActionItem.Builder(R.id.fab_photos_data_add, R.drawable.fab_icon_time_add)
+                    .setLabel(getString(R.string.photos_fab_sort_date_added))
+                    .setLabelClickable(true)
+                    .setLabelColor(ContextCompat.getColor(GalleryApplication.instance, R.color.inverse_follow_system_color))
+                    .setTheme(R.style.Theme_LightHouseGallery)
+                    .create())
+
+                addActionItem(SpeedDialActionItem.Builder(R.id.fab_photos_data_modify, R.drawable.fab_icon_time_modify)
+                    .setLabel(getString(R.string.photos_fab_sort_date_modify))
+                    .setLabelClickable(true)
+                    .setLabelColor(ContextCompat.getColor(GalleryApplication.instance, R.color.inverse_follow_system_color))
+                    .setTheme(R.style.Theme_LightHouseGallery)
+                    .create())
+            }
         }
 
         repeatOnLifecycleOnStart {

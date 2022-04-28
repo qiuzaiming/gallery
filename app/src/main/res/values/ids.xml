@@ -18,4 +18,7 @@
 
         <item name="target_view_last_click_time" type="id" />
         <item name="viewpager_click_event" type="id" />
+
+        <item name="fab_photos_data_add" type="id" />
+        <item name="fab_photos_data_modify" type="id" />
 </resources>

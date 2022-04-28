@@ -3,4 +3,5 @@
     <color name="loading_icon_background">#50FFFFFF</color>
     <color name="follow_system_color">#FF000000</color>
     <color name="inverse_follow_system_color">#FFFFFFFF</color>
+    <color name="follow_system_color_70">#4D000000</color>
 </resources>

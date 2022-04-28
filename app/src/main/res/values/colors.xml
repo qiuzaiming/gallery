@@ -12,4 +12,5 @@
     <color name="loading_icon_background">#10000000</color>
     <color name="follow_system_color">#FFFFFFFF</color>
     <color name="inverse_follow_system_color">#FF000000</color>
+    <color name="follow_system_color_70">#4DFFFFFF</color>
 </resources>
