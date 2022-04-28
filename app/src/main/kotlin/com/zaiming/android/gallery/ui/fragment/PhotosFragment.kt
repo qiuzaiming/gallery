@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.zaiming.android.gallery.GalleryApplication
@@ -22,6 +23,7 @@ import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMod
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * @author zaiming
@@ -90,7 +92,7 @@ class PhotosFragment : Fragment(), IController {
             }
         }
 
-        repeatOnLifecycleOnStart {
+        lifecycleScope.launchWhenStarted {
             galleryViewModel.asMediaStoreFlow().collect {
                 photosAdapter.setSections(it)
                 binding.vfPhotos.displayedChild = 1

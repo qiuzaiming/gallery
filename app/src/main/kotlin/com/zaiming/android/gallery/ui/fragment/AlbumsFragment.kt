@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.zaiming.android.gallery.R
@@ -49,7 +50,7 @@ class AlbumsFragment : Fragment() {
 
         initView()
 
-        repeatOnLifecycleOnStart {
+        lifecycleScope.launchWhenStarted {
             albumsViewModel.asAlbumMediaStoreFlow().collect {
                 albumAssetGroup.clear()
                 albumAssetGroup.addAll(it.toMutableList())
