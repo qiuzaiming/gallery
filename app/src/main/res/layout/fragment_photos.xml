@@ -48,15 +48,14 @@
                 android:id="@+id/speedDial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="80dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:sdExpansionMode="top"
                 app:sdMainFabAnimationRotateAngle="45"
                 app:sdMainFabClosedBackgroundColor="@color/purple_500"
-                app:sdMainFabClosedSrc="@drawable/album_add"
+                app:sdMainFabClosedSrc="@drawable/photo_icon_sort"
                 app:sdMainFabOpenedBackgroundColor="@color/purple_500"
                 app:sdOverlayLayout="@id/overlay" />
 
