@@ -1,10 +1,16 @@
 package com.zaiming.android.gallery.ui.activity
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import com.drakeet.about.*
 import com.zaiming.android.gallery.BuildConfig
 import com.zaiming.android.gallery.R
+import com.zaiming.android.gallery.utils.constantUtils.AuthorConstants
 
 
 /**
@@ -35,5 +41,23 @@ class AboutActivity : AbsAboutActivity() {
             add(License("about-page", "drakeet", License.APACHE_2, "https://github.com/drakeet/about-page"))
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.about_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
+        if (menuItem.itemId == R.id.about_menu_like) {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(AuthorConstants.githubUrl)
+                })
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+            }
+        }
+        return super.onOptionsItemSelected(menuItem)
     }
 }
