@@ -86,4 +86,8 @@ dependencies {
 
     // speed dial
     implementation "com.leinardi.android:speed-dial:$rootProject.fabSpeedDialVersion"
+
+    // multitype about
+    implementation "com.drakeet.multitype:multitype:$rootProject.multitypeVersion"
+    implementation "com.drakeet.about:about:$rootProject.aboutVersion"
 }

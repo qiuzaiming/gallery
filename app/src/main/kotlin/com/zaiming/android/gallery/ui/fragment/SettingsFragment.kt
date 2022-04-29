@@ -1,5 +1,6 @@
 package com.zaiming.android.gallery.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -9,6 +10,7 @@ import androidx.preference.SwitchPreference
 import com.zaiming.android.gallery.BuildConfig
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.app.GlobalValue
+import com.zaiming.android.gallery.ui.activity.AboutActivity
 import com.zaiming.android.gallery.utils.constantUtils.Constants
 import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
@@ -17,7 +19,7 @@ import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 /**
  * @author zaiming
  */
-class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
+class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     private val galleryViewModel: GalleryViewModel by activityViewModels()
 
@@ -27,6 +29,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
         findPreference<SwitchPreference>(Constants.showVideoFiles)?.onPreferenceChangeListener = this
         findPreference<Preference>(Constants.settingAppVersion)?.apply {
             summary = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+            onPreferenceClickListener = this@SettingsFragment
         }
         findPreference<SwitchPreference>(Constants.sendErrorMessage)?.onPreferenceChangeListener = this
     }
@@ -47,5 +50,12 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
             }
         }
         return false
+    }
+
+    override fun onPreferenceClick(preference: Preference): Boolean {
+        when(preference.key) {
+            Constants.settingAppVersion -> startActivity(Intent(requireContext(), AboutActivity::class.java))
+        }
+        return true
     }
 }

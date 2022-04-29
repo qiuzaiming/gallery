@@ -19,6 +19,9 @@
     <string name="settings_summary_privacy_provide_crash_information">自动将崩溃和错误信息发送给开发者</string>
     <string name="photos_fab_sort_date_added">添加时间排序</string>
     <string name="photos_fab_sort_date_modify">修改时间排序</string>
+    <string name="lab_about">关于</string>
+    <string name="about_category_introduce">相册介绍</string>
+    <string name="about_card_introduce">查看手机中图片和视频的应用</string>
 
     <!--shortcut-->
     <string name="shortcut_title_photos">照片</string>

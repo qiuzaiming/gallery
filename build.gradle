@@ -21,6 +21,8 @@ buildscript {
         lifecycleVersion = '2.4.1'
         preferenceVersion = '1.2.0'
         fabSpeedDialVersion = '3.2.0'
+        multitypeVersion = '4.3.0'
+        aboutVersion = '2.5.1'
 
         minSdkVersion = 24
         targetSdkVersion = 31

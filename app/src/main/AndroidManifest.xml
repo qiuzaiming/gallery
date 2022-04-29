@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LightHouseGallery">
+
         <activity
             android:name=".ui.MainActivity"
             android:launchMode="singleTop"
@@ -31,6 +32,11 @@
         <activity
             android:name=".ui.activity.GalleryDetailActivity"
             android:launchMode="singleTop"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:label="@string/lab_about"
             android:exported="false" />
 
         <meta-data android:name="secret_appcenter" android:value="51e2b874-6add-4f72-ad1f-69af59cf88c2" />
