@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.zaiming.android.gallery.GalleryApplication
 import com.zaiming.android.gallery.R
@@ -75,6 +76,20 @@ class PhotosFragment : Fragment(), IController {
                 layoutManager = gridLayoutManager
                 addItemDecoration(PhotosItemDecoration(photosAdapter))
                 adapter = photosAdapter
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        if (dy > 0) {
+                            if (speedDial.isShown) {
+                                speedDial.hide()
+                            }
+                        } else {
+                            if (!speedDial.isShown) {
+                                speedDial.show()
+                            }
+                        }
+                    }
+                })
             }
 
             speedDial.apply {

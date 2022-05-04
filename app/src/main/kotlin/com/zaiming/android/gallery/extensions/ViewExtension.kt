@@ -27,6 +27,7 @@ inline fun View.setOnSingleClick(
 }
 
 fun RecyclerView.scrollToTopIfNeed() {
+    // true: can scroll. false: already top
     if (canScrollVertically(-1)) {
         smoothScrollToPosition(0)
     }
