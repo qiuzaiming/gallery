@@ -7,4 +7,7 @@ object SpKeys {
 
     // collect crash information to appcenter
     const val isCollectCrashInformation = "sendErrorMessage"
+
+    // photos sort condition sp key
+    const val photosSortCondition = "photosSortCondition"
 }

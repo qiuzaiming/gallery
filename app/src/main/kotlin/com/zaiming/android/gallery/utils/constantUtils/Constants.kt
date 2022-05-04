@@ -5,11 +5,7 @@ package com.zaiming.android.gallery.utils.constantUtils
  */
 object Constants {
 
-    const val showPicturesFiles = "showPicturesFiles"
-
-    const val showVideoFiles = "showVideoFiles"
-
-    const val settingAppVersion = "appVersion"
-
-    const val sendErrorMessage = "sendErrorMessage"
+    // sort condition
+    const val SORT_BY_DATE_ADDED = 0L
+    const val SORT_BY_DATE_MODIFIED = 1L
 }

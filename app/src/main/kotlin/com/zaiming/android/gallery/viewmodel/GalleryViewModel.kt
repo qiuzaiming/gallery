@@ -10,9 +10,13 @@ import com.zaiming.android.gallery.bean.Asset
 import com.zaiming.android.gallery.extensions.dateFormat
 import com.zaiming.android.gallery.galleryinterface.IController
 import com.zaiming.android.gallery.repository.PhotosRepository
+import com.zaiming.android.gallery.utils.constantUtils.Constants.SORT_BY_DATE_ADDED
+import com.zaiming.android.gallery.utils.sharedPreference.SharedPreferenceUtils
+import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,12 +35,20 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
 
     private var mediaStoreGroup = MutableStateFlow<MutableList<Asset>>(mutableListOf())
 
-    fun asMediaStoreFlow() = mediaStoreGroup.map {
-        it.sortedByDescending { createItem ->
-            createItem.dateTimeModified
-        }.groupBy { item ->
-            item.dateTimeModified.dateFormat()
-        }.map { processData ->
+    var sortCondition = MutableStateFlow(SharedPreferenceUtils.getValue(SpKeys.photosSortCondition, SORT_BY_DATE_ADDED))
+
+    fun asMediaStoreFlow() = mediaStoreGroup.combine(sortCondition) { group, condition ->
+        val destination = HashMap<String, ArrayList<Asset>>()
+        group.sortedByDescending {
+            if (condition == SORT_BY_DATE_ADDED) it.dateTimeAdded else it.dateTimeModified
+        }.let {
+            for (element in it) {
+                val key = if (condition == SORT_BY_DATE_ADDED) element.dateTimeAdded.dateFormat() else element.dateTimeModified.dateFormat()
+                val list = destination.getOrPut(key) { ArrayList() }
+                list.add(element)
+            }
+        }
+        destination.map { processData ->
             SectionsAdapter.Section(processData.key, processData.value, Any())
         }
     }

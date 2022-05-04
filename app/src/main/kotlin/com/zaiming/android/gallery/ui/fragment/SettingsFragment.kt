@@ -11,7 +11,7 @@ import com.zaiming.android.gallery.BuildConfig
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.app.GlobalValue
 import com.zaiming.android.gallery.ui.activity.AboutActivity
-import com.zaiming.android.gallery.utils.constantUtils.Constants
+import com.zaiming.android.gallery.utils.constantUtils.SettingConstants
 import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
@@ -25,13 +25,13 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings, rootKey)
-        findPreference<SwitchPreference>(Constants.showPicturesFiles)?.onPreferenceChangeListener = this
-        findPreference<SwitchPreference>(Constants.showVideoFiles)?.onPreferenceChangeListener = this
-        findPreference<Preference>(Constants.settingAppVersion)?.apply {
+        findPreference<SwitchPreference>(SettingConstants.showPicturesFiles)?.onPreferenceChangeListener = this
+        findPreference<SwitchPreference>(SettingConstants.showVideoFiles)?.onPreferenceChangeListener = this
+        findPreference<Preference>(SettingConstants.settingAppVersion)?.apply {
             summary = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
             onPreferenceClickListener = this@SettingsFragment
         }
-        findPreference<SwitchPreference>(Constants.sendErrorMessage)?.onPreferenceChangeListener = this
+        findPreference<SwitchPreference>(SettingConstants.sendErrorMessage)?.onPreferenceChangeListener = this
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +54,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
     override fun onPreferenceClick(preference: Preference): Boolean {
         when(preference.key) {
-            Constants.settingAppVersion -> startActivity(Intent(requireContext(), AboutActivity::class.java))
+            SettingConstants.settingAppVersion -> startActivity(Intent(requireContext(), AboutActivity::class.java))
         }
         return true
     }

@@ -16,14 +16,16 @@ import com.zaiming.android.gallery.adapter.PhotosAdapter
 import com.zaiming.android.gallery.adapter.itemdecoration.PhotosItemDecoration
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
 import com.zaiming.android.gallery.databinding.FragmentPhotosBinding
-import com.zaiming.android.gallery.extensions.repeatOnLifecycleOnStart
 import com.zaiming.android.gallery.extensions.scrollToTopIfNeed
 import com.zaiming.android.gallery.galleryinterface.IController
+import com.zaiming.android.gallery.utils.constantUtils.Constants.SORT_BY_DATE_ADDED
+import com.zaiming.android.gallery.utils.constantUtils.Constants.SORT_BY_DATE_MODIFIED
+import com.zaiming.android.gallery.utils.sharedPreference.SharedPreferenceUtils
+import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 /**
  * @author zaiming
@@ -76,12 +78,6 @@ class PhotosFragment : Fragment(), IController {
             }
 
             speedDial.apply {
-                addActionItem(SpeedDialActionItem.Builder(R.id.fab_photos_data_add, R.drawable.fab_icon_time_add)
-                    .setLabel(getString(R.string.photos_fab_sort_date_added))
-                    .setLabelClickable(true)
-                    .setLabelColor(ContextCompat.getColor(GalleryApplication.instance, R.color.inverse_follow_system_color))
-                    .setTheme(R.style.Theme_LightHouseGallery)
-                    .create())
 
                 addActionItem(SpeedDialActionItem.Builder(R.id.fab_photos_data_modify, R.drawable.fab_icon_time_modify)
                     .setLabel(getString(R.string.photos_fab_sort_date_modify))
@@ -89,6 +85,28 @@ class PhotosFragment : Fragment(), IController {
                     .setLabelColor(ContextCompat.getColor(GalleryApplication.instance, R.color.inverse_follow_system_color))
                     .setTheme(R.style.Theme_LightHouseGallery)
                     .create())
+
+                addActionItem(SpeedDialActionItem.Builder(R.id.fab_photos_data_add, R.drawable.fab_icon_time_add)
+                    .setLabel(getString(R.string.photos_fab_sort_date_added))
+                    .setLabelClickable(true)
+                    .setLabelColor(ContextCompat.getColor(GalleryApplication.instance, R.color.inverse_follow_system_color))
+                    .setTheme(R.style.Theme_LightHouseGallery)
+                    .create())
+
+                setOnActionSelectedListener {
+                    when (it.id) {
+                        R.id.fab_photos_data_add -> {
+                            galleryViewModel.sortCondition.value = SORT_BY_DATE_ADDED
+                        }
+                        R.id.fab_photos_data_modify -> {
+                            galleryViewModel.sortCondition.value = SORT_BY_DATE_MODIFIED
+                        }
+                    }
+                    close(true)
+                    overlayLayout?.hide(true)
+                    SharedPreferenceUtils.putValue(SpKeys.photosSortCondition, if (galleryViewModel.sortCondition.value == SORT_BY_DATE_ADDED) SORT_BY_DATE_ADDED else SORT_BY_DATE_MODIFIED)
+                    true
+                }
             }
         }
 
