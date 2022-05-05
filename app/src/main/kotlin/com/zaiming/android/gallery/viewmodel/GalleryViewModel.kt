@@ -10,6 +10,7 @@ import com.zaiming.android.gallery.bean.Asset
 import com.zaiming.android.gallery.extensions.dateFormat
 import com.zaiming.android.gallery.galleryinterface.IController
 import com.zaiming.android.gallery.repository.PhotosRepository
+import com.zaiming.android.gallery.utils.TimeRecorder
 import com.zaiming.android.gallery.utils.constantUtils.Constants.SORT_BY_DATE_ADDED
 import com.zaiming.android.gallery.utils.sharedPreference.SharedPreferenceUtils
 import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import timber.log.Timber
 
 /**
  * @author zaiming
@@ -72,7 +74,11 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
         mapTo: (Asset, Cursor) -> Asset = { a, _ -> a }
     ) {
         viewModelScope.launch {
+            val timeRecorder = TimeRecorder()
+            timeRecorder.startTime()
             mediaStoreGroup.value = photosRepository.fetchMediaStoreInRepository(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
+            timeRecorder.endTime()
+            Timber.i("qzm time: $timeRecorder")
         }
     }
 
