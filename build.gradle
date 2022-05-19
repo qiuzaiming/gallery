@@ -26,6 +26,7 @@ buildscript {
         hiltAndroidVersion = '2.40.5'
         hiltViewModelVersion = '1.0.0-alpha03'
         hiltCompileVersion = '1.0.0'
+        roomVersion = '2.5.0-alpha01'
 
         minSdkVersion = 24
         targetSdkVersion = 31
