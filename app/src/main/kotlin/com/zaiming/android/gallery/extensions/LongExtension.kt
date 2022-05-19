@@ -1,5 +1,6 @@
 package com.zaiming.android.gallery.extensions
 
+import android.text.format.Formatter
 import com.zaiming.android.gallery.GalleryApplication
 import com.zaiming.android.gallery.R
 import java.text.SimpleDateFormat
@@ -18,3 +19,5 @@ fun Long.dateFormat(
     val simpleDateFormat = SimpleDateFormat(pattern, locale)
     return simpleDateFormat.format(Date(this * 1000))
 }
+
+fun Long.formatFileSize(): String = Formatter.formatFileSize(GalleryApplication.instance, this)
