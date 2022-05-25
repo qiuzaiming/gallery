@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.zaiming.android.gallery.R
+import com.zaiming.android.gallery.base.BaseActivity
 import com.zaiming.android.gallery.databinding.ActivityMainBinding
 import com.zaiming.android.gallery.extensions.applyExitMaterialTransform
 import com.zaiming.android.gallery.extensions.applyImmersionWithWindowInsets
@@ -29,9 +29,8 @@ import kotlinx.coroutines.launch
  * @author zaiming
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val photosViewModel by viewModels<GalleryViewModel>()
     private val needRequestMultiplePermission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
@@ -47,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         applyExitMaterialTransform()
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
 
         applyImmersionWithWindowInsets()
         initView()

@@ -2,16 +2,20 @@ package com.zaiming.android.gallery.extensions
 
 import android.graphics.Color
 import android.transition.TransitionManager
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.LifecycleOwner
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.zaiming.android.gallery.utils.windowInsets.EdgeInsetDelegate
+import java.lang.reflect.ParameterizedType
 
 internal fun getContentTransform(): MaterialContainerTransform {
     return MaterialContainerTransform().apply {
@@ -63,4 +67,13 @@ fun applyMaterialContainerTransitionBetweenTwoViews(rootView: ViewGroup, mStartV
         pathMotion = MaterialArcMotion()
         scrimColor = Color.TRANSPARENT
     })
+}
+
+// todo learn kotlin genericity
+fun <T : ViewBinding> LifecycleOwner.inflateBinding(inflater: LayoutInflater): T {
+    return (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments
+        .filterIsInstance<Class<T>>()
+        .first()
+        .getDeclaredMethod("inflate", LayoutInflater::class.java)
+        .invoke(null, inflater) as T
 }
