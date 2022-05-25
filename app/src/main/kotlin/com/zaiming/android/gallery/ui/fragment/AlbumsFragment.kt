@@ -1,10 +1,6 @@
 package com.zaiming.android.gallery.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.AlbumsAdapter
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
+import com.zaiming.android.gallery.base.BaseFragment
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
 import com.zaiming.android.gallery.extensions.*
@@ -23,10 +20,7 @@ import kotlinx.coroutines.flow.collect
 /**
  * @author zaiming
  */
-class AlbumsFragment : Fragment() {
-
-    private var _binding: FragmentAlbumsBinding? = null
-    private val binding get() = _binding!!
+class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>() {
 
     private val albumsViewModel: GalleryViewModel by activityViewModels()
 
@@ -35,18 +29,9 @@ class AlbumsFragment : Fragment() {
         AlbumsAdapter(albumAssetGroup)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
-        binding.recyclerviewAlbum.applySystemBarImmersionMode()
-        return binding.root
-    }
+    override fun init() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding.recyclerviewAlbum.applySystemBarImmersionMode()
 
         initView()
 
@@ -59,10 +44,6 @@ class AlbumsFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     private fun initView() {
 

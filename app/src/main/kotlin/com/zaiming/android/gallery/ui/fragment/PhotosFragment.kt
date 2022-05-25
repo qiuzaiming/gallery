@@ -1,11 +1,6 @@
 package com.zaiming.android.gallery.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +11,7 @@ import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.PhotosAdapter
 import com.zaiming.android.gallery.adapter.itemdecoration.PhotosItemDecoration
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
+import com.zaiming.android.gallery.base.BaseFragment
 import com.zaiming.android.gallery.databinding.FragmentPhotosBinding
 import com.zaiming.android.gallery.extensions.scrollToTopIfNeed
 import com.zaiming.android.gallery.galleryinterface.IController
@@ -32,25 +28,12 @@ import kotlinx.coroutines.flow.collect
  * @author zaiming
  */
 @AndroidEntryPoint
-class PhotosFragment : Fragment(), IController {
-
-    private lateinit var binding: FragmentPhotosBinding
+class PhotosFragment : BaseFragment<FragmentPhotosBinding>(), IController {
 
     private val galleryViewModel: GalleryViewModel by activityViewModels()
 
     private val photosAdapter by lazy {
         PhotosAdapter(requireActivity())
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentPhotosBinding.inflate(inflater, container, false)
-        binding.rvPhotos.applySystemBarImmersionMode()
-        setAnimator()
-        return binding.root
     }
 
     private fun setAnimator() {
@@ -60,8 +43,10 @@ class PhotosFragment : Fragment(), IController {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun init() {
+
+        binding.rvPhotos.applySystemBarImmersionMode()
+        setAnimator()
 
         val gridLayoutManager = GridLayoutManager(requireContext(), 4).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

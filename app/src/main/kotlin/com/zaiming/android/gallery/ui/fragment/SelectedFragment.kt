@@ -1,26 +1,15 @@
 package com.zaiming.android.gallery.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.zaiming.android.gallery.base.BaseFragment
 import com.zaiming.android.gallery.databinding.FragmentSelectedBinding
 
 /**
  * @author zaiming
  */
-class SelectedFragment : Fragment() {
+class SelectedFragment : BaseFragment<FragmentSelectedBinding>() {
 
-    private lateinit var binding: FragmentSelectedBinding
+    override fun init() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSelectedBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
 }
