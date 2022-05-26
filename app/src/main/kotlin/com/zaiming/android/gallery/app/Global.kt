@@ -27,6 +27,7 @@ object Global {
         val stackTraceContent = Log.getStackTraceString(e)
         Timber.e(e)
         if (stackTraceContent.contains("SavedStateProvider with the given key is already registered")) {
+            // from google issue: https://github.com/google/dagger/issues/2328
             return
         }
         throw e
