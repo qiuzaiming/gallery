@@ -16,11 +16,13 @@ import com.zaiming.android.gallery.extensions.*
 import com.zaiming.android.gallery.galleryinterface.ItemClickListener
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 /**
  * @author zaiming
  */
+@AndroidEntryPoint
 class AlbumsFragment : BaseControllerFragment<FragmentAlbumsBinding>() {
 
     private var albumAssetGroup: MutableList<AlbumAsset> = ArrayList()

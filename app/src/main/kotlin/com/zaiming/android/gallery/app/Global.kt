@@ -26,6 +26,9 @@ object Global {
     private fun handlerException(e: Throwable) {
         val stackTraceContent = Log.getStackTraceString(e)
         Timber.e(e)
+        if (stackTraceContent.contains("SavedStateProvider with the given key is already registered")) {
+            return
+        }
         throw e
     }
 

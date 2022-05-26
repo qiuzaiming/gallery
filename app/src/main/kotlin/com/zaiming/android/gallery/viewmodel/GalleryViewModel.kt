@@ -1,7 +1,9 @@
 package com.zaiming.android.gallery.viewmodel
 
+import android.app.Application
 import android.database.Cursor
 import android.net.Uri
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zaiming.android.gallery.adapter.SectionsAdapter
@@ -27,7 +29,7 @@ import timber.log.Timber
  * @author zaiming
  */
 @HiltViewModel
-class GalleryViewModel @Inject constructor(private val photosRepository: PhotosRepository) : ViewModel() {
+class GalleryViewModel @Inject constructor(private val photosRepository: PhotosRepository, application: Application) : AndroidViewModel(application) {
 
     var controller: IController? = null
 

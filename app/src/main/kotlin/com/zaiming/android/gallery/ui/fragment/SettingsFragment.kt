@@ -15,10 +15,12 @@ import com.zaiming.android.gallery.utils.constantUtils.SettingConstants
 import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author zaiming
  */
+@AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     private val galleryViewModel: GalleryViewModel by activityViewModels()

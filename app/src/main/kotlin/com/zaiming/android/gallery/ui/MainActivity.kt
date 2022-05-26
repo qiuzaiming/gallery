@@ -12,6 +12,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
+import com.microsoft.appcenter.analytics.Analytics
+import com.microsoft.appcenter.analytics.EventProperties
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.base.BaseActivity
 import com.zaiming.android.gallery.databinding.ActivityMainBinding
@@ -23,6 +25,7 @@ import com.zaiming.android.gallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.gallery.ui.fragment.PhotosFragment
 import com.zaiming.android.gallery.ui.fragment.SelectedFragment
 import com.zaiming.android.gallery.ui.fragment.SettingsFragment
+import com.zaiming.android.gallery.utils.constantUtils.AppCenterConstants
 import com.zaiming.android.gallery.utils.constantUtils.ShortCutConstants
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -140,6 +143,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), INavController {
             ShortCutConstants.ACTION_START_PHOTOS -> binding.viewpagerHostFragmentActivityMain.setCurrentItem(0, false)
             ShortCutConstants.ACTION_START_ALBUM ->  binding.viewpagerHostFragmentActivityMain.setCurrentItem(1, false)
         }
+        Analytics.trackEvent(AppCenterConstants.ACTION_LAUNCH, EventProperties().set(AppCenterConstants.ACTION_LAUNCH, intent.action))
     }
 
     companion object {
