@@ -4,10 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.base.BaseActivity
@@ -15,6 +18,7 @@ import com.zaiming.android.gallery.databinding.ActivityMainBinding
 import com.zaiming.android.gallery.extensions.applyExitMaterialTransform
 import com.zaiming.android.gallery.extensions.applyImmersionWithWindowInsets
 import com.zaiming.android.gallery.extensions.imageContentUri
+import com.zaiming.android.gallery.galleryinterface.INavController
 import com.zaiming.android.gallery.ui.fragment.AlbumsFragment
 import com.zaiming.android.gallery.ui.fragment.PhotosFragment
 import com.zaiming.android.gallery.ui.fragment.SelectedFragment
@@ -29,7 +33,7 @@ import kotlinx.coroutines.launch
  * @author zaiming
  */
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity<ActivityMainBinding>(), INavController {
 
     private val photosViewModel by viewModels<GalleryViewModel>()
     private val needRequestMultiplePermission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -41,6 +45,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             // agree all permission
             photosViewModel.fetchMediaStoreInViewModel(contentUri = imageContentUri())
         }
+    }
+    private val hideBottomViewOnScrollBehavior by lazy {
+        HideBottomViewOnScrollBehavior<BottomNavigationView>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +97,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             navView.apply {
 
+                (layoutParams as CoordinatorLayout.LayoutParams).behavior = hideBottomViewOnScrollBehavior
+
                 // display full BottomNavigationView
                 labelVisibilityMode = LABEL_VISIBILITY_LABELED
 
@@ -135,5 +144,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     companion object {
         private const val NAVIGATIONTABCOUNT = 4
+    }
+
+    override fun slideUp() {
+        hideBottomViewOnScrollBehavior.slideUp(binding.navView)
+    }
+
+    override fun slideDown() {
+        hideBottomViewOnScrollBehavior.slideDown(binding.navView)
     }
 }
