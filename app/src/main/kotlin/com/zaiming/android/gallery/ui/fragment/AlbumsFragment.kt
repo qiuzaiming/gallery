@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.AlbumsAdapter
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
+import com.zaiming.android.gallery.base.BaseControllerFragment
 import com.zaiming.android.gallery.base.BaseFragment
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.databinding.FragmentAlbumsBinding
@@ -20,9 +21,7 @@ import kotlinx.coroutines.flow.collect
 /**
  * @author zaiming
  */
-class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>() {
-
-    private val albumsViewModel: GalleryViewModel by activityViewModels()
+class AlbumsFragment : BaseControllerFragment<FragmentAlbumsBinding>() {
 
     private var albumAssetGroup: MutableList<AlbumAsset> = ArrayList()
     private val albumAdapter by lazy {
@@ -36,14 +35,13 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>() {
         initView()
 
         lifecycleScope.launchWhenStarted {
-            albumsViewModel.asAlbumMediaStoreFlow().collect {
+            galleryViewModel.asAlbumMediaStoreFlow().collect {
                 albumAssetGroup.clear()
                 albumAssetGroup.addAll(it.toMutableList())
                 albumAdapter.notifyDataSetChanged()
             }
         }
     }
-
 
     private fun initView() {
 
@@ -89,6 +87,10 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>() {
                 fabAddAlbum.beVisible()
             }
         }
+    }
+
+
+    override fun scrollToTop() {
     }
 
     companion object {

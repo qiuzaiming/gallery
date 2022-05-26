@@ -78,7 +78,7 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
             timeRecorder.startTime()
             mediaStoreGroup.value = photosRepository.fetchMediaStoreInRepository(columns, contentUri, selection, selectionArguments, sortBy, mapTo)
             timeRecorder.endTime()
-            Timber.i("qzm time: $timeRecorder")
+            Timber.i("fetchMediaStoreInViewModel: $timeRecorder")
         }
     }
 

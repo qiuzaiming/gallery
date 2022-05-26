@@ -11,6 +11,7 @@ import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.adapter.PhotosAdapter
 import com.zaiming.android.gallery.adapter.itemdecoration.PhotosItemDecoration
 import com.zaiming.android.gallery.animator.SpringAddItemAnimator
+import com.zaiming.android.gallery.base.BaseControllerFragment
 import com.zaiming.android.gallery.base.BaseFragment
 import com.zaiming.android.gallery.databinding.FragmentPhotosBinding
 import com.zaiming.android.gallery.extensions.scrollToTopIfNeed
@@ -28,9 +29,7 @@ import kotlinx.coroutines.flow.collect
  * @author zaiming
  */
 @AndroidEntryPoint
-class PhotosFragment : BaseFragment<FragmentPhotosBinding>(), IController {
-
-    private val galleryViewModel: GalleryViewModel by activityViewModels()
+class PhotosFragment : BaseControllerFragment<FragmentPhotosBinding>(), IController {
 
     private val photosAdapter by lazy {
         PhotosAdapter(requireActivity())
@@ -115,20 +114,6 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>(), IController {
                 photosAdapter.setSections(it)
                 binding.vfPhotos.displayedChild = 1
             }
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (galleryViewModel.controller != this) {
-            galleryViewModel.controller = this
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        if (galleryViewModel.controller == this) {
-            galleryViewModel.controller = null
         }
     }
 
