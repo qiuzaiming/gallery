@@ -1,5 +1,6 @@
 package com.zaiming.android.gallery.di.module
 
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,9 +33,9 @@ class RetrofitModule {
     @Provides
     fun providerRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .baseUrl("https://api.github.com/")
+            .baseUrl("https://my-json-server.typicode.com/")
             .build()
     }
 
