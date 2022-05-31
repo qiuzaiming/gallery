@@ -27,6 +27,7 @@ buildscript {
         hiltViewModelVersion = '1.0.0-alpha03'
         hiltCompileVersion = '1.0.0'
         roomVersion = '2.5.0-alpha01'
+        retrofitVersion = '2.9.0'
 
         minSdkVersion = 24
         targetSdkVersion = 31
