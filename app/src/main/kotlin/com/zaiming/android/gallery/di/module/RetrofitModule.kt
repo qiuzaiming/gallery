@@ -33,7 +33,7 @@ class RetrofitModule {
     @Provides
     fun providerRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
+            .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .baseUrl("https://my-json-server.typicode.com/")
             .build()

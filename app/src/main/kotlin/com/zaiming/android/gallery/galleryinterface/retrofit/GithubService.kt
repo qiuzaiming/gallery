@@ -1,5 +1,6 @@
 package com.zaiming.android.gallery.galleryinterface.retrofit
 
+import com.zaiming.android.gallery.bean.retrofitBean.SimluateBean
 import retrofit2.http.GET
 
 /**
@@ -7,6 +8,7 @@ import retrofit2.http.GET
  */
 interface GithubService {
 
-    // @GET("qiuzaiming/rules/db")
-    // suspend fun getRules(): SimluateBean
+    @GET("qiuzaiming/rules/db")
+    suspend fun getRules(): SimluateBean
+
 }
