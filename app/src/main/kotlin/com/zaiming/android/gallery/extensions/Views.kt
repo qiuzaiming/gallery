@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("ViewKts")
+
 package com.zaiming.android.gallery.extensions
 
 import android.view.View

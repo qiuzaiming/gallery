@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("MediaStoreKts")
+
 package com.zaiming.android.gallery.extensions
 
 import android.net.Uri

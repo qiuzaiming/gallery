@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("ContextKts")
+
 package com.zaiming.android.gallery.extensions
 
 import android.content.Context

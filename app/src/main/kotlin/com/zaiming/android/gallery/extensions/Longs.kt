@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("LongKts")
+
 package com.zaiming.android.gallery.extensions
 
 import android.text.format.Formatter

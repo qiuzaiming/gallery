@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("ActivityKts")
+
 package com.zaiming.android.gallery.extensions
 
 import android.graphics.Color

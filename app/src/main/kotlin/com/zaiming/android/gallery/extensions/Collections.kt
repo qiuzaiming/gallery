@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("CollectionKts")
+
 package com.zaiming.android.gallery.extensions
 
 import kotlin.math.ceil

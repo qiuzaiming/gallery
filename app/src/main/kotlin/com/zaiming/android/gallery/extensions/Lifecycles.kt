@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("LifecycleKts")
+
 package com.zaiming.android.gallery.extensions
 
 import androidx.lifecycle.Lifecycle

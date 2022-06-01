@@ -1,3 +1,5 @@
+@file:kotlin.jvm.JvmName("AndroidVersionKts")
+
 package com.zaiming.android.gallery.extensions
 
 import android.os.Build
