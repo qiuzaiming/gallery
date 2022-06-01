@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import com.zaiming.android.gallery.databse.converters.Converters
 import com.zaiming.android.gallery.databse.dao.PhotoDao
 import com.zaiming.android.gallery.databse.entity.MediaMetaData
+import com.zaiming.android.gallery.utils.singleton.BaseSingleton
 
 /**
  * @author zaiming
@@ -20,18 +21,13 @@ abstract class PhotoDatabase : RoomDatabase() {
 
     abstract fun photoDao(): PhotoDao
 
-    companion object {
+    companion object : BaseSingleton<Context, PhotoDatabase>() {
 
-        @Volatile
-        private var INSTANCE: PhotoDatabase? = null
-
-        fun getDatabase(context: Context): PhotoDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Room.databaseBuilder(context.applicationContext,
-                    PhotoDatabase::class.java,
-                    "photo_database")
-                    .build().also { INSTANCE = it }
-            }
+        override fun createSingleton(param: Context): PhotoDatabase {
+            return Room.databaseBuilder(param.applicationContext,
+                PhotoDatabase::class.java,
+                "photo_database")
+                .build()
         }
     }
 

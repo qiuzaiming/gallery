@@ -20,6 +20,6 @@ class DaoModule {
     @Singleton
     @Provides
     fun providerPhotoDao(application: Application): PhotoDao {
-        return PhotoDatabase.getDatabase(application).photoDao()
+        return PhotoDatabase.getInstance(application).photoDao()
     }
 }
