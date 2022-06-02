@@ -7,11 +7,11 @@ abstract class BaseSingleton<in P, out T> {
 
     @Volatile private var INSTANCE: T? = null
 
-    protected abstract fun createSingleton(param: P): T
+    protected abstract val creator: (P) -> T
 
     fun getInstance(param: P): T {
         return INSTANCE ?: synchronized(this) {
-            INSTANCE ?: createSingleton(param).also { INSTANCE = it }
+            INSTANCE ?: creator(param).also { INSTANCE = it }
         }
     }
 }

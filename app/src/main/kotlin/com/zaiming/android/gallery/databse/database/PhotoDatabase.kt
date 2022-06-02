@@ -23,12 +23,14 @@ abstract class PhotoDatabase : RoomDatabase() {
 
     companion object : BaseSingleton<Context, PhotoDatabase>() {
 
-        override fun createSingleton(param: Context): PhotoDatabase {
-            return Room.databaseBuilder(param.applicationContext,
-                PhotoDatabase::class.java,
-                "photo_database")
-                .build()
-        }
+        override val creator: (Context) -> PhotoDatabase
+            get() = {
+                Room.databaseBuilder(it.applicationContext,
+                    PhotoDatabase::class.java,
+                    "photo_database")
+                    .build()
+            }
+
     }
 
 }
