@@ -13,7 +13,7 @@ buildscript {
         liveDataKtxVersion = '2.4.1'
         viewModelKrxVersion = '2.4.1'
         timberVersion = '5.0.1'
-        materialVersion = '1.6.0'
+        materialVersion = '1.6.1'
         glideVersion = '4.13.1'
         hiltVersion = '2.40.1'
         appcenterVersion = '4.4.3'
@@ -26,7 +26,7 @@ buildscript {
         hiltAndroidVersion = '2.40.5'
         hiltViewModelVersion = '1.0.0-alpha03'
         hiltCompileVersion = '1.0.0'
-        roomVersion = '2.5.0-alpha01'
+        roomVersion = '2.5.0-alpha02'
         retrofitVersion = '2.9.0'
 
         minSdkVersion = 24
