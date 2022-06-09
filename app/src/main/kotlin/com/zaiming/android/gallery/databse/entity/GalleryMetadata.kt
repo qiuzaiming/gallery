@@ -5,8 +5,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "media_metadata")
-data class MediaMetaData (
+@Entity(tableName = "gallery_metadata")
+data class GalleryMetadata (
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
 
     // uri

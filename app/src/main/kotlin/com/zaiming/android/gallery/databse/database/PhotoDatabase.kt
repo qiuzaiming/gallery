@@ -7,14 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.zaiming.android.gallery.databse.converters.Converters
 import com.zaiming.android.gallery.databse.dao.PhotoDao
-import com.zaiming.android.gallery.databse.entity.MediaMetaData
+import com.zaiming.android.gallery.databse.entity.GalleryMetadata
 import com.zaiming.android.gallery.utils.singleton.BaseSingleton
 
 /**
  * @author zaiming
  */
 @Database(
-    entities = [MediaMetaData::class], version = 1, exportSchema = false
+    entities = [GalleryMetadata::class], version = 1, exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class PhotoDatabase : RoomDatabase() {

@@ -4,12 +4,11 @@ import android.app.Application
 import android.database.Cursor
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zaiming.android.gallery.adapter.SectionsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.bean.Asset
-import com.zaiming.android.gallery.databse.entity.MediaMetaData
+import com.zaiming.android.gallery.databse.entity.GalleryMetadata
 import com.zaiming.android.gallery.extensions.dateFormat
 import com.zaiming.android.gallery.galleryinterface.IController
 import com.zaiming.android.gallery.repository.PhotosRepository
@@ -120,13 +119,13 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
         }
     }
 
-    fun addMediaMetaData(addItem: MediaMetaData) {
+    fun addMediaMetaData(addItem: GalleryMetadata) {
         setGalleryStatus {
             GalleryStatus.AddMediaMetaData(addItem)
         }
     }
 
-    fun removeMediaMetaData(removeItem: MediaMetaData) {
+    fun removeMediaMetaData(removeItem: GalleryMetadata) {
         setGalleryStatus {
             GalleryStatus.RemoveMediaMetaData(removeItem)
         }
