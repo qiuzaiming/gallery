@@ -50,7 +50,7 @@ class PhotosAdapter(private val activity: Activity) : SectionsDiffAdapter<String
         val transientName = "${assets.uri}${assets.fullPath}"
         ViewCompat.setTransitionName(viewHolder.ivPic, transientName)
         viewHolder.ivPic.setOnSingleClick {
-            GalleryDetailActivity.startActivity(activity, it, transientName, assets.uri.toString())
+            GalleryDetailActivity.startActivity(activity, this, transientName, assets.uri.toString())
         }
     }
 

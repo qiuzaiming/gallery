@@ -18,13 +18,13 @@ fun View.beVisible() {
 
 inline fun View.setOnSingleClick(
     @IntRange(from = 0) internalTime: Long = MAX_INTERVAL_TIME,
-    crossinline block: (view: View) -> Unit,
+    crossinline block: View.() -> Unit,
 ) {
     setOnClickListener {
         if (AntiShakeUtils.isInvalidClick(it, internalTime)) {
             return@setOnClickListener
         }
-        block(this)
+        block()
     }
 }
 

@@ -76,7 +76,7 @@ class AlbumsFragment : BaseControllerFragment<FragmentAlbumsBinding>() {
                 setHideMotionSpecResource(R.animator.fab_hide)
 
                 setOnSingleClick {
-                    applyMaterialContainerTransitionBetweenTwoViews(binding.root, it, cardviewAlbumDetail)
+                    applyMaterialContainerTransitionBetweenTwoViews(binding.root, this, cardviewAlbumDetail)
                     cardviewAlbumDetail.beVisible()
                     fabAddAlbum.beGone()
                 }
@@ -84,7 +84,7 @@ class AlbumsFragment : BaseControllerFragment<FragmentAlbumsBinding>() {
 
 
             cardviewAlbumDetail.setOnSingleClick {
-                applyMaterialContainerTransitionBetweenTwoViews(binding.root, it, fabAddAlbum)
+                applyMaterialContainerTransitionBetweenTwoViews(binding.root, this, fabAddAlbum)
                 cardviewAlbumDetail.beGone()
                 fabAddAlbum.beVisible()
             }
