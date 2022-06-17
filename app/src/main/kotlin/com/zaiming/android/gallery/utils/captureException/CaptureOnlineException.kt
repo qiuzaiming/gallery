@@ -19,7 +19,7 @@ import java.io.InputStreamReader
  */
 object CaptureOnlineException {
 
-    private val logBuilder = StringBuilder()
+    private val logBuilder by lazy { StringBuilder() }
 
     fun init(application: Application) {
 
