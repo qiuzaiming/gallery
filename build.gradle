@@ -23,7 +23,7 @@ buildscript {
         fabSpeedDialVersion = '3.2.0'
         multitypeVersion = '4.3.0'
         aboutVersion = '2.5.1'
-        hiltAndroidVersion = '2.40.5'
+        hiltAndroidVersion = '2.42'
         hiltViewModelVersion = '1.0.0-alpha03'
         hiltCompileVersion = '1.0.0'
         roomVersion = '2.5.0-alpha02'
