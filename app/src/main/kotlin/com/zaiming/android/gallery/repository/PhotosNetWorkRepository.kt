@@ -16,7 +16,5 @@ class PhotosNetWorkRepository @Inject constructor(private val retrofit: Retrofit
         retrofit.create(GithubService::class.java)
     }
 
-    suspend fun getGalleryAlbumRules() {
-        githubService.getRules()
-    }
+    suspend fun getGalleryAlbumRules() = githubService.getRules()
 }

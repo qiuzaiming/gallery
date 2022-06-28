@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.zaiming.android.gallery.adapter.SectionsAdapter
 import com.zaiming.android.gallery.bean.AlbumAsset
 import com.zaiming.android.gallery.bean.Asset
+import com.zaiming.android.gallery.bean.retrofitBean.App
 import com.zaiming.android.gallery.databse.entity.GalleryMetadata
 import com.zaiming.android.gallery.extensions.dateFormat
 import com.zaiming.android.gallery.galleryinterface.IController
+import com.zaiming.android.gallery.repository.PhotosNetWorkRepository
 import com.zaiming.android.gallery.repository.PhotosRepository
 import com.zaiming.android.gallery.sealed.GalleryStatus
 import com.zaiming.android.gallery.utils.TimeRecorder
@@ -18,24 +20,36 @@ import com.zaiming.android.gallery.utils.constantUtils.Constants.SORT_BY_DATE_AD
 import com.zaiming.android.gallery.utils.sharedPreference.SharedPreferenceUtils
 import com.zaiming.android.gallery.utils.sharedPreference.SpKeys
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * @author zaiming
  */
 @HiltViewModel
-class GalleryViewModel @Inject constructor(private val photosRepository: PhotosRepository, application: Application) : AndroidViewModel(application) {
+class GalleryViewModel @Inject constructor(
+    private val photosRepository: PhotosRepository,
+    application: Application,
+    private val networkRepository: PhotosNetWorkRepository,
+) : AndroidViewModel(application) {
 
     var controller: IController? = null
 
     private val _galleryStatus = MutableSharedFlow<GalleryStatus>()
     val galleryStatus = _galleryStatus.asSharedFlow()
 
+    // album name rules from github api.
+    private var galleryAlbumsNames = mutableListOf<App>()
+    private var galleryAlbumNameDefer: Deferred<List<App>>? = null
+
     init {
         listenerMediaStoreObserverInViewModel()
+        getAlbumRules()
     }
 
     private var mediaStoreGroup = MutableStateFlow<MutableList<Asset>>(mutableListOf())
@@ -58,14 +72,26 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
         }
     }
 
-    fun asAlbumMediaStoreFlow() = mediaStoreGroup.map {
+    suspend fun asAlbumMediaStoreFlow() = mediaStoreGroup.map {
         it.sortedByDescending { createItem ->
             createItem.dateTimeModified
         }.groupBy { item ->
-            item.relativePath.orEmpty()
+            getActualAlbumName(item.relativePath)
         }.map { processData ->
             AlbumAsset(processData.key, processData.value.size, processData.value.firstOrNull()?.uri?.toString().orEmpty())
         }
+    }
+
+    private suspend fun getActualAlbumName(relativePath: String?): String {
+
+        if (galleryAlbumNameDefer != null) {
+            galleryAlbumNameDefer?.await()
+            galleryAlbumNameDefer = null
+        }
+
+       return galleryAlbumsNames.firstOrNull {
+               it.path == relativePath
+           }?.locales?.zh ?: ""
     }
 
     fun fetchMediaStoreInViewModel(
@@ -129,6 +155,13 @@ class GalleryViewModel @Inject constructor(private val photosRepository: PhotosR
         setGalleryStatus {
             GalleryStatus.RemoveMediaMetaData(removeItem)
         }
+    }
+
+    private fun getAlbumRules() {
+        galleryAlbumNameDefer = viewModelScope.async(Dispatchers.IO) {
+            galleryAlbumsNames = networkRepository.getGalleryAlbumRules().apps.toMutableList()
+            galleryAlbumsNames
+       }
     }
 
     private fun setGalleryStatus(build: () -> GalleryStatus) {
