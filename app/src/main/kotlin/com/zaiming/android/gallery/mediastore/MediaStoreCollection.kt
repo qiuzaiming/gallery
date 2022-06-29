@@ -12,6 +12,7 @@ import com.zaiming.android.gallery.extensions.videoContentUri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -38,61 +39,61 @@ class MediaStoreCollection @Inject constructor(@ApplicationContext val context: 
             if (requireApiQ()) MediaStore.MediaColumns.RELATIVE_PATH else MediaStore.MediaColumns.DATA
         ) + columns
 
-        try {
-            return withContext(Dispatchers.IO) {
-                val assets = ArrayList<Asset>()
-                val isCollection = contentUri == imageContentUri() || contentUri == videoContentUri()
-                context.contentResolver.query(
-                    contentUri,
-                    projection,
-                    selection,
-                    selectionArguments,
-                    sortBy
-                )?.use { c ->
-                    val idColumn = c.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
-                    val displayNameColumn =
-                        c.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
-                    val sizeColumn = c.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE)
-                    val dateAddedColumn =
-                        c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_ADDED)
-                    val dateModifiedColumn =
-                        c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_MODIFIED)
-                    val dataColumn = c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
-                    val mimeTypeColumn =
-                        c.getColumnIndexOrThrow(MediaStore.MediaColumns.MIME_TYPE)
-                    val relativePathColumn =
-                        if (requireApiQ()) c.getColumnIndexOrThrow(MediaStore.MediaColumns.RELATIVE_PATH) else -1
+            return runCatching {
+                withContext(Dispatchers.IO) {
+                    val assets = ArrayList<Asset>()
+                    val isCollection = contentUri == imageContentUri() || contentUri == videoContentUri()
+                    context.contentResolver.query(
+                        contentUri,
+                        projection,
+                        selection,
+                        selectionArguments,
+                        sortBy
+                    )?.use { c ->
+                        val idColumn = c.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
+                        val displayNameColumn =
+                            c.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
+                        val sizeColumn = c.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE)
+                        val dateAddedColumn =
+                            c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_ADDED)
+                        val dateModifiedColumn =
+                            c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_MODIFIED)
+                        val dataColumn = c.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+                        val mimeTypeColumn =
+                            c.getColumnIndexOrThrow(MediaStore.MediaColumns.MIME_TYPE)
+                        val relativePathColumn =
+                            if (requireApiQ()) c.getColumnIndexOrThrow(MediaStore.MediaColumns.RELATIVE_PATH) else -1
 
-                    while (c.moveToNext()) {
-                        val id = c.getLong(idColumn)
-                        val displayName = c.getString(displayNameColumn)
-                        val size = c.getLong(sizeColumn)
-                        val dateAdded = c.getLong(dateAddedColumn)
-                        val dateModified = c.getLong(dateModifiedColumn)
-                        val fullPath = c.getString(dataColumn)
-                        val mimeType = c.getString(mimeTypeColumn)
-                        val relativePath =
-                            if (relativePathColumn >= 0) c.getString(relativePathColumn) else null
+                        while (c.moveToNext()) {
+                            val id = c.getLong(idColumn)
+                            val displayName = c.getString(displayNameColumn)
+                            val size = c.getLong(sizeColumn)
+                            val dateAdded = c.getLong(dateAddedColumn)
+                            val dateModified = c.getLong(dateModifiedColumn)
+                            val fullPath = c.getString(dataColumn)
+                            val mimeType = c.getString(mimeTypeColumn)
+                            val relativePath =
+                                if (relativePathColumn >= 0) c.getString(relativePathColumn) else null
 
-                        val asset = Asset(
-                            id = id,
-                            uri = if (isCollection) ContentUris.withAppendedId(contentUri, id) else contentUri,
-                            dateTimeAdded = dateAdded,
-                            dateTimeModified = dateModified,
-                            displayName = displayName,
-                            size = size,
-                            fullPath = fullPath,
-                            mimeType = mimeType,
-                            relativePath = relativePath
-                        )
-                        assets.add(mapTo(asset, c))
+                            val asset = Asset(
+                                id = id,
+                                uri = if (isCollection) ContentUris.withAppendedId(contentUri, id) else contentUri,
+                                dateTimeAdded = dateAdded,
+                                dateTimeModified = dateModified,
+                                displayName = displayName,
+                                size = size,
+                                fullPath = fullPath,
+                                mimeType = mimeType,
+                                relativePath = relativePath
+                            )
+                            assets.add(mapTo(asset, c))
+                        }
                     }
+                    return@withContext assets
                 }
-                return@withContext assets
+            }.getOrElse {
+                Timber.e(it)
+                mutableListOf()
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return mutableListOf()
-        }
     }
 }

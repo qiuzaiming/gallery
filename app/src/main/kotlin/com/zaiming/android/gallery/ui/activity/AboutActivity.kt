@@ -50,12 +50,10 @@ class AboutActivity : AbsAboutActivity() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.about_menu_like) {
-            try {
+            runCatching {
                 startActivity(Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse(AuthorConstants.githubUrl)
                 })
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
             }
         }
         return super.onOptionsItemSelected(menuItem)
