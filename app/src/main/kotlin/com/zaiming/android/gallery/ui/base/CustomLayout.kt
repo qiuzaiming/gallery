@@ -21,7 +21,7 @@ const val wrapContent = WRAP_CONTENT
 /**
  * from drakeet
  */
-abstract class CustomBaseLayout @JvmOverloads constructor(
+abstract class CustomLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     deStyleAttr: Int = 0
@@ -55,9 +55,9 @@ abstract class CustomBaseLayout @JvmOverloads constructor(
 
     protected fun View.autoMeasure() {
         if (isGone) return
-        measure(
-            defaultWidthMeasureSpec(this@CustomBaseLayout),
-            defaultHeightMeasureSpec(this@CustomBaseLayout)
+        this.measure(
+            this.defaultWidthMeasureSpec(this@CustomLayout),
+            this.defaultHeightMeasureSpec(this@CustomLayout)
         )
     }
 
@@ -74,8 +74,8 @@ abstract class CustomBaseLayout @JvmOverloads constructor(
     ) {
         if (isGone) return
         layout(
-            if (fromEnd) this@CustomBaseLayout.measuredWidth - x - measuredWidth else x,
-            if (fromBottom) this@CustomBaseLayout.measuredHeight - y - measuredHeight else y
+            if (fromEnd) this@CustomLayout.measuredWidth - x - measuredWidth else x,
+            if (fromBottom) this@CustomLayout.measuredHeight - y - measuredHeight else y
         )
     }
 
@@ -84,11 +84,11 @@ abstract class CustomBaseLayout @JvmOverloads constructor(
     )
 
     protected fun View.toHorizontalCenter(): Int {
-        return (this@CustomBaseLayout.measuredWidth - measuredWidth) / 2
+        return (this@CustomLayout.measuredWidth - measuredWidth) / 2
     }
 
     protected fun View.toVerticalCenter(): Int {
-        return (this@CustomBaseLayout.measuredHeight - measuredHeight) / 2
+        return (this@CustomLayout.measuredHeight - measuredHeight) / 2
     }
 
     protected val View.measureWidthWithMargin get() = (measuredWidth + marginStart + marginEnd)

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SnapOutlinedStyle" parent="Widget.Material3.CardView.Outlined" >
+        <item name="colorOutline">@color/inverse_follow_system_color</item>
+    </style>
+
+</resources>

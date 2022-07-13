@@ -23,6 +23,12 @@
     <string name="about_category_introduce">相册介绍</string>
     <string name="about_card_introduce">查看手机中图片和视频的应用</string>
     <string name="about_star">收藏</string>
+    <string name="snapshot_add">添加</string>
+    <string name="snapshot_remove">移除</string>
+    <string name="snapshot_change">变更</string>
+    <string name="snapshot_move">移动</string>
+    <string name="snapshot_time_stamp">时间戳</string>
+    <string name="snapshot_number_pictures">图片/视频数量</string>
 
     <!--shortcut-->
     <string name="shortcut_title_photos">照片</string>

@@ -23,6 +23,12 @@
     <string name="about_category_introduce">What\'s this</string>
     <string name="about_card_introduce">Apps to view pictures and videos on your phone</string>
     <string name="about_star">star</string>
+    <string name="snapshot_add">Added</string>
+    <string name="snapshot_remove">Remove</string>
+    <string name="snapshot_change">Change</string>
+    <string name="snapshot_move">Move</string>
+    <string name="snapshot_time_stamp">TimeStamp</string>
+    <string name="snapshot_number_pictures">Numbers</string>
 
     <!--shortcut-->
     <string name="shortcut_title_photos">Photos</string>

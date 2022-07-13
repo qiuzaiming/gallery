@@ -9,12 +9,12 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.marginTop
 import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.extensions.toTheme
-import com.zaiming.android.gallery.ui.base.CustomBaseLayout
+import com.zaiming.android.gallery.ui.base.CustomLayout
 
 /**
  * Loading ViewGroup
  */
-class LoadingView(context: Context, attributeSet: AttributeSet) : CustomBaseLayout(context, attributeSet) {
+class LoadingView(context: Context, attributeSet: AttributeSet) : CustomLayout(context, attributeSet) {
 
     private val loadingImageView = AppCompatImageView(context).apply {
         layoutParams = LayoutParams(160.dp, 160.dp)
