@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.zaiming.android.gallery.extensions.inflateBinding
 
-abstract class BaseActivity<VB: ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     protected lateinit var binding: VB
 
@@ -14,5 +14,4 @@ abstract class BaseActivity<VB: ViewBinding> : AppCompatActivity() {
         binding = inflateBinding(layoutInflater)
         setContentView(binding.root)
     }
-
 }

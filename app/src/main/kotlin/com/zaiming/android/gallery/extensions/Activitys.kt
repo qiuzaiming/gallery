@@ -61,14 +61,17 @@ fun AppCompatActivity.applyImmersionWithWindowInsets() {
  * two view apply motion animator
  */
 fun applyMaterialContainerTransitionBetweenTwoViews(rootView: ViewGroup, mStartView: View, mEndView: View) {
-    TransitionManager.beginDelayedTransition(rootView, MaterialContainerTransform().apply {
-        startView = mStartView
-        endView = mEndView
-        addTarget(mEndView)
-        duration = 550L
-        pathMotion = MaterialArcMotion()
-        scrimColor = Color.TRANSPARENT
-    })
+    TransitionManager.beginDelayedTransition(
+        rootView,
+        MaterialContainerTransform().apply {
+            startView = mStartView
+            endView = mEndView
+            addTarget(mEndView)
+            duration = 550L
+            pathMotion = MaterialArcMotion()
+            scrimColor = Color.TRANSPARENT
+        }
+    )
 }
 
 // todo learn kotlin genericity

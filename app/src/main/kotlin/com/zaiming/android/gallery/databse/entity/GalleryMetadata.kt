@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "gallery_metadata")
-data class GalleryMetadata (
+data class GalleryMetadata(
     @PrimaryKey(autoGenerate = true) var id: Long = 0,
 
     // uri
@@ -21,6 +21,6 @@ data class GalleryMetadata (
     // relative_path
     @ColumnInfo(name = "relative_path") val relativePath: String,
 
-    //data
+    // data
     @ColumnInfo(name = "full_path") val fullPath: String
 )

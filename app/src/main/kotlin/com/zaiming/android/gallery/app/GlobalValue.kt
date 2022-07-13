@@ -10,5 +10,4 @@ import com.zaiming.android.gallery.utils.sharedPreference.SpKeys.isCollectCrashI
 object GlobalValue {
 
     var analyticsCollectInformationFromAppCenter = MutableLiveData(SharedPreferenceUtils.getValue(isCollectCrashInformation, true))
-
 }

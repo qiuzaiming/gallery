@@ -17,5 +17,4 @@ interface PhotoDao {
 
     @Query("SELECT * FROM gallery_metadata WHERE uri = (:uri)")
     suspend fun queryMediaMetaDataFromUri(uri: String): GalleryMetadata
-
 }

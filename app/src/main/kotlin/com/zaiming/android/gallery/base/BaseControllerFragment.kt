@@ -5,7 +5,7 @@ import androidx.viewbinding.ViewBinding
 import com.zaiming.android.gallery.galleryinterface.IController
 import com.zaiming.android.gallery.viewmodel.GalleryViewModel
 
-abstract class BaseControllerFragment<VB: ViewBinding> : BaseFragment<VB>(), IController {
+abstract class BaseControllerFragment<VB : ViewBinding> : BaseFragment<VB>(), IController {
 
     protected val galleryViewModel: GalleryViewModel by activityViewModels()
 
@@ -22,5 +22,4 @@ abstract class BaseControllerFragment<VB: ViewBinding> : BaseFragment<VB>(), ICo
             galleryViewModel.controller = null
         }
     }
-
 }

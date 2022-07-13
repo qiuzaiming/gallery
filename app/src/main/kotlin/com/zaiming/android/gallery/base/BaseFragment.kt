@@ -11,7 +11,7 @@ import com.zaiming.android.gallery.extensions.inflateBinding
 /**
  * @author zaiming
  */
-abstract class BaseFragment<VB: ViewBinding> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     protected lateinit var binding: VB
 

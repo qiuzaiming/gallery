@@ -25,12 +25,12 @@ abstract class PhotoDatabase : RoomDatabase() {
 
         override val creator: (Context) -> PhotoDatabase
             get() = {
-                Room.databaseBuilder(it.applicationContext,
+                Room.databaseBuilder(
+                    it.applicationContext,
                     PhotoDatabase::class.java,
-                    "photo_database")
+                    "photo_database"
+                )
                     .build()
             }
-
     }
-
 }
