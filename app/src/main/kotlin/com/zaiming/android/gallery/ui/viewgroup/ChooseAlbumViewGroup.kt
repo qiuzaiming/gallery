@@ -27,7 +27,12 @@ class MaterialChooseAlbumViewGroup(context: Context) :
     }
 
     init {
-        layoutParams = LayoutParams(matchParent, wrapContent)
+        layoutParams = LayoutParams(matchParent, wrapContent).also {
+            with(context) {
+                it.marginStart = 4.dp.toInt()
+                it.marginEnd = 4.dp.toInt()
+            }
+        }
         with(context) {
             radius = 8.dp
             cardElevation = 0.dp

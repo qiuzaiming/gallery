@@ -1,5 +1,3 @@
-@file:kotlin.jvm.JvmName("FloatKts")
-
 package com.zaiming.android.gallery.extensions
 
 import android.content.Context
