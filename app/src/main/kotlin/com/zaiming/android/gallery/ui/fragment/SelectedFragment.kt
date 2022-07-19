@@ -6,13 +6,11 @@ import com.zaiming.android.gallery.R
 import com.zaiming.android.gallery.base.BaseControllerFragment
 import com.zaiming.android.gallery.databinding.FragmentSelectedBinding
 import com.zaiming.android.gallery.extensions.dp
+import com.zaiming.android.gallery.galleryinterface.INavController
 import com.zaiming.android.gallery.ui.base.CustomLayout
 import com.zaiming.android.gallery.ui.base.matchParent
 import com.zaiming.android.gallery.ui.base.wrapContent
-import com.zaiming.android.gallery.ui.viewgroup.AndroidVersionLabelView
-import com.zaiming.android.gallery.ui.viewgroup.AppInfoMaterialViewGroup
-import com.zaiming.android.gallery.ui.viewgroup.MaterialChooseAlbumViewGroup
-import com.zaiming.android.gallery.ui.viewgroup.SnapshotDashboardViewGroup
+import com.zaiming.android.gallery.ui.viewgroup.*
 import com.zaiming.android.gallery.utils.windowInsets.applySystemBarImmersionMode
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +23,14 @@ class SelectedFragment : BaseControllerFragment<FragmentSelectedBinding>() {
     override fun init() {
 
         binding.llRoot.applySystemBarImmersionMode()
+
+        binding.scrollview.setOnScrollChangeListener { _, _, _, _, _ ->
+          if (binding.scrollview.scrollY > 0) {
+              (activity as INavController).slideDown()
+          } else {
+              (activity as INavController).slideUp()
+          }
+        }
 
         val view = SnapshotDashboardViewGroup(ContextThemeWrapper(context, R.style.SnapOutlinedStyle))
 
@@ -52,11 +58,23 @@ class SelectedFragment : BaseControllerFragment<FragmentSelectedBinding>() {
 
         val view4 = AppInfoMaterialViewGroup(ContextThemeWrapper(context, R.style.SnapOutlinedStyle))
 
+        val view5 = AppItemViewGroup(requireContext()).apply {
+            layoutParams = ViewGroup.LayoutParams(matchParent, wrapContent)
+            setContent(R.drawable.ic_launch, "packageName", "name", "1.0.1")
+        }
+
+        val view6 = AppInitViewGroup(requireContext())
+
+        val view7 = RulesMaterialViewGroup(ContextThemeWrapper(context, R.style.SnapOutlinedStyle))
+
 
         binding.llRoot.addView(view)
         binding.llRoot.addView(view2)
-        // binding.llRoot.addView(view3)
+        binding.llRoot.addView(view3)
         binding.llRoot.addView(view4)
+        binding.llRoot.addView(view5)
+        binding.llRoot.addView(view6)
+        binding.llRoot.addView(view7)
     }
 
     override fun scrollToTop() {

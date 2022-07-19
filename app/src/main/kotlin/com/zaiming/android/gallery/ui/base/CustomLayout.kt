@@ -91,6 +91,14 @@ abstract class CustomLayout @JvmOverloads constructor(
         return (parentView.measuredHeight - measuredHeight) / 2
     }
 
+    protected fun View.toTargetViewHorizontalCenter(targetView: View): Int {
+        return targetView.left - (measuredWidth - targetView.measuredWidth) / 2
+    }
+
+    protected fun View.toTargetViewVerticalCenter(targetView: View): Int {
+        return targetView.top - (measuredHeight - targetView.measuredHeight) / 2
+    }
+
     protected val View.measureWidthWithMargin get() = (measuredWidth + marginStart + marginEnd)
     protected val View.measureHeightWithMargin get() = (measuredHeight + marginTop + marginBottom)
 
